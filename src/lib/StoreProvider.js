@@ -1,19 +1,10 @@
 'use client'
-import { useState } from 'react'
-import { valueContext, setValueContext } from './Store'
-import Store from './Store'
+import { Provider } from 'react-redux'
+import { makeStore } from './Store'
 
+const StoreProvider = ({ children }) => {
 
-
-export default function StoreProvider({ children }) {
-    const obj = Store()
-    return (
-        <setValueContext.Provider value={obj.dispatch}>
-            <valueContext.Provider value={obj.state}>
-                {children}
-            </valueContext.Provider>
-        </setValueContext.Provider>
-    )
+    return <Provider store={makeStore}>{children}</Provider>
 }
 
-
+export default StoreProvider

@@ -1,31 +1,48 @@
+"use client"
 import React from 'react'
 import ReviewStars from './ReviewStars.js'
+import Loading from './Loading.js'
+import { useDispatch, useSelector } from "react-redux"
+import { addToCart } from "@/lib/storeSlice"
+import AddToCartBtn from './AddToCartBtn.js'
+import Link from 'next/link.js'
 
-export default function ItemsCard({ description, price, reviewStars }) {
+export default function ItemsCard({ array, reviewStars = 4 }) {
+    const goToProduct = () => {
+
+
+    }
     return (
         <>
-            <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <a href="/">
-                    <img className="p-8 rounded-t-lg" src="/docs/images/products/apple-watch.png" alt="product image" />
-                </a>
-                <div className="px-5 pb-5">
-                    <a href="/">
-                        <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{description}</h5>
-                    </a>
-                    {/* rateing */}
-                    <div className="flex items-center mt-2.5 mb-5">
-                        {reviewStars ?
-                            <div className="flex items-center space-x-1 rtl:space-x-reverse">
-                                <ReviewStars reviewStar={reviewStars} />
-                            </div> : "No review"}
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <span className="text-3xl font-bold text-gray-900 dark:text-white">₹{price}</span>
-                        <a href="/" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a>
-                    </div>
-                </div>
-            </div >
-
+            <div className='flex flex-wrap justify-center'>
+                {array ? array.map((item) => {
+                    return <div key={item.id} className="w-full mb-2 itemcard m-auto  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <Link href={`/products/${item.id}`}>
+                            <img className="p-2 rounded-t-lg" src={item.images[0]} alt="product image" />
+                        </Link>
+                        <div className="px-2 pb-2">
+                            <div className='w-full'>
+                                <Link href={`/products/${item.id}`}>
+                                    <h5 className="text-xs font-semibold tracking-tight text-gray-900 dark:text-white">{item.description.slice(0, 60)}...</h5>
+                                </Link>
+                            </div>
+                            {/* rateing */}
+                            <div className="flex items-center mt-2.5 mb-5">
+                                {reviewStars ?
+                                    <div className="flex justify-between items-center h-1 w-full ">
+                                        <div className='w-1/4 flex'>
+                                            <ReviewStars reviewStar={reviewStars} />
+                                        </div>
+                                        <span className="mr-2 text-xs font-bold text-gray-900 dark:text-white">₹{item.price}</span>
+                                    </div> : "No review"}
+                            </div>
+                            <div className="flex items-center justify-between">
+                                <AddToCartBtn product={item} />
+                            </div>
+                        </div>
+                    </div >
+                }) : <Loading />}
+            </div>
         </>
     )
 }

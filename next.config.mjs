@@ -13,6 +13,24 @@ const nextConfig = {
             port: '',
             pathname: '/**'
         }],
+        remotePatterns: [{
+            protocol: 'https',
+            hostname: 'api.escuelajs.co/',
+            port: '',
+            pathname: '/**'
+        }],
+        remotePatterns: [{
+            protocol: 'https',
+            hostname: 'placeimg.com/',
+            port: '',
+            pathname: '/**'
+        }],
+        remotePatterns: [{
+            protocol: 'https',
+            hostname: 'unsplash.com/',
+            port: '',
+            pathname: '/**'
+        }],
         localPatterns: [
             {
                 pathname: '../images/**',

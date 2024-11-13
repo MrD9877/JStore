@@ -9,6 +9,9 @@
 }
 
 @media (prefers-color-scheme: dark) {
+  .itemcard{
+  max-width: 8rem ;
+  }
   :root {
     -webkit-overflow-scrolling: touch;
     --background: #171717;

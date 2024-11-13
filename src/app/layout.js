@@ -1,7 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import StoreProvider from "@/lib/StoreProvider";
-import SearchBar from "@/navBars/SearchBar";
+
 
 
 const geistSans = localFont({
@@ -26,17 +26,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <>
-      <StoreProvider>
-        <html lang="en">
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-          >
-            <SearchBar />
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <StoreProvider>
             {children}
-            <script src="https://cdn.lordicon.com/lordicon.js"></script>
-          </body>
-        </html>
-      </StoreProvider>
+          </StoreProvider>
+          <script src="https://cdn.lordicon.com/lordicon.js"></script>
+        </body>
+      </html>
     </>
   );
 }

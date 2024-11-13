@@ -6,14 +6,7 @@ import { useEffect, useState } from "react"
 export default function ProductSlider({ product }) {
     const [item, setItem] = useState()
     const data = async () => {
-        setItem(() => {
-            let pro = product
-            if (pro.images.length < 2) {
-                // todo find and push pics for all products
-                pro.images.push("https://i.imgur.com/YIq57b6.jpeg")
-            }
-            return pro
-        })
+        setItem(product)
     }
     useEffect(() => {
         data()
@@ -26,6 +19,7 @@ export default function ProductSlider({ product }) {
                     {item.images.map((src, index) => {
                         return <img key={index} className="w-auto" src={src} alt="" />
                     })}
+                    {/* <img key="dummy" className="w-auto" src="https://i.imgur.com/YIq57b6.jpeg" alt="" /> */}
                 </CustomCarousel>
             ) : (
                 <Loading width={"100vw"} height={"50vh"} />

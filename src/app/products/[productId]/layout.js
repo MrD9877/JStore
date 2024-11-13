@@ -7,7 +7,7 @@ export default async function Layout({ children, params }) {
   const { productId } = id
   const res = await fetch("https://api.escuelajs.co/api/v1/products")
   const products = await res.json()
-  const product = products.filter((items) => items.id == productId)[0]
+  const product = products.find((items) => items.id == productId)
 
   return (
     <>
