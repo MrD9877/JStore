@@ -37,6 +37,12 @@ const nextConfig = {
                 search: '',
             },
         ],
+        localPatterns: [
+            {
+                pathname: '../_images/**',
+                search: '',
+            },
+        ],
     }
 };
 

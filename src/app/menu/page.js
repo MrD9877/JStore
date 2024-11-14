@@ -1,5 +1,4 @@
 import CategoriesCard from '@/components/CatogriesCard'
-import ItemsCard from '@/components/ItemsCard'
 import NavBottom from '@/components/NavBottom'
 import SearchBar from '@/navBars/SearchBar'
 
