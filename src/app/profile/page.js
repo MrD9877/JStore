@@ -1,28 +1,40 @@
-import LoginPage from '@/components/LoginCard';
-import NavBottom from '@/components/NavBottom'
-import UserProfileCard from '@/components/UserProfileCard'
-import SearchBar from '@/navBars/SearchBar'
+"use client"
+import Loading from '@/app/components/Loading'
+import Popup from '@/app/components/Popup'
+import UserProfileCard from '@/app/components/UserProfileCard'
+import { useState } from 'react'
+import FetchUser from '../components/FetchUser'
+import DisplayOrdersCard from '../components/DisplayOrdersCard'
 
 
-export default async function ProfilePage() {
-    let user;
-    const res = await fetch("https://api.escuelajs.co/api/v1/users")
-    // user = await res.json()
+export default function ProfilePage() {
+    const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState()
+    const [error, setError] = useState(false)
     return (
         <div>
-            <SearchBar />
+            <FetchUser setLoading={setLoading} setError={setError} setUser={setUser} />
             <div style={{ maxWidth: "100vw" }} className='mb-20 w-screen'>
-                {user ? (
-                    <UserProfileCard user={user[0]} />) : (
-                    <>
-                        <div className='bg-slate-200 flex align-middle pt-16 h-5/6'>
-                            <LoginPage welcome={false} />
-                        </div>
-                    </>
-                )}
-
+                {
+                    error ? <Popup link={"/profile"} msg={"Error!! reload page?"} /> : (
+                        loading ? <Loading height='40vh' /> : (
+                            user ? (
+                                user.name ? (
+                                    <section className="bg-white w-screen py-8 antialiased dark:bg-gray-900 md:py-8">
+                                        <div className="mx-auto max-w-screen-lg px-4 2xl:px-0">
+                                            <UserProfileCard user={user} />
+                                            <DisplayOrdersCard />
+                                        </div>
+                                    </section>
+                                ) : (
+                                    <Popup link={"/profile/delivery"} msg={"Add your delivery address"} />
+                                )
+                            ) : (
+                                <Popup link={"/login"} msg={"Login to Continue"} />
+                            )
+                        ))
+                }
             </div>
-            <NavBottom />
         </div>
     )
 }

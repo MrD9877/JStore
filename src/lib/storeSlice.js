@@ -9,19 +9,44 @@ const findAmount = (products) => {
     return sum
 }
 
+const updateCart = async (state) => {
+    try {
+        const res = await fetch(`${process.env.SERVER_URL}/cart`,
+            {
+                method: "POST",
+                credentials: "include",
+                body: JSON.stringify(state)
+            })
+        const jres = await res.json()
+    } catch (err) {
+        console.log("error in saving cart items")
+    }
+}
+
 export const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         count: 0,
         products: undefined,
         total: 0,
+        progress: 0,
     },
     reducers: {
+        editProgress: (state, action) => {
+            state.progress = action.payload;
+            console.log(state.progress)
+        },
+        setCart: (state, action) => {
+            state.count = action.payload.count;
+            state.products = action.payload.products;
+            state.total = action.payload.total;
+        },
         addToCart: (state, action) => {
+            console.log(action)
             state.count += 1;
             if (state.products !== undefined) {
                 const temp = state.products
-                const dublicate = temp.find((item) => item.id === action.payload.id)
+                const dublicate = temp.find((item) => item.productId === action.payload.productId)
                 if (dublicate) return state = state
             }
             if (state.products === undefined) {
@@ -30,6 +55,7 @@ export const cartSlice = createSlice({
                 state.products = [...state.products, { ...action.payload, count: 1 }]
             }
             state.total = findAmount(state.products)
+            updateCart(state)
         },
         removeFromCart: (state, action) => {
             state.count -= 1
@@ -37,28 +63,30 @@ export const cartSlice = createSlice({
                 return
             } else {
                 const temp = [...state.products]
-                const index = temp.findIndex((item) => item.id === action.payload)
+                const index = temp.findIndex((item) => item.productId === action.payload)
                 state.products = [...state.products.slice(0, index), ...state.products.slice(index + 1)]
             }
             state.total = findAmount(state.products)
+            updateCart(state)
         },
         editCart: (state, action) => {
             if (action.payload.type === ACTIONS.ADD) {
                 const temp = [...state.products]
-                const index = temp.findIndex((item) => item.id === action.payload.product.id)
+                const index = temp.findIndex((item) => item.productId === action.payload.product.productId)
                 state.products[index].count = state.products[index].count + 1
             }
             if (action.payload.type === ACTIONS.SUBTRACT) {
                 const temp = [...state.products]
-                const index = temp.findIndex((item) => item.id === action.payload.product.id)
+                const index = temp.findIndex((item) => item.productId === action.payload.product.productId)
                 state.products[index].count -= 1
             }
             state.total = findAmount(state.products)
+            updateCart(state)
         }
     }
 })
 
 // Action creators are generated for each case reducer function
-export const { addToCart, removeFromCart, editCart } = cartSlice.actions
+export const { addToCart, removeFromCart, editCart, setCart, editProgress } = cartSlice.actions
 
 export default cartSlice.reducer

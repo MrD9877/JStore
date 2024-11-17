@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link';
 import Form from './Form';
 
-export default function LoginPage({ welcome = true }) {
+export default function LoginPage({ welcome = true, link = "/" }) {
     const [style, setStyle] = useState();
     const navigate = useRouter()
     const redInputStyle = {
@@ -37,28 +37,25 @@ export default function LoginPage({ welcome = true }) {
     }
     const onSubmit = async (data) => {
         try {
-            const checkUser = await fetch(`http://localhost:3000/login`, {
+            const checkUser = await fetch(`${process.env.SERVER_URL}/login`, {
+                method: "POST",
+                mode: "cors",
                 credentials: "include",
                 headers: {
-                    'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                method: "POST",
                 body: JSON.stringify(data)
             })
-            console.log(checkUser)
             if (checkUser.status === 401) {
                 popTost("Envalid Username or password", false)
                 setStyle(redInputStyle)
                 return
             }
-            console.log(checkUser)
             if (checkUser.status === 200) {
                 popTost('You are now loged in', true)
-                navigateTOlogin("/", 1000)
+                navigate.push(link)
             }
         } catch (err) {
-            console.log(err)
             popTost('Sorry server is down', false)
         }
     }

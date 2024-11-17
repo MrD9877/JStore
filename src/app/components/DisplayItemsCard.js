@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import { useRouter } from 'next/navigation'
-import { colors } from '../../colors'
+import { colors } from '../../../colors'
 
 export default function DisplayItemsCard({ array }) {
     const router = useRouter()
@@ -16,7 +16,7 @@ export default function DisplayItemsCard({ array }) {
                 <div className="flow-root">
                     <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
                         {array.map((items, index) => {
-                            return <li onClick={(e) => handleClickOnItem(e, items.id)} key={index} className="py-3 sm:py-4">
+                            return <li onClick={(e) => handleClickOnItem(e, items.productId)} key={index} className="py-3 sm:py-4">
                                 <div className="flex items-center">
                                     <div className="flex-shrink-0">
                                         <img className="w-8 h-8 rounded-full" src={items.images[0]} alt="Neil image" />

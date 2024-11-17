@@ -1,9 +1,9 @@
-import ItemsCard from "@/components/ItemsCard";
-import NavBottom from "@/components/NavBottom";
+import ItemsCard from "@/app/components/ItemsCard";
+import NavBottom from "@/app/components/NavBottom";
 
 
 export default async function ProductsLayout() {
-    const res = await fetch("https://api.escuelajs.co/api/v1/products")
+    const res = await fetch(`${process.env.SERVER_URL}/product`)
     const products = await res.json()
     return (<>
         <div className="mb-20">

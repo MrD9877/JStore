@@ -1,6 +1,6 @@
 'use client'
-import CustomCarousel from "@/components/CustomCarousel"
-import Loading from "@/components/Loading"
+import CustomCarousel from "@/app/components/CustomCarousel"
+import Loading from "@/app/components/Loading"
 import { useEffect, useState } from "react"
 
 export default function ProductSlider({ product }) {

@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import StoreProvider from "@/lib/StoreProvider";
+import UpdateCart from "@/app/components/UpdateCart";
 
 
 
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <StoreProvider>
+            <UpdateCart />
             {children}
           </StoreProvider>
           <script src="https://cdn.lordicon.com/lordicon.js"></script>

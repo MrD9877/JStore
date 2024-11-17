@@ -1,9 +1,8 @@
 "use client"
-import "../app/globals.css"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
-import gif from "../images/check.gif"
+import gif from "../_images/check.gif"
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart } from "@/lib/storeSlice"
 

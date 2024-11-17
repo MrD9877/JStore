@@ -16,13 +16,13 @@ export default function ItemsCard({ array, reviewStars = 4 }) {
         <>
             <div className='flex flex-wrap justify-center'>
                 {array ? array.map((item) => {
-                    return <div key={item.id} className="w-full mb-2 itemcard m-auto  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                        <Link href={`/products/${item.id}`}>
+                    return <div key={item.productId} className="w-full mb-2 itemcard m-auto  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <Link href={`/products/${item.productId}`}>
                             <img className="p-2 rounded-t-lg" src={item.images[0]} alt="product image" />
                         </Link>
                         <div className="px-2 pb-2">
                             <div className='w-full'>
-                                <Link href={`/products/${item.id}`}>
+                                <Link href={`/products/${item.productId}`}>
                                     <h5 className="text-xs font-semibold tracking-tight text-gray-900 dark:text-white">{item.description.slice(0, 60)}...</h5>
                                 </Link>
                             </div>

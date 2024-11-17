@@ -43,32 +43,31 @@ export default function SigninPage() {
 
     const onSubmit = async (data) => {
         if (data.password !== data.repeatpassword) {
+            popTost("Password does't match")
             setStyle(redInputStyle)
         }
         if (data.password === data.repeatpassword) {
             setStyle({ color: "black" })
-        }
-        try {
-            const addNewUser = await fetch(`https://onotesbackend-production.up.railway.app/signin`, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-                body: JSON.stringify(data)
-            })
-            const res = await addNewUser.json();
-            if (!res.valid) {
-                popTost(res.msg, false)
-                console.log(res.msg)
+            try {
+                const addNewUser = await fetch(`${process.env.SERVER_URL}/signin`, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    body: JSON.stringify(data)
+                })
+                const res = await addNewUser.json();
+                if (!res.valid) {
+                    popTost(res.msg, false)
+                }
+                if (res.valid) {
+                    popTost('You are now signed in', true)
+                    navigateTOlogin("/login")
+                }
+            } catch (err) {
+                popTost("Sorry server is down", false)
             }
-            if (res.valid) {
-                console.log('signedIN')
-                popTost('You are now signed in', true)
-                navigateTOlogin("/login")
-            }
-        } catch {
-            popTost("Sorry server is down", false)
         }
     }
     return (
@@ -79,10 +78,10 @@ export default function SigninPage() {
             />
             <div style={{ backgroundImage: `url(${bgImage.src})` }} className='flex h-screen'>
                 <form style={{ background: "rgba(0, 10,20,0.9)" }} className="border rounded-xl max-w-sm mx-auto bg-white p-12 my-auto" onSubmit={handleSubmit(onSubmit)}>
-                    <div className="mb-5">
+                    {/* <div className="mb-5">
                         <label htmlFor="email" className="block mb-2 text-sm font-medium text-white dark:text-white">Your email</label>
                         <input type="email" {...register("email")} required id="email" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="name@flowbite.com" />
-                    </div>
+                    </div> */}
                     <div className="mb-5">
                         <label htmlFor="username" className="block mb-2 text-sm font-medium text-white dark:text-white">User Name</label>
                         <input type="username" {...register("username")} required id="username" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Jonny23" />
