@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
+
 export default function CheckoutBar() {
     const [colorStyle, setColorStyle] = useState(["gray", "gray", "gray", "gray"])
     const progress = useSelector(state => state.progress)
