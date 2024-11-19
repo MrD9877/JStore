@@ -1,6 +1,7 @@
+"use client"
 import React from 'react'
 
-export default function Loading({ width = "100%", height = "100%" }) {
+export default function Loading({ width = "100%", height = "30vh" }) {
     return (
         <div className='flex justify-center' style={{ width: width, height: height }}>
             <div className='m-auto' role="status">

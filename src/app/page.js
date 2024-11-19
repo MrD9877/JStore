@@ -1,11 +1,10 @@
-import NavBottom from "@/app/components/NavBottom";
-import SearchBar from "@/navBars/SearchBar";
+import HomePage from "./components/Home";
+
 
 export default function Home() {
   return (
     <>
-      <SearchBar />
-      <NavBottom />
+      <HomePage />
     </>
   );
 }

@@ -7,7 +7,6 @@ export default function CheckoutBar() {
     const [colorStyle, setColorStyle] = useState(["gray", "gray", "gray", "gray"])
     const progress = useSelector(state => state.progress)
     useEffect(() => {
-        console.log(progress)
         let temp = []
         for (let i = 0; i < 4; i++) {
             i < progress ? temp.push("blue") : temp.push("gray")

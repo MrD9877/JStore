@@ -44,7 +44,7 @@ export default function CartPage() {
                                                     <div className="flex items-center">
                                                         {/* decrese btn  */}
                                                         <button type="button" onClick={() => handleChangeCount(ACTIONS.SUBTRACT, item)} id="decrement-button" data-input-counter-decrement="counter-input" className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border  focus:outline-none focus:ring-2 border-gray-600 bg-gray-700 hover:bg-gray-600 focus:ring-gray-700">
-                                                            <svg className="h-2.5 w-2.5 text-gray-900 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                            <svg className="h-2.5 w-2.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h16" />
                                                             </svg>
                                                         </button>
@@ -55,7 +55,7 @@ export default function CartPage() {
                                                         </span>
 
                                                         {/* increse btn  */}
-                                                        <button type="button" onClick={() => handleChangeCount(ACTIONS.ADD, item)} id="increment-button" data-input-counter-increment="counter-input" className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border focus:outline-none focus:ring-2 focus:ring-gray-100 border-gray-600 bg-gray-700 hover:bg-gray-600 focus:ring-gray-700">
+                                                        <button type="button" onClick={() => handleChangeCount(ACTIONS.ADD, item)} id="increment-button" data-input-counter-increment="counter-input" className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border focus:outline-none focus:ring-2  border-gray-600 bg-gray-700 hover:bg-gray-600 focus:ring-gray-700">
                                                             <svg className="h-2.5 w-2.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 1v16M1 9h16" />
                                                             </svg>

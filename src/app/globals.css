@@ -7,6 +7,11 @@
   --foreground: #ffffff;
 }
 
+*{
+  margin: 0;
+  padding: 0;
+}
+
 @media (prefers-color-scheme: dark) {
   .itemcard {
     max-width: 8rem;

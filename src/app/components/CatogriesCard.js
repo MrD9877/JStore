@@ -16,7 +16,7 @@ export default function CategoriesCard({ array, reviewStars = 4 }) {
                             <div className="px-2 pb-2">
                                 <div className='w-full'>
                                     <Link href={`/categories/${item.category}`}>
-                                        <h5 className="text-xs font-semibold tracking-tight text-gray-900 dark:text-white">{item.name}</h5>
+                                        <h5 className="text-xs font-semibold tracking-tight text-gray-900 dark:text-white">{item.category}</h5>
                                     </Link>
                                 </div>
                                 {/* rateing */}

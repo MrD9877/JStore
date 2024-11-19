@@ -1,12 +1,16 @@
 "use client"
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import UserProfileCard from './UserProfileCard'
 import toast, { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import { clearCart } from '@/lib/storeSlice';
 
 export default function DisplayOrderSummary({ user }) {
     const products = useSelector(state => state.products)
     const total = useSelector(state => state.total)
+    const router = useRouter()
+    const dispatch = useDispatch()
 
     const popTost = (msg, success) => {
         let emote = "❌";
@@ -25,12 +29,14 @@ export default function DisplayOrderSummary({ user }) {
 
 
     const handleOrder = async () => {
-        const res = await fetch(`${process.env.SERVER_URL}/order`, { method: "POST", credentials: "include", body: JSON.stringify(products) })
+        const res = await fetch(`${process.env.SERVER_URL}/order`, { method: "POST", credentials: "include", body: JSON.stringify({ products: products, total: total }) })
         if (res.status === 200) {
+            dispatch(clearCart())
             popTost("Done", true)
+            router.push('/profile')
         } else if (res.status === 400) {
-            const msg = await res.json().msg
-            popTost("msg", false)
+            const msg = await res.json()
+            popTost(msg.msg, false)
         } else if (res.status === 401) {
             popTost("login to continue", false)
         }

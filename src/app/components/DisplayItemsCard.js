@@ -6,6 +6,7 @@ import { colors } from '../../../colors'
 export default function DisplayItemsCard({ array }) {
     const router = useRouter()
     const handleClickOnItem = (e, id) => {
+        // todo if admin push to admin/id 
         router.push(`/products/${id}`, { scroll: false })
         e.currentTarget.style.border = `solid 2px ${colors.blue}`
         e.currentTarget.style.background = `${colors.gray}`

@@ -2,7 +2,12 @@ import localFont from "next/font/local";
 import "./globals.css";
 import StoreProvider from "@/lib/StoreProvider";
 import UpdateCart from "@/app/components/UpdateCart";
+import Home from "./page";
+import { Suspense } from "react";
+import Loading from "./components/Loading";
 
+// todo 
+// DisplayItemsCard
 
 
 const geistSans = localFont({
@@ -33,7 +38,9 @@ export default function RootLayout({ children }) {
         >
           <StoreProvider>
             <UpdateCart />
-            {children}
+            <Suspense fallback={<Loading />}>
+              {children}
+            </Suspense>
           </StoreProvider>
           <script src="https://cdn.lordicon.com/lordicon.js"></script>
         </body>

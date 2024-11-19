@@ -1,5 +1,5 @@
 "use client"
-import DisplayOrderSummary from '@/app/components/displayOrderSummary'
+import DisplayOrderSummary from '@/app/components/DisplayOrderSummary'
 import FetchUser from '@/app/components/FetchUser'
 import Loading from '@/app/components/Loading'
 import React, { useState } from 'react'
