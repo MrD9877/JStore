@@ -10,9 +10,13 @@ export default function UpdateCart() {
         dispatch(setCart(data))
     }
     const fetchCart = async () => {
-        const res = await fetch(`${process.env.SERVER_URL}/cart`, { credentials: "include", })
-        const data = await res.json()
-        setuser(data)
+        try {
+            const res = await fetch(`${process.env.SERVER_URL}/cart`, { credentials: "include", })
+            const data = await res.json()
+            setuser(data)
+        } catch {
+
+        }
     }
     useEffect(() => {
         fetchCart()
