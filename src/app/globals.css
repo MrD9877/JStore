@@ -7,7 +7,17 @@
   --foreground: #ffffff;
 }
 
-*{
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: royalblue; 
+  border-radius: 10px;
+  width: 2px;
+}
+
+* {
   margin: 0;
   padding: 0;
 }
@@ -23,7 +33,16 @@
     --foreground: #ffffff;
   }
 }
-
+@media screen and (orientation:landscape) { 
+  #orint { 
+    -ms-transform: rotate(-90deg); /* IE 9 */ 
+    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */ 
+    transform: rotate(-90deg); 
+    width: 100vh ; 
+    height: 100vw ; 
+    overflow: scroll; 
+  } 
+}
 body {
   color: black;
   background: white;

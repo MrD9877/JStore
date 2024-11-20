@@ -15,9 +15,7 @@ export default function OrdersCard({ array }) {
 
                     <CustomCarousel>
                         {item.products.map((product) => {
-                            return <div>
-                                <Image width={200} height={100} src={product.images[0]} alt="product-image" className="w-1/3 rounded-md md:rounded-lg object-cover" />
-                            </div>
+                            return <Image style={{ maxHeight: "30vh", maxWidth: '40vw' }} width={200} height={100} src={product.images[0]} alt="product-image" className=" rounded-md md:rounded-lg object-cover" />
                         })}
                     </CustomCarousel>
                     <div style={{ maxWidth: "70%" }} className="px-6 py-2">

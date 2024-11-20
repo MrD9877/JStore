@@ -5,6 +5,7 @@ import UpdateCart from "@/app/components/UpdateCart";
 import Home from "./page";
 import { Suspense } from "react";
 import Loading from "./components/Loading";
+import FetchToken from "./_utility/FetchToken";
 
 // todo 
 // DisplayItemsCard
@@ -28,7 +29,6 @@ export const metadata = {
   },
   description: "A cloth store",
 };
-
 export default function RootLayout({ children }) {
   return (
     <>
@@ -38,6 +38,7 @@ export default function RootLayout({ children }) {
         >
           <StoreProvider>
             <UpdateCart />
+            <FetchToken />
             <Suspense fallback={<Loading />}>
               {children}
             </Suspense>
