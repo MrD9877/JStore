@@ -1,3 +1,4 @@
+import AdminNavBottom from "@/app/_navbars/AdminNavBottom"
 import OrderItemCard from "@/app/components/OrderItemCard"
 
 export default async function OrderIdLayout({ children, params }) {
@@ -9,6 +10,7 @@ export default async function OrderIdLayout({ children, params }) {
       <div className="orint">
         {children}
         <OrderItemCard orderId={orderId} />
+        <AdminNavBottom />
       </div>
     </>
   )

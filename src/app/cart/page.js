@@ -4,10 +4,14 @@ import { removeFromCart, editCart } from "@/lib/storeSlice"
 import ACTIONS from '@/lib/action'
 import Link from 'next/link'
 import Popup from "../components/Popup"
+import GetImages from "../_utility/GetImages"
+import { useEffect, useState } from "react"
 
 export default function CartPage() {
     const total = useSelector(state => state.total)
     const products = useSelector(state => state.products)
+    const count = useSelector(state => state.count)
+    const [urls, setUrls] = useState([])
     const dispatch = useDispatch()
 
     const removeItem = (id) => {

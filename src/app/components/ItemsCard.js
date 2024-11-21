@@ -6,7 +6,7 @@ import AddToCartBtn from './AddToCartBtn.js'
 import Link from 'next/link.js'
 import EditProductsBtn from '../_utility/EditProductsBtn.js'
 
-export default function ItemsCard({ array, reviewStars = 4, admin = true }) {
+export default function ItemsCard({ array, reviewStars = 4, admin = false }) {
     const [link, setLink] = useState("products")
     useEffect(() => {
         if (admin) setLink("editproducts")
@@ -15,6 +15,7 @@ export default function ItemsCard({ array, reviewStars = 4, admin = true }) {
         <>
             <div className='flex flex-wrap justify-center'>
                 {array ? array.map((item) => {
+                    console.log(item.images[0])
                     return <div key={item.productId} className="w-full mb-2 itemcard m-auto  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <Link href={`/${link}/${item.productId}`}>
                             <img className="p-2 rounded-t-lg" src={item.images[0]} alt="product image" />

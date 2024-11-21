@@ -1,4 +1,5 @@
 "use client"
+import AdminNavBottom from "@/app/_navbars/AdminNavBottom";
 import FilterBar from "@/app/_navbars/FilterBar";
 import Loading from "@/app/components/Loading";
 import OrdersCard from "@/app/components/OrdersCard";
@@ -14,6 +15,7 @@ export default function OrdersPage() {
             {loading ? <Loading /> : (
                 <OrdersCard array={orders} />
             )}
+            <AdminNavBottom />
         </div>
     )
 }

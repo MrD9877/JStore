@@ -37,7 +37,12 @@ export default function AddProduct() {
         })
         const arrayData = Object.entries(data);
         arrayData.forEach((entry) => {
-            formData.append(`${entry[0]}`, entry[1])
+            if (entry[0] === 'colors') {
+                const colors = entry[1].split(",")
+                formData.append(`${entry[0]}`, colors)
+            } else {
+                formData.append(`${entry[0]}`, entry[1])
+            }
         })
         try {
             const res = await fetch(`${process.env.SERVER_URL}/product`, { method: "POST", credentials: "include", body: formData })
@@ -89,8 +94,8 @@ export default function AddProduct() {
 
                                 {/* <!-- Color --> */}
                                 <div>
-                                    <label htmlFor="color" className="block text-sm font-medium text-gray-700">Color</label>
-                                    <input type="text" id="color" name="color"
+                                    <label htmlFor="colors" className="block text-sm font-medium text-gray-700">Colors</label>
+                                    <input {...register("colors")} type="text" id="colors" name="colors"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5" placeholder='(optional)  black,white,gray' />
                                 </div>
                                 {/* category */}

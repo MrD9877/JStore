@@ -17,7 +17,6 @@ const updateCart = async (state) => {
                 credentials: "include",
                 body: JSON.stringify(state)
             })
-        const jres = await res.json()
     } catch (err) {
         console.log("error in saving cart items")
     }
@@ -78,7 +77,11 @@ export const cartSlice = createSlice({
             if (action.payload.type === ACTIONS.SUBTRACT) {
                 const temp = [...state.products]
                 const index = temp.findIndex((item) => item.productId === action.payload.product.productId)
-                state.products[index].count -= 1
+                if (state.products[index].count <= 1) {
+                    state.products[index].count = 1
+                } else {
+                    state.products[index].count -= 1
+                }
             }
             state.total = findAmount(state.products)
             updateCart(state)
