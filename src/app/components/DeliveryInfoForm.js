@@ -42,7 +42,7 @@ export default function DeliveryInfoForm({ linkAfterDone = "/profile" }) {
         const user = { name: data.name, phonenumber: data.phonenumber, email: data.email, avatar: avatar.src };
         const deliveryaddress = { state: data.state, pin: data.pin, city: data.city, streetname: data.streetname, housenumber: data.housenumber, }
         const res = await uploadForm({ user: user, deliveryaddress: deliveryaddress })
-        if (res === 201) router.push(linkAfterDone)
+        if (res === 201) router.back()
         if (res === 406) popTost("opps!Somthing went Wrong!! try again.", false)
         if (res === 401) router.push('/login')
         if (!res) popTost("opps!Somthing went Wrong!! try again.", false)
@@ -63,19 +63,19 @@ export default function DeliveryInfoForm({ linkAfterDone = "/profile" }) {
                                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                     <div>
                                         <label htmlFor="your_name" className="mb-2 block text-sm font-medium text-white"> Your name </label>
-                                        <input {...register("name")} type="text" id="your_name" className="block w-full rounded-lg border border-gray-600 bg-gray-700 text-white placeholder:text-gray-400  focus:border-primary-500 focus:ring-primary-500" placeholder="Bonnie Green" required />
+                                        <input {...register("name")} type="text" id="your_name" className="block w-full rounded-sm   px-3 border border-gray-600 bg-gray-700 text-white placeholder:text-gray-400  focus:border-primary-500 focus:ring-primary-500" placeholder="Bonnie Green" required />
                                     </div>
 
                                     <div>
                                         <label htmlFor="your_email" className="mb-2 block text-sm font-medium text-white"> Your email <span className='text-gray-500'>(optional)</span> </label>
-                                        <input {...register("email")} type="email" id="your_email" className="block w-full rounded-lg border border-gray-600 bg-gray-700 text-white placeholder:text-gray-400  focus:border-primary-500 focus:ring-primary-500" placeholder="name@flowbite.com" />
+                                        <input {...register("email")} type="email" id="your_email" className="block w-full rounded-sm  px-3 border border-gray-600 bg-gray-700 text-white placeholder:text-gray-400  focus:border-primary-500 focus:ring-primary-500" placeholder="name@flowbite.com" />
                                     </div>
 
                                     <div>
                                         <div className="mb-2 flex items-center gap-2">
                                             <label htmlFor="select-country-input-3" className="block text-sm font-medium text-white"> State</label>
                                         </div>
-                                        <select {...register("state")} id="select-country-input-3" className="block w-full rounded-lg border border-gray-600 bg-gray-700 text-white placeholder:text-gray-400  focus:border-primary-500 focus:ring-primary-500">
+                                        <select {...register("state")} id="select-country-input-3" className="block w-full rounded-sm  px-3 border border-gray-600 bg-gray-700 text-white placeholder:text-gray-400  focus:border-primary-500 focus:ring-primary-500">
                                             <option defaultValue={"Punjab"}>Punjab</option>
                                             <option value="AS">Haryana</option>
                                             <option value="FR">Delhi</option>
@@ -84,7 +84,7 @@ export default function DeliveryInfoForm({ linkAfterDone = "/profile" }) {
 
                                     <div>
                                         <label htmlFor="your_city" className="mb-2 block text-sm font-medium text-white"> City </label>
-                                        <input {...register("city")} type="text" id="your_city" className="block w-full rounded-lg border border-gray-600 bg-gray-700 text-white placeholder:text-gray-400  focus:border-primary-500 focus:ring-primary-500" placeholder="name@flowbite.com" required />
+                                        <input {...register("city")} type="text" id="your_city" className="block w-full rounded-sm  px-3 border border-gray-600 bg-gray-700 text-white placeholder:text-gray-400  focus:border-primary-500 focus:ring-primary-500" placeholder="name@flowbite.com" required />
                                     </div>
 
                                     <div>
@@ -101,17 +101,17 @@ export default function DeliveryInfoForm({ linkAfterDone = "/profile" }) {
 
                                     <div>
                                         <label htmlFor="pincode" className="mb-2 block text-sm font-medium text-white"> PIN-Code </label>
-                                        <input {...register("pin")} type="number" id="pincode" className="block w-full rounded-lg border border-gray-600 bg-gray-700 text-white placeholder:text-gray-400  focus:border-primary-500 focus:ring-primary-500" placeholder="142026" required />
+                                        <input {...register("pin")} type="number" id="pincode" className="block w-full rounded-sm  px-3 border border-gray-600 bg-gray-700 text-white placeholder:text-gray-400  focus:border-primary-500 focus:ring-primary-500" placeholder="142026" required />
                                     </div>
 
                                     <div>
                                         <label htmlFor="housenumber" className="mb-2 block text-sm font-medium text-white"> House No</label>
-                                        <input {...register("housenumber")} type="text" id="housenumber" className="block w-full rounded-lg border border-gray-600 bg-gray-700 text-white placeholder:text-gray-400  focus:border-primary-500 focus:ring-primary-500" placeholder="House Number:2002" required />
+                                        <input {...register("housenumber")} type="text" id="housenumber" className="block w-full rounded-sm  px-3 border border-gray-600 bg-gray-700 text-white placeholder:text-gray-400  focus:border-primary-500 focus:ring-primary-500" placeholder="House Number:2002" required />
                                     </div>
 
                                     <div>
                                         <label htmlFor="streetname" className="mb-2 block text-sm font-medium text-white">Street Name</label>
-                                        <input {...register("streetname")} type="text" id="streetname" className="block w-full rounded-lg border border-gray-600 bg-gray-700 text-white placeholder:text-gray-400  focus:border-primary-500 focus:ring-primary-500" placeholder="Pashim marg...." required />
+                                        <input {...register("streetname")} type="text" id="streetname" className="block w-full rounded-sm  px-3 border border-gray-600 bg-gray-700 text-white placeholder:text-gray-400  focus:border-primary-500 focus:ring-primary-500" placeholder="Pashim marg...." required />
                                     </div>
 
                                     <div className="sm:col-span-2">

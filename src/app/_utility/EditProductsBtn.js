@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from 'react'
 
 export default function EditProductsBtn({ product }) {
@@ -24,9 +25,6 @@ export default function EditProductsBtn({ product }) {
 
     return (
         <>
-            <span className='text-white text-xs font-bold'>
-                stock:
-            </span>
             <div className="flex items-center">
                 {/* decrese btn  */}
                 <button type="button" onClick={() => setCount((pre) => pre - 1)} id="decrement-button" data-input-counter-decrement="counter-input" className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border  focus:outline-none focus:ring-2 border-gray-600 bg-gray-700 hover:bg-gray-600 focus:ring-gray-700">
@@ -36,7 +34,7 @@ export default function EditProductsBtn({ product }) {
                 </button>
 
                 {/* number of items  */}
-                <span type="text" id="counter-input" className="w-5 shrink-0 border-0 bg-transparent text-center text-sm font-medium focus:outline-none focus:ring-0 text-white" >
+                <span type="text" id="counter-input" className="w-5 shrink-0 border-0 bg-transparent text-center text-sm font-medium focus:outline-none focus:ring-0 text-black" >
                     {count}
                 </span>
 

@@ -8,11 +8,11 @@
 }
 
 ::-webkit-scrollbar {
-  width: 0px;
   height: 0px;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: royalblue; 
+  background: royalblue;
   border-radius: 10px;
   width: 2px;
 }
@@ -33,16 +33,20 @@
     --foreground: #ffffff;
   }
 }
-@media screen and (orientation:landscape) { 
-  #orint { 
-    -ms-transform: rotate(-90deg); /* IE 9 */ 
-    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */ 
-    transform: rotate(-90deg); 
-    width: 100vh ; 
-    height: 100vw ; 
-    overflow: scroll; 
-  } 
+
+@media screen and (orientation:landscape) {
+  #orint {
+    -ms-transform: rotate(-90deg);
+    /* IE 9 */
+    -webkit-transform: rotate(-90deg);
+    /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+    width: 100vh;
+    height: 100vw;
+    overflow: scroll;
+  }
 }
+
 body {
   color: black;
   background: white;
@@ -102,4 +106,34 @@ body {
   -ms-user-select: none;
   /* Internet Explorer/Edge */
   user-select: none;
+}
+
+.cls-1 {
+  fill: #1877f2;
+}
+
+.cls-2 {
+  fill: #fff;
+}
+
+.swiper-wrapper {
+  height: max-content !important;
+
+  width: max-content;
+}
+
+.swiper-button-prev:after,
+.swiper-rtl .swiper-button-next:after {
+  content: "" !important;
+}
+
+.swiper-button-next:after,
+.swiper-rtl .swiper-button-prev:after {
+  content: "" !important;
+
+}
+
+.product-thumb .swiper-slide.swiper-slide-thumb-active>.slide\:border-indigo-600 {
+  --tw-border-opacity: 1;
+  border-color: rgb(79 70 229 / var(--tw-border-opacity));
 }

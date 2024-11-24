@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react"
 import gif from "../_images/check.gif"
 import Loading from "../components/Loading"
+import CreateRocketOrder from "../components/CreateRocketOrder"
 
-export default function AcceptRejectBtn({ orderId, orderStatus }) {
+export default function AcceptRejectBtn({ orderId, orderStatus, order, customer }) {
     const [orderState, setOrderState] = useState()
     const [loading, setLoading] = useState(false)
     const handleOrderEdit = async (type) => {
@@ -44,9 +45,7 @@ export default function AcceptRejectBtn({ orderId, orderStatus }) {
                         </>
                     ) : (
                         <>
-                            <button onClick={() => handleOrderEdit("deliver")} className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-3 py-1.5 mb-2 dark:bg-green-600 dark:hover:bg-green-700 mr-3">
-                                Deliver
-                            </button>
+                            <CreateRocketOrder order={order} customer={customer} />
                             <button onClick={() => handleOrderEdit("decline")} className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-3 py-1.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 ">
                                 Decline
                             </button>

@@ -10,7 +10,9 @@ export default async function OrderIdLayout({ children, params }) {
       <div className="orint">
         {children}
         <OrderItemCard orderId={orderId} />
-        <AdminNavBottom />
+        <div className="mt-20">
+          <AdminNavBottom />
+        </div>
       </div>
     </>
   )

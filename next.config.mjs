@@ -29,12 +29,18 @@ const nextConfig = {
         return config;
     },
     images: {
-        domains: ['i.imgur.com', 'www.w3.org'],
+        domains: ['i.imgur.com', 'www.w3.org', "j-shop.s3.eu-north-1.amazonaws.com"],
         remotePatterns: [{
             protocol: 'https',
             hostname: 'fakestoreapi.com',
             port: '',
             pathname: '/img/**'
+        }],
+        remotePatterns: [{
+            protocol: 'https',
+            hostname: 'j-shop.s3.eu-north-1.amazonaws.com',
+            port: '',
+            pathname: '/**'
         }],
 
         remotePatterns: [{

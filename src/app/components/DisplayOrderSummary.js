@@ -5,6 +5,8 @@ import UserProfileCard from './UserProfileCard'
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { clearCart } from '@/lib/storeSlice';
+import OrderSummary from './OrderSummary';
+import Link from 'next/link';
 
 export default function DisplayOrderSummary({ user }) {
     const products = useSelector(state => state.products)
@@ -31,9 +33,9 @@ export default function DisplayOrderSummary({ user }) {
     const handleOrder = async () => {
         const res = await fetch(`${process.env.SERVER_URL}/order`, { method: "POST", credentials: "include", body: JSON.stringify({ products: products, total: total }) })
         if (res.status === 200) {
-            dispatch(clearCart())
             popTost("Done", true)
             router.push('/profile')
+            dispatch(clearCart())
         } else if (res.status === 400) {
             const msg = await res.json()
             popTost(msg.msg, false)
@@ -47,45 +49,21 @@ export default function DisplayOrderSummary({ user }) {
                 position="top-center"
                 reverseOrder={false}
             />
-            <UserProfileCard user={user} />
-            {/* order summary  */}
-            <div className="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
-                <div className="space-y-4 rounded-lg border p-4 shadow-sm border-gray-700 bg-gray-800 sm:p-6">
-                    <p className="text-xl font-semibold text-white">Order summary</p>
+            <div>
+                <OrderSummary order={{ products: products, total: total }} />
+                <div className="gap-4 sm:flex sm:items-center w-3/5 m-auto pb-28">
+                    <button
+                        className="w-full rounded-lg mb-3 border border-gray-600 bg-gray-800 px-5 py-2.5 text-sm font-medium text-gray-400 hover:bg-gray-700 hover:text-white focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-700"
+                    >
+                        <Link href="/products">
+                            Return to Shopping
+                        </Link>
+                    </button>
 
-                    <div className="space-y-4">
-                        <div className="space-y-2">
-
-                            {products ? products.map((item) => {
-                                return (
-                                    <dl key={item.productId} className="flex items-center justify-between gap-4">
-                                        <dt className="text-base font-normal text-gray-400">
-                                            <span className='text-red-600'>
-                                                {item.count}
-                                            </span>
-                                            <span>
-                                                * {item.title}
-                                            </span>
-
-                                        </dt>
-                                        <dd className="text-base font-medium text-white">₹{item.price}</dd>
-                                    </dl>
-                                )
-                            }) : (
-                                ""
-                            )}
-
-                        </div>
-
-                        <dl className="flex items-center justify-between gap-4 border-t pt-2 border-gray-700">
-                            <dt className="text-base font-bold  text-white">Total</dt>
-                            <dd className="text-base font-bold text-white">₹{total}</dd>
-                        </dl>
-                    </div>
-                    <button onClick={handleOrder} >
-                        <div className="flex w-full items-center justify-center rounded-lg  px-5 py-2.5 text-sm font-medium text-green-500  focus:outline-none focus:ring-4 hover:bg-blue-800 bg-blue-rgba focus:ring-primary-800">
-                            Order
-                        </div>
+                    <button onClick={handleOrder}
+                        className="w-full rounded-lg mb-3 border border-gray-600 bg-gray-800 px-5 py-2.5 text-sm font-medium text-gray-400 hover:bg-gray-700 hover:text-white focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-700"
+                    >
+                        Send the order
                     </button>
                 </div>
             </div>

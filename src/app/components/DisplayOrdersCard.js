@@ -53,7 +53,7 @@ export default function DisplayOrdersCard() {
                 {loading ? <Loading /> : (orders && orders.length > 0 && orders.map((order) => {
                     var date = new Date(order.orderDate).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' })
 
-                    return <div key={order._id} className="flex flex-wrap items-center gap-y-4 border-b border-gray-200 pb-4 dark:border-gray-700 md:pb-5">
+                    return <div key={order._id} className="flex flex-wrap items-center gap-y-4 border-b border-gray-200 py-4 dark:border-gray-700 md:pb-5">
                         {/* order id  */}
                         <dl className="w-1/2 sm:w-48">
                             <dt className="text-base font-medium text-gray-500 dark:text-gray-400">Order ID:</dt>

@@ -28,16 +28,21 @@ export default function page() {
         let shipRocketToken;
         try {
             const res = await fetch(`${process.env.SERVER_URL}/user`, { credentials: "include" })
-            const user = res.json()
-            token = user.token
-        } catch {
+            const user = await res.json()
+            shipRocketToken = user.shiprocket.token
+        } catch (err) {
+            console.log(err)
             return popTost("somthing is not working try reloading or Login...")
         }
         try {
             const headers = { 'Authorization': `Bearer ${shipRocketToken}`, 'Content-Type': 'application/json' }
             const res = await fetch("https://apiv2.shiprocket.in/v1/external/settings/company/addpickup", { method: "POST", headers, body: JSON.stringify(data) })
             const msg = await res.json()
-            res.status === 200 ? popTost("Done", true) && router.push('/adminprofile') : popTost(`Rejected! ${msg.message}`)
+            console.log(msg)
+            if (res.status === 200) {
+                popTost("Done", true);
+                router.push('/adminprofile')
+            } else { popTost(`Rejected! ${msg.message}`) }
         } catch {
             return popTost("somthing is not working try reloading or check for connection")
         }

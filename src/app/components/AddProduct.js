@@ -37,12 +37,14 @@ export default function AddProduct() {
         })
         const arrayData = Object.entries(data);
         arrayData.forEach((entry) => {
-            if (entry[0] === 'colors') {
-                const colors = entry[1].split(",")
-                formData.append(`${entry[0]}`, colors)
+            if (entry[0] === 'colors' || entry[0] === 'size') {
+                const split = entry[1].split(",")
+                console.log(split)
+                formData.append(`${entry[0]}`, split)
             } else {
                 formData.append(`${entry[0]}`, entry[1])
             }
+            console.log(formData)
         })
         try {
             const res = await fetch(`${process.env.SERVER_URL}/product`, { method: "POST", credentials: "include", body: formData })
@@ -97,6 +99,12 @@ export default function AddProduct() {
                                     <label htmlFor="colors" className="block text-sm font-medium text-gray-700">Colors</label>
                                     <input {...register("colors")} type="text" id="colors" name="colors"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5" placeholder='(optional)  black,white,gray' />
+                                </div>
+                                {/* size  */}
+                                <div>
+                                    <label htmlFor="size" className="block text-sm font-medium text-gray-700">Sizes</label>
+                                    <input {...register("size")} type="text" id="size" name="size"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5" required placeholder='m,l,xl...' />
                                 </div>
                                 {/* category */}
                                 <div>

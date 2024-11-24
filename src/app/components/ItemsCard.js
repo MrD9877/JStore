@@ -37,7 +37,12 @@ export default function ItemsCard({ array, reviewStars = 4, admin = false }) {
                                     </div> : "No review"}
                             </div>
                             <div className="flex items-center justify-between">
-                                {admin ? <EditProductsBtn product={item} /> : <AddToCartBtn product={item} />}
+                                {admin ? <>
+                                    <span className='text-white text-xs font-bold'>
+                                        stock:
+                                    </span>
+                                    <EditProductsBtn product={item} />
+                                </> : <AddToCartBtn product={item} />}
                             </div>
                         </div>
                     </div >

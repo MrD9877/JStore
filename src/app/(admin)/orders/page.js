@@ -15,7 +15,9 @@ export default function OrdersPage() {
             {loading ? <Loading /> : (
                 <OrdersCard array={orders} />
             )}
-            <AdminNavBottom />
+            <div className="mt-20">
+                <AdminNavBottom />
+            </div>
         </div>
     )
 }

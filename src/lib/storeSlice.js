@@ -22,6 +22,12 @@ const updateCart = async (state) => {
     }
 }
 
+const findGivenIndex = (temp, action) => {
+    const index = temp.findIndex((item) => item.productId === action.payload.product.productId && item.selectedColor === action.payload.product.selectedColor && item.selectedSize === action.payload.product.selectedSize)
+    console.log(index)
+    return index
+}
+
 export const cartSlice = createSlice({
     name: 'cart',
     initialState: {
@@ -33,7 +39,6 @@ export const cartSlice = createSlice({
     reducers: {
         editProgress: (state, action) => {
             state.progress = action.payload;
-            console.log(state.progress)
         },
         setCart: (state, action) => {
             state.count = action.payload.count;
@@ -41,17 +46,16 @@ export const cartSlice = createSlice({
             state.total = action.payload.total;
         },
         addToCart: (state, action) => {
-            console.log(action)
             state.count += 1;
             if (state.products !== undefined) {
                 const temp = state.products
-                const dublicate = temp.find((item) => item.productId === action.payload.productId)
-                if (dublicate) return state = state
+                const dublicate = findGivenIndex(temp, action)
+                if (dublicate !== -1) return state = state
             }
             if (state.products === undefined) {
-                state.products = [{ ...action.payload, count: 1 }]
+                state.products = [{ ...action.payload.product, count: 1 }]
             } else {
-                state.products = [...state.products, { ...action.payload, count: 1 }]
+                state.products = [...state.products, { ...action.payload.product, count: 1 }]
             }
             state.total = findAmount(state.products)
             updateCart(state)
@@ -62,7 +66,7 @@ export const cartSlice = createSlice({
                 return
             } else {
                 const temp = [...state.products]
-                const index = temp.findIndex((item) => item.productId === action.payload)
+                const index = findGivenIndex(temp, action)
                 state.products = [...state.products.slice(0, index), ...state.products.slice(index + 1)]
             }
             state.total = findAmount(state.products)
@@ -71,12 +75,12 @@ export const cartSlice = createSlice({
         editCart: (state, action) => {
             if (action.payload.type === ACTIONS.ADD) {
                 const temp = [...state.products]
-                const index = temp.findIndex((item) => item.productId === action.payload.product.productId)
+                const index = findGivenIndex(temp, action)
                 state.products[index].count = state.products[index].count + 1
             }
             if (action.payload.type === ACTIONS.SUBTRACT) {
                 const temp = [...state.products]
-                const index = temp.findIndex((item) => item.productId === action.payload.product.productId)
+                const index = findGivenIndex(temp, action)
                 if (state.products[index].count <= 1) {
                     state.products[index].count = 1
                 } else {

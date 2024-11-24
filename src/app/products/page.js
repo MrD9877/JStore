@@ -3,7 +3,7 @@ import NavBottom from "@/app/components/NavBottom";
 
 
 export default async function ProductsLayout() {
-    const res = await fetch(`${process.env.SERVER_URL}/product`)
+    const res = await fetch(`${process.env.SERVER_URL}/product`, { next: { revalidate: 360 } })
     const products = await res.json()
     return (<>
         <div className="mb-20">

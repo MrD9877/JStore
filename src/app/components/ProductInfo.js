@@ -1,71 +1,181 @@
 "use client"
-import React, { useState } from 'react'
-import CustomCarousel from './CustomCarousel'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from "react-redux"
+import { addToCart, editCart } from "@/lib/storeSlice"
+import ACTIONS from '@/lib/action'
 import ProductBottomNav from './ProductBottomNav'
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
 
 export default function ProductInfo({ product }) {
-    const [hideButton, setHideButton] = useState({})
-    const [show, setShow] = useState({ length: 100, btnTxt: "...show more" })
-    const handleShowMore = () => {
-        if (show.length == 100) {
-            setShow(() => {
-                const newShow = {
-                    length: product.description.length,
-                    btnTxt: "...Show less"
-                }
-                console.log(newShow.length)
-                return newShow
-            })
-            return
+    const products = useSelector(state => state.products)
+    const [inCart, setInCart] = useState(false)
+    const [count, setCount] = useState(0)
+    const [color, setColor] = useState()
+    const [size, setSize] = useState()
+    const dispatch = useDispatch()
+
+    const handleChangeCount = (action, item) => {
+        if (count === 0 && action === ACTIONS.ADD) {
+            dispatch(addToCart({ ...product, selectedColor: color, selectedSize: size }))
+        } else {
+            dispatch(editCart({ type: action, product: { ...item } }))
         }
-        setShow({
-            length: 100,
-            btnTxt: "...show more"
-        })
     }
+
+    const handleSelect = (action, payload) => {
+        if (action == ACTIONS.COLOR) {
+            setColor(payload)
+        }
+        if (action == ACTIONS.SIZE) {
+            setSize(payload)
+        }
+
+    }
+
+    useEffect(() => {
+        if (!products) return
+        const contain = products.find((item) => { return item.productId === product.productId && item.selectedColor === color && item.selectedSize === size })
+        if (contain) {
+            setInCart(true)
+            setCount(contain.count)
+        } else if (!contain) {
+            setInCart(false)
+        }
+    }, [products, color, size])
+
+    useEffect(() => {
+        if (products) return
+        setColor(product.colors[0])
+        setSize(product.size[0])
+    }, [])
     return (
         <>
-            <section className="py-8  md:py-16 bg-gray-900 antialiased">
-                <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
-                    <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
-                        <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
-                            <CustomCarousel >
-                                {product.images.map((src, index) => {
-                                    return <img key={index} className="w-auto" src={src} alt={`${product.title}`} />
-                                })}
-                                {/* <img key="dummy" className="w-auto" src="https://i.imgur.com/YIq57b6.jpeg" alt="" /> */}
-                            </CustomCarousel>
-                        </div>
-
-                        <div className="mt-6 sm:mt-8 lg:mt-0">
-                            <h1
-                                className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white"
-                            >
-                                {product && product.title}
-                            </h1>
-                            <div className="mt-4 sm:items-center sm:gap-4 sm:flex">
-                                <p
-                                    className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white"
-                                >
-                                    ₹ {product && product.price}
-                                </p>
+            <section className="py-10 lg:py-24 relative bg-white">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+                        <div className="pro-detail w-full flex flex-col justify-center order-last lg:order-none max-lg:max-w-[608px] max-lg:mx-auto">
+                            {/* catogory  */}
+                            <p className="font-medium text-lg text-indigo-600 mb-4"> {product && product.category}</p>
+                            {/* title  */}
+                            <h2 className="mb-2 font-manrope font-bold text-3xl leading-10 text-gray-900"> {product && product.title}
+                            </h2>
+                            <div className="flex flex-col sm:flex-row sm:items-center mb-6">
+                                {/* price  */}
+                                <h6
+                                    className="font-manrope font-semibold text-2xl leading-9 text-gray-900 pr-5 sm:border-r border-gray-200 mr-5">
+                                    ₹{product && product.price}</h6>
                             </div>
-
-                            <div className="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-                                <span
-                                    className="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                                >
-                                    <ProductBottomNav product={product} />
-                                </span>
-
-                            </div>
-
-                            <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
-
-                            <p className="mb-6 text-gray-500 dark:text-gray-400">
+                            {/* description  */}
+                            <p className="text-gray-500 text-base font-normal mb-8 ">
                                 {product && product.description}
                             </p>
+                            <div className="block w-full">
+                                {/* colors  */}
+                                <p className="font-medium text-lg leading-8 text-gray-900 mb-4">Color</p>
+                                <div className="text">
+                                    <div className="flex items-center justify-start gap-3 md:gap-6 relative mb-6 ">
+                                        {product && product.colors.map((_color) => {
+                                            return <button key={_color} data-ui="checked active"
+                                                onClick={() => handleSelect(ACTIONS.COLOR, _color)} style={_color === color ? { border: "2px solid blue" } : { border: "2px solid white" }}
+                                                className="p-2.5 border border-gray-400 bg-gray-200 rounded-full transition-all duration-300 hover:border-emerald-500 :border-emerald-500">
+                                                <svg width="20" height="20" viewBox="0 0 40 40" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="20" cy="20" r="20" fill={`${_color}`} />
+                                                </svg>
+                                            </button>
+                                        })}
+                                    </div>
+                                    <div className="block w-full mb-6">
+                                        <p className="font-medium text-lg leading-8 text-gray-900 mb-4">size</p>
+                                        {/* size  */}
+                                        <div className="grid grid-cols-2 min-[400px]:grid-cols-3 gap-3">
+                                            {product.size && product.size.map((_size) => {
+                                                return <button
+                                                    onClick={() => handleSelect(ACTIONS.SIZE, _size)} style={_size === size ? { border: "2px solid blue" } : { border: "2px solid white" }}
+                                                    className="border border-gray-200 text-gray-900 text-lg py-2 rounded-full px-1.5 sm:px-6 w-full font-semibold whitespace-nowrap shadow-sm shadow-transparent transition-all duration-300 hover:shadow-gray-300 hover:bg-gray-50 hover:border-gray-300">
+                                                    {_size}
+                                                </button>
+
+                                            })}
+                                        </div>
+                                    </div>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                                        {/* count  */}
+                                        <div className="flex items-center justify-center w-full">
+                                            <button
+                                                onClick={() => handleChangeCount(ACTIONS.SUBTRACT, product)}
+                                                className="group py-4 px-6 border border-gray-400 rounded-l-full shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-300 hover:bg-gray-50">
+                                                <svg className="stroke-gray-700 transition-all duration-500 group-hover:stroke-black"
+                                                    width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M16.5 11H5.5" stroke="" strokeWidth="1.6"
+                                                        strokeLinecap="round" />
+                                                    <path d="M16.5 11H5.5" stroke="" strokeOpacity="0.2" strokeWidth="1.6"
+                                                        strokeLinecap="round" />
+                                                    <path d="M16.5 11H5.5" stroke="" strokeOpacity="0.2" strokeWidth="1.6"
+                                                        strokeLinecap="round" />
+                                                </svg>
+                                            </button>
+                                            <input type="text"
+                                                className="font-semibold text-gray-900 text-lg py-[13px] px-6 w-full lg:max-w-[118px] border-y border-gray-400 bg-transparent placeholder:text-gray-900 text-center hover:bg-gray-50 focus-within:bg-gray-50 outline-0"
+                                                placeholder={count} />
+                                            <button
+                                                onClick={() => handleChangeCount(ACTIONS.ADD, product)}
+                                                className="group py-4 px-6 border border-gray-400 rounded-r-full shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-300 hover:bg-gray-50">
+                                                <svg className="stroke-gray-700 transition-all duration-500 group-hover:stroke-black"
+                                                    width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" strokeWidth="1.6"
+                                                        strokeLinecap="round" />
+                                                    <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" strokeOpacity="0.2"
+                                                        strokeWidth="1.6" strokeLinecap="round" />
+                                                    <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" strokeOpacity="0.2"
+                                                        strokeWidth="1.6" strokeLinecap="round" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        {/* add to cart  */}
+                                        <ProductBottomNav product={product} inCart={inCart} selectedColor={color} selectedSize={size} />
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
+                        <div className="">
+                            <div style={{ "--swiper-navigation-color": "#fff", "--swiper-pagination-color": "#fff" }}
+                                className="swiper product-prev mb-6">
+                                <div className="swiper-wrapper">
+                                    <Swiper
+                                        spaceBetween={40}
+                                        slidesPerView={1}
+                                    >
+                                        {product.images.map((src, index) => {
+                                            return <SwiperSlide>
+                                                <div key={index} className="swiper-slide">
+                                                    <img style={{ maxWidth: "90vw", maxHeight: "60vh" }} className="w-auto" src={src} alt={`${product.title}`} />
+                                                </div>
+                                            </SwiperSlide>
+                                        })}
+                                    </Swiper>
+                                </div>
+
+                            </div>
+                            <div className="swiper product-thumb max-w-[608px] mx-auto">
+                                <div className="swiper-wrapper flex">
+                                    {product.images.map((src, index) => {
+                                        if (index > 4) return
+                                        return <div key={index} >
+                                            <img className="object-scale-down h-32" src={src} alt={`${product.title}`} />
+                                        </div>
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </section>

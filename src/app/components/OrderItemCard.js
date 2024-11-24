@@ -45,7 +45,7 @@ export default function OrderItemCard({ orderId }) {
         fetchCustomer()
     }, [order])
     return (
-        <div style={{ minHeight: "100vh" }} className='bg-gray-500'>
+        <div style={{ minHeight: "100vh" }}>
             {order ? (
                 <CustomCarousel>
                     {order.products.map((item) => {
@@ -57,11 +57,7 @@ export default function OrderItemCard({ orderId }) {
             ) : <Loading height='30vh' />}
             <CustomerDetailCard customer={customer} />
             <OrderDetailCard order={order} />
-            <div className="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
-                <div className='flex justify-center mt-3 mb-0 items-center'>
-                    {order && <AcceptRejectBtn orderStatus={order.status} orderId={orderId} />}
-                </div>
-            </div>
+            {order && <AcceptRejectBtn customer={customer} order={order} orderStatus={order.status} orderId={orderId} />}
         </div>
     )
 }
