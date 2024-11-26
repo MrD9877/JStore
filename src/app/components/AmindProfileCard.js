@@ -6,8 +6,7 @@ import Image from 'next/image'
 import ShipRocketLogin from './ShipRocketLogin'
 import PickupAddress from './PickupAddress'
 import toast, { Toaster } from 'react-hot-toast';
-import Loading from './Loading'
-import { space } from 'postcss/lib/list'
+
 
 
 export default function AdminProfileCard({ user }) {
@@ -79,7 +78,7 @@ export default function AdminProfileCard({ user }) {
                 position="top-center"
                 reverseOrder={false}
             />
-            <div class="h-full bg-gray-200 rounded-lg  p-8">
+            <div class="h-full bg-gray-200 rounded-lg py-4 px-2 sm:p-8">
                 <div class="bg-white rounded-lg shadow-xl pb-8">
                     <div x-data="{ openSettings: false }" class="absolute right-12 mt-4 rounded">
                     </div>
@@ -103,13 +102,13 @@ export default function AdminProfileCard({ user }) {
                     <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
                         <div class="flex items-center space-x-4 mt-2">
                             {user.admin && <Link href={"/"}>
-                                <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                                <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2.5 rounded text-sm space-x-2 transition duration-100">
                                     <svg className="-ms-0.5 me-1.5 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path d="M22 2.00001L11.75 12.25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                         <path d="M21.9998 6.49999L21.9998 1.99999L17.0568 1.99999" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                         <path d="M11 2H4C2.89543 2 2 2.89543 2 4V20C2 21.1046 2.89543 22 4 22H20C21.1046 22 22 21.1046 22 20V12.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
-                                    <span>Web Page</span>
+                                    <span>WebPage</span>
                                 </button>
                             </Link>}
                             <button class="flex items-center bg-red-600 hover:bg-red-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
@@ -137,7 +136,7 @@ export default function AdminProfileCard({ user }) {
                                 </li>
                                 <li class="flex border-b py-2">
                                     <span class="font-bold w-24">Email:</span>
-                                    <span class="text-gray-700">{user.email ? user.email : "Not provided"}</span>
+                                    <span class="text-gray-700 ml-2 overflow-scroll">{user.email ? user.email : "Not provided"}</span>
                                 </li>
                                 <li class="flex border-b py-2">
                                     <span class="font-bold w-24">Country:</span>
@@ -158,7 +157,7 @@ export default function AdminProfileCard({ user }) {
                             <ul class="mt-2 text-gray-700">
                                 <li class="flex border-y py-2">
                                     <span class="font-bold w-24">Email:</span>
-                                    <span class="text-gray-700">{user.shiprocket.email}</span>
+                                    <span class="text-gray-700 ml-3 overflow-scroll">{user.shiprocket.email}</span>
                                 </li>
                                 <li class="flex border-y py-2">
                                     <span class="font-bold w-24">Token:</span>

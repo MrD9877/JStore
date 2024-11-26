@@ -1,6 +1,6 @@
 import CategoriesCard from '@/app/components/CatogriesCard'
 import NavBottom from '@/app/components/NavBottom'
-import SearchBar from '@/navBars/SearchBar'
+import SearchBar from '@/app/_navbars/SearchBar'
 
 
 export default async function MenuPage() {

@@ -1,7 +1,7 @@
 "use client"
 import React, { useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import { colors } from '../../colors'
+import { colors } from '../../../colors'
 
 
 export default function SearchBar({ searchInput, setSearchInput }) {

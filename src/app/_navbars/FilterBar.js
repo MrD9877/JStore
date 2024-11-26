@@ -66,7 +66,7 @@ export default function FilterBar({ setOrders, setLoading }) {
                 </MenuHandler>
                 <MenuList>
                     <MenuItem onClick={() => setFilter("new")}>New orders</MenuItem>
-                    <MenuItem onClick={() => setFilter("accept")}>Accepted</MenuItem>
+                    <MenuItem onClick={() => setFilter("accepted")}>Accepted</MenuItem>
                     <MenuItem onClick={() => setFilter("decline")}>Declines</MenuItem>
                     <MenuItem onClick={() => setFilter("deliver")}>Delivered</MenuItem>
                     <MenuItem onClick={() => setFilter(null)}>All</MenuItem>

@@ -41,6 +41,9 @@ export default function AddProduct() {
                 const split = entry[1].split(",")
                 console.log(split)
                 formData.append(`${entry[0]}`, split)
+            } else if (entry[0] === "category") {
+                const data = entry[1].toLowerCase()
+                formData.append(entry[0], data)
             } else {
                 formData.append(`${entry[0]}`, entry[1])
             }

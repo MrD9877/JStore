@@ -1,5 +1,5 @@
 "use client"
-export default function CreateRocketOrder({ order, customer, }) {
+export async function createRocketOrder({ order, customer, packageDetails }) {
 
     const getToken = async () => {
         try {
@@ -16,6 +16,7 @@ export default function CreateRocketOrder({ order, customer, }) {
 
     const dispatchDelivery = async () => {
         console.log(customer)
+        console.log(pickupLocation)
         const token = await getToken()
         if (!token) return
         const date = new Date(order.orderDate).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' })
@@ -30,7 +31,7 @@ export default function CreateRocketOrder({ order, customer, }) {
         const data = {
             "order_id": order.orderId,
             "order_date": date,
-            "pickup_location": "shop",
+            "pickup_location": packageDetails.pickupLocation,
             "billing_customer_name": customer.name,
             "billing_last_name": "",
             "billing_address": customer.deliveryaddress.housenumber,
@@ -44,12 +45,12 @@ export default function CreateRocketOrder({ order, customer, }) {
             "billing_phone": customer.phonenumber,
             "shipping_is_billing": true,
             "order_items": products,
-            "payment_method": "COD",
+            "payment_method": packageDetails.method,
             "sub_total": order.amount,
-            "length": 0.6,
-            "breadth": 0.8,
-            "height": 0.6,
-            "weight": 0.5,
+            "length": packageDetails.length,
+            "breadth": packageDetails.breadth,
+            "height": packageDetails.height,
+            "weight": packageDetails.weight,
         }
         console.log(data)
 
@@ -73,9 +74,5 @@ export default function CreateRocketOrder({ order, customer, }) {
             console.log(err)
         }
     }
-    return (
-        <button onClick={dispatchDelivery} className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-3 py-1.5 mb-2 dark:bg-green-600 dark:hover:bg-green-700 mr-3">
-            Deliver
-        </button>
-    )
+    return await dispatchDelivery()
 }

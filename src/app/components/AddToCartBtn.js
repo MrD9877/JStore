@@ -1,34 +1,35 @@
 "use client"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import gif from "../_images/check.gif"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { addToCart } from "@/lib/storeSlice"
 
-export default function AddToCartBtn({ product }) {
+export default function AddToCartBtn({ product, inCart = undefined }) {
     const dispatch = useDispatch()
-    const [cartBtnStyle, setCartBtnStyle] = useState({
-        addtocart: {
-            display: ""
-        },
-        gotocart: {
-            display: "none"
+    const [cartBtnStyle, setCartBtnStyle] = useState({ addtocart: { display: "" }, gotocart: { display: "none" } })
+
+    const changebutton = (state) => {
+        if (state) {
+            setCartBtnStyle({ addtocart: { display: "none" }, gotocart: { display: "" } })
+        } else if (!state) {
+            setCartBtnStyle({ addtocart: { display: "" }, gotocart: { display: "none" } })
         }
-    })
-    const handleAddcart = (e) => {
-        if (e.currentTarget.id === "addtocart") {
-            setCartBtnStyle({
-                addtocart: {
-                    display: "none"
-                },
-                gotocart: {
-                    display: "",
-                }
-            })
-        }
-        dispatch(addToCart(product))
     }
+    const handleAddcart = (e) => {
+        changebutton(true)
+        const color = product.colors[0]
+        const size = product.size[0]
+        dispatch(addToCart({ product: { ...product, selectedColor: color, selectedSize: size } }))
+    }
+    useEffect(() => {
+        if (inCart) {
+            changebutton(true)
+        } else if (!inCart) {
+            changebutton(false)
+        }
+    }, [inCart])
     return (
         <div>
             <button style={cartBtnStyle.addtocart} id="addtocart" onClick={handleAddcart} type="button" className="bg-blue-600 rounded-xl p-3 flex justify-center items-center py-2 h-6 text-xs m-auto">
@@ -42,5 +43,6 @@ export default function AddToCartBtn({ product }) {
                 Go to Cart
             </Link>
         </div>
+
     )
 }

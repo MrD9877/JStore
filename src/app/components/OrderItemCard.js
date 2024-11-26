@@ -1,14 +1,14 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import AcceptRejectBtn from '../_utility/AcceptRejectBtn'
-import Loading from './Loading'
-import CustomCarousel from './CustomCarousel'
 import CustomerDetailCard from './CustomerDetailCard'
 import OrderDetailCard from './OrderDetailCard'
+import PackageForm from './PackageForm'
 
 export default function OrderItemCard({ orderId }) {
     const [order, setOrder] = useState()
     const [customer, setCustomer] = useState()
+    const [action, setAction] = useState("close")
     const fetchOrder = async () => {
         try {
             const res = await fetch(`${process.env.SERVER_URL}/orders?orderId=${orderId}`, { credentials: "include" })
@@ -38,6 +38,9 @@ export default function OrderItemCard({ orderId }) {
             console.log("pop")
         }
     }
+    const handleRocket = (action) => {
+        setAction(action)
+    }
     useEffect(() => {
         fetchOrder()
     }, [])
@@ -45,19 +48,21 @@ export default function OrderItemCard({ orderId }) {
         fetchCustomer()
     }, [order])
     return (
-        <div style={{ minHeight: "100vh" }}>
-            {order ? (
-                <CustomCarousel>
-                    {order.products.map((item) => {
-                        return <div className='w-screen bg-gray-700'>
-                            <img className='object-contain' style={{ height: "30vh" }} src={item.images[0]} alt="" />
-                        </div>
-                    })}
-                </CustomCarousel>
-            ) : <Loading height='30vh' />}
-            <CustomerDetailCard customer={customer} />
-            <OrderDetailCard order={order} />
-            {order && <AcceptRejectBtn customer={customer} order={order} orderStatus={order.status} orderId={orderId} />}
-        </div>
+        <>
+            <span style={action === "open" ? { display: "" } : { display: "none" }}>
+                <PackageForm handleRocket={handleRocket} order={order} customer={customer} />
+            </span>
+            <div style={{ minHeight: "100vh" }}>
+                <div className='lg:flex'>
+                    <CustomerDetailCard customer={customer} />
+                    <OrderDetailCard order={order} />
+                </div>
+                {order && (
+                    <div className='w-1/2 mx-auto sm:w-1/3 lg:w-1/5 xl:w-1/6'>
+                        <AcceptRejectBtn orderId={orderId} orderStatus={order.status} handleRocket={handleRocket} />
+                    </div>
+                )}
+            </div>
+        </>
     )
 }

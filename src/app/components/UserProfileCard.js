@@ -5,12 +5,12 @@ import DisplayOrdersCard from './DisplayOrdersCard'
 export default function UserProfileCard({ user }) {
     return (
         <div>
-            <div className="h-full bg-gray-200 rounded-lg  p-8">
+            <div className="h-full bg-gray-200 rounded-lg  sm:p-8">
                 <div className="bg-white rounded-lg shadow-xl pb-8">
                     <div x-data="{ openSettings: false }" className="absolute right-12 mt-4 rounded">
                     </div>
                     <div className="w-full h-[250px]">
-                        <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" className="w-full h-full rounded-tl-lg rounded-tr-lg" />
+                        <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" className="w-full h-full object-cover rounded-tl-lg rounded-tr-lg" />
                     </div>
                     <div className="flex flex-col items-center -mt-20">
                         <img
@@ -26,7 +26,7 @@ export default function UserProfileCard({ user }) {
                             </span>
                         </div>
                     </div>
-                    <div className="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
+                    <div className="flex-1 flex flex-col items-center lg:items-end justify-end px-2 sm:px-8 mt-2">
                         <div className="flex items-center space-x-4 mt-2">
                             <Link href={"/profile/delivery"}>
                                 <button className="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
@@ -60,12 +60,12 @@ export default function UserProfileCard({ user }) {
 
                 <div className="my-4  flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
                     <div className="w-full flex flex-col ">
-                        <div className="flex-1 bg-white rounded-lg shadow-xl p-8">
+                        <div className="flex-1 bg-white rounded-lg shadow-xl p-3 sm:p-8">
                             <h4 className="text-xl text-gray-900 font-bold">Personal Info</h4>
                             <ul className="w-full mt-2 text-gray-700">
                                 <li className="flex border-y py-2">
-                                    <span className="font-bold w-24">Full name:</span>
-                                    <span className="text-gray-700">{user.name}</span>
+                                    <span className="font-bold w-24 ">Full name:</span>
+                                    <span className="text-gray-700 ml-2 sm:ml-0 overflow-scroll">{user.name}</span>
                                 </li>
                                 <li className="flex border-b py-2">
                                     <span className="font-bold w-24">Mobile:</span>
@@ -73,7 +73,7 @@ export default function UserProfileCard({ user }) {
                                 </li>
                                 <li className="flex border-b py-2">
                                     <span className="font-bold w-24">Email:</span>
-                                    <span className="text-gray-700">{user.email ? user.email : "Not provided"}</span>
+                                    <span className="text-gray-700 ml-2 sm:ml-0 overflow-scroll">{user.email ? user.email : "Not provided"}</span>
                                 </li>
                                 <li className="flex border-b py-2">
                                     <span className="font-bold w-24">Country:</span>
@@ -84,8 +84,8 @@ export default function UserProfileCard({ user }) {
                                     <span className="text-gray-700"> {user.deliveryaddress.state}</span>
                                 </li>
                                 <li className="flex border-b py-2">
-                                    <span className="font-bold w-24">Location:</span>
-                                    <span className="text-gray-700"> {user.deliveryaddress.housenumber},{user.deliveryaddress.streetname},{user.deliveryaddress.city}</span>
+                                    <span className="font-bold w-24 ">Location:</span>
+                                    <span className="text-gray-700 ml-2 sm:ml-0 overflow-scroll"> {user.deliveryaddress.housenumber},{user.deliveryaddress.streetname},{user.deliveryaddress.city}</span>
                                 </li>
                                 <li className="flex border-b py-2">
                                     <span className="font-bold w-24">PIN:</span>

@@ -1,4 +1,4 @@
-import SearchBar from "@/navBars/SearchBar";
+import SearchBar from "@/app/_navbars/SearchBar";
 import NavBottom from "./NavBottom";
 
 export default function HomePage() {

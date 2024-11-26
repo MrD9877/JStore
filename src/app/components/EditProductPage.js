@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import Loading from './Loading';
 import EditProductsBtn from '../_utility/EditProductsBtn';
+import { useRouter } from 'next/navigation';
 
 export default function EditProductPage({ productId }) {
     const [loading, setLoading] = useState(false)
@@ -11,6 +12,7 @@ export default function EditProductPage({ productId }) {
     const [color, setColor] = useState()
     const [size, setSize] = useState()
     const [inputs, setInputs] = useState()
+    const router = useRouter()
     const popTost = (msg, success) => {
         let emote = "❌";
         if (success) emote = "✅"
@@ -28,12 +30,17 @@ export default function EditProductPage({ productId }) {
 
     const deleteProduct = async () => {
         try {
-            const res = await fetch(`${process.env.SERVER_URL}/`, {
+            const res = await fetch(`${process.env.SERVER_URL}/product`, {
                 method: "DELETE",
                 credentials: "include",
                 body: JSON.stringify({ productId: productId })
             })
-            if (res.ok) popTost("done")
+            if (res.ok) {
+                popTost("done", true)
+                router.push("/editproducts")
+            } else {
+                popTost(res.status)
+            }
         } catch {
             popTost("Opps Somthing went wrong try again!!")
         }
@@ -212,7 +219,7 @@ export default function EditProductPage({ productId }) {
                     </div>
                     <div className="h-16  w-full mt-12">
                         <div className='flex justify-center'>
-                            <button onClick={() => handleEdit("description", inputs.description, ACTIONS.PUT)}
+                            <button onClick={deleteProduct}
                                 className="w-40 bg-red-600 text-white font-medium py-2 px-4 rounded-lg shadow-sm hover:bg-red-700 focus:outline-none  ">
                                 Delete
                             </button>

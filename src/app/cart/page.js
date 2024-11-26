@@ -31,7 +31,7 @@ export default function CartPage() {
                                 {/* cart Items  */}
                                 {products ? (
                                     products.map((item, index) => {
-                                        return <div key={item.productId} className="rounded-lg border  p-4 shadow-sm border-gray-700 bg-gray-800 md:p-6">
+                                        return <div key={item.productId} className="rounded-lg border  p-4 shadow-sm border-gray-700 bg-gray-800 md:p-6 overflow-hidden">
                                             <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                                                 <Link href={`/products/${item.productId}`} className="shrink-0 md:order-1">
                                                     {/* image  */}
@@ -67,34 +67,37 @@ export default function CartPage() {
                                                         <p className="text-base font-bold  text-white">₹ {item.price}</p>
                                                     </div>
                                                 </div>
-
-                                                <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                                    {/* description  */}
-                                                    <span className="text-base font-medium  text-white">{item.description}</span>
-                                                    <div className="flex items-center gap-4">
-                                                        {/* remove btn  */}
-                                                        <button type="button" onClick={() => removeItem(item)} className="inline-flex items-center text-sm font-medium hover:underline text-red-500">
-                                                            <svg className="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18 17.94 6M18 18 6.06 6" />
-                                                            </svg>
-                                                            Remove
-                                                        </button>
+                                                <div className="flex items-center justify-between md:w-64 md:max-w-md  md:order-2">
+                                                    <div className="w-full min-w-0 flex-1 space-y-4 ">
+                                                        {/* title  */}
+                                                        <span className="text-base font-medium  text-white">{item.title}</span>
+                                                        <div className="flex items-center gap-4">
+                                                            {/* remove btn  */}
+                                                            <button type="button" onClick={() => removeItem(item)} className="inline-flex items-center text-sm font-medium hover:underline text-red-500">
+                                                                <svg className="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                                                                </svg>
+                                                                Remove
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                                    {/* size */}
-                                                    <span className="text-base font-medium  text-white">
-                                                        <span className="text-white font-bold">Size:</span>
-                                                        {item.selectedSize}
-                                                    </span>
-                                                    <div className="flex items-center">
-                                                        {/* color btn  */}
-                                                        <span className="text-white font-bold mr-2">Color:</span>
-                                                        <svg width="14" height="14" viewBox="0 0 40 40" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="20" cy="20" r="20" fill={`${item.selectedColor}`} />
-                                                        </svg>
+                                                    <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 justify-end md:max-w-md">
+                                                        {/* size */}
+                                                        <div className="flex justify-end md:justify-start">
+                                                            <span className="text-base font-medium  text-white">
+                                                                <span className="text-white font-bold">Size:</span>
+                                                                {item.selectedSize}
+                                                            </span>
+                                                        </div>
+                                                        <div className="flex items-center justify-end md:justify-start">
+                                                            {/* color btn  */}
+                                                            <span className="text-white font-bold mr-2">Color:</span>
+                                                            <svg width="14" height="14" viewBox="0 0 40 40" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <circle cx="20" cy="20" r="20" fill={`${item.selectedColor}`} />
+                                                            </svg>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

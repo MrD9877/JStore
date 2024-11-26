@@ -19,7 +19,7 @@ export default function ProductInfo({ product }) {
 
     const handleChangeCount = (action, item) => {
         if (count === 0 && action === ACTIONS.ADD) {
-            dispatch(addToCart({ ...product, selectedColor: color, selectedSize: size }))
+            dispatch(addToCart({ product: { ...product, selectedColor: color, selectedSize: size } }))
         } else {
             dispatch(editCart({ type: action, product: { ...item } }))
         }
@@ -53,10 +53,10 @@ export default function ProductInfo({ product }) {
     }, [])
     return (
         <>
-            <section className="py-10 lg:py-24 relative bg-white">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-                        <div className="pro-detail w-full flex flex-col justify-center order-last lg:order-none max-lg:max-w-[608px] max-lg:mx-auto">
+            <section style={{ maxWidth: "100vw" }} className="py-10 sm:py-24 relative bg-white overflow-hidden">
+                <div className="mx-auto max-w-7xl px-4  sm:px-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-16">
+                        <div className="pro-detail w-full flex flex-col justify-center order-last sm:order-none max-sm:max-w-[608px] max-sm:mx-auto">
                             {/* catogory  */}
                             <p className="font-medium text-lg text-indigo-600 mb-4"> {product && product.category}</p>
                             {/* title  */}
@@ -69,7 +69,7 @@ export default function ProductInfo({ product }) {
                                     ₹{product && product.price}</h6>
                             </div>
                             {/* description  */}
-                            <p className="text-gray-500 text-base font-normal mb-8 ">
+                            <p style={{ maxWidth: "100%" }} className="text-gray-500 text-base font-normal mb-8 ">
                                 {product && product.description}
                             </p>
                             <div className="block w-full">
@@ -79,8 +79,8 @@ export default function ProductInfo({ product }) {
                                     <div className="flex items-center justify-start gap-3 md:gap-6 relative mb-6 ">
                                         {product && product.colors.map((_color) => {
                                             return <button key={_color} data-ui="checked active"
-                                                onClick={() => handleSelect(ACTIONS.COLOR, _color)} style={_color === color ? { border: "2px solid blue" } : { border: "2px solid white" }}
-                                                className="p-2.5 border border-gray-400 bg-gray-200 rounded-full transition-all duration-300 hover:border-emerald-500 :border-emerald-500">
+                                                onClick={() => handleSelect(ACTIONS.COLOR, _color)} style={_color === color ? { border: "2px solid blue" } : { border: "2px solid black" }}
+                                                className="p-2.5 border border-black bg-gray-200 rounded-full transition-all duration-300 hover:border-emerald-500 :border-emerald-500">
                                                 <svg width="20" height="20" viewBox="0 0 40 40" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <circle cx="20" cy="20" r="20" fill={`${_color}`} />
@@ -94,15 +94,15 @@ export default function ProductInfo({ product }) {
                                         <div className="grid grid-cols-2 min-[400px]:grid-cols-3 gap-3">
                                             {product.size && product.size.map((_size) => {
                                                 return <button
-                                                    onClick={() => handleSelect(ACTIONS.SIZE, _size)} style={_size === size ? { border: "2px solid blue" } : { border: "2px solid white" }}
-                                                    className="border border-gray-200 text-gray-900 text-lg py-2 rounded-full px-1.5 sm:px-6 w-full font-semibold whitespace-nowrap shadow-sm shadow-transparent transition-all duration-300 hover:shadow-gray-300 hover:bg-gray-50 hover:border-gray-300">
+                                                    onClick={() => handleSelect(ACTIONS.SIZE, _size)} style={_size === size ? { border: "2px solid blue" } : { border: "2px solid gray" }}
+                                                    className="border  text-gray-900 text-lg py-2 rounded-full px-1.5 sm:px-6 w-full font-semibold whitespace-nowrap shadow-sm shadow-transparent transition-all duration-300 hover:shadow-gray-300 hover:bg-gray-50 hover:border-gray-300">
                                                     {_size}
                                                 </button>
 
                                             })}
                                         </div>
                                     </div>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-8">
                                         {/* count  */}
                                         <div className="flex items-center justify-center w-full">
                                             <button
@@ -120,7 +120,7 @@ export default function ProductInfo({ product }) {
                                                 </svg>
                                             </button>
                                             <input type="text"
-                                                className="font-semibold text-gray-900 text-lg py-[13px] px-6 w-full lg:max-w-[118px] border-y border-gray-400 bg-transparent placeholder:text-gray-900 text-center hover:bg-gray-50 focus-within:bg-gray-50 outline-0"
+                                                className="font-semibold text-gray-900 text-lg py-[13px] px-6 w-full sm:max-w-[118px] border-y border-gray-400 bg-transparent placeholder:text-gray-900 text-center hover:bg-gray-50 focus-within:bg-gray-50 outline-0"
                                                 placeholder={count} />
                                             <button
                                                 onClick={() => handleChangeCount(ACTIONS.ADD, product)}

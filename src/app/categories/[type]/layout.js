@@ -1,6 +1,6 @@
 import ItemsCard from "@/app/components/ItemsCard"
 import NavBottom from "@/app/components/NavBottom"
-import SearchBar from "@/navBars/SearchBar"
+import SearchBar from "@/app/_navbars/SearchBar"
 
 export default async function CategoriesLayout({ children, params }) {
     const id = await params
