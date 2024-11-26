@@ -1,9 +1,9 @@
 "use client"
-export async function createRocketOrder({ order, customer, packageDetails }) {
+export async function createRocketOrder({ order, customer, packageDetails, handleRocket }) {
 
     const getToken = async () => {
         try {
-            const res = await fetch(`${process.env.SERVER_URL}/user`, { credentials: "include" })
+            const res = await fetch(`${process.env.SERVER_URL}/user}`, { credentials: "include" })
             if (res.status === 200) {
                 const data = await res.json()
                 return data.shiprocket.token
