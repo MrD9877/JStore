@@ -48,6 +48,7 @@ export default function SigninPage() {
         }
         if (data.password === data.repeatpassword) {
             setStyle({ color: "black" })
+            let username = data.username.trim().toLowerCase()
             try {
                 const addNewUser = await fetch(`${process.env.SERVER_URL}/signin`, {
                     headers: {
@@ -55,7 +56,7 @@ export default function SigninPage() {
                         'Content-Type': 'application/json'
                     },
                     method: "POST",
-                    body: JSON.stringify(data)
+                    body: JSON.stringify({ username, password: data.password })
                 })
                 const res = await addNewUser.json();
                 if (!res.valid) {

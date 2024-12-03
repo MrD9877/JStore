@@ -39,6 +39,7 @@ export default function OrderItemCard({ orderId }) {
         }
     }
     const handleRocket = (action) => {
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
         setAction(action)
     }
     useEffect(() => {
@@ -59,7 +60,7 @@ export default function OrderItemCard({ orderId }) {
                 </div>
                 {order && (
                     <div className='w-1/2 mx-auto sm:w-1/3 lg:w-1/5 xl:w-1/6'>
-                        <AcceptRejectBtn orderId={orderId} orderStatus={order.status} handleRocket={handleRocket} />
+                        <AcceptRejectBtn orderId={orderId} rocketValue={"open"} orderStatus={order.status} handleRocket={handleRocket} />
                     </div>
                 )}
             </div>

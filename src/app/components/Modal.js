@@ -34,11 +34,9 @@ export default function Modal({ image }) {
             {/* <!-- Main modal --> */}
             {loading ? <Loading height='10vh' /> : (
                 <div id="default-modal" tabIndex="-1" className="outside w-screen h-screen overflow-y-auto overflow-x-hidden fixed z-50 justify-center items-center">
-                    <div className="relative m-auto p-4 w-full max-w-2xl max-h-full">
-                        {/* <!-- Modal body --> */}
-                        <div className="p-4 space-y-4 flex justify-center">
-                            <Image src={src} width={300} height={300} alt='img' />
-                        </div>
+                    {/* <!-- Modal body --> */}
+                    <div className="p-4 mt-8 space-y-4 flex justify-center bg-gray-600 w-fit mx-auto">
+                        <Image src={src} width={300} height={300} alt='img' />
                     </div>
                 </div>)}
 

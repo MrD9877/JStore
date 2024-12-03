@@ -20,7 +20,7 @@ export default function DisplayItemsCard({ array }) {
                         return <li onClick={(e) => handleClickOnItem(e, items.productId)} key={index} className="py-3 sm:py-4">
                             <div className="flex items-center">
                                 <div className="flex-shrink-0">
-                                    <img className="w-8 h-8 rounded-full" src={index < 4 ? items.images[0] : paceholderImage.src} alt="Neil image" />
+                                    <img className="w-8 h-8 rounded-full" src={index < 4 ? items.imagesUrl.urls[0] : paceholderImage.src} alt="Neil image" />
                                 </div>
                                 <div className="flex-1 min-w-0 ms-4">
                                     <p className="text-sm font-medium text-gray-900 truncate dark:text-white">

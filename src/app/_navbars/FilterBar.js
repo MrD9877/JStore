@@ -62,7 +62,7 @@ export default function FilterBar({ setOrders, setLoading }) {
             />
             <Menu>
                 <MenuHandler>
-                    <Button>Filter Results</Button>
+                    <Button className="bg-gray-400">Filter Results</Button>
                 </MenuHandler>
                 <MenuList>
                     <MenuItem onClick={() => setFilter("new")}>New orders</MenuItem>

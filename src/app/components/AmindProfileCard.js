@@ -6,12 +6,14 @@ import Image from 'next/image'
 import ShipRocketLogin from './ShipRocketLogin'
 import PickupAddress from './PickupAddress'
 import toast, { Toaster } from 'react-hot-toast';
+import GetAvatar from '../customhooks/GetAvatar'
 
 
 
 export default function AdminProfileCard({ user }) {
     const [shipRocket, setShipRocket] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [avatarSrc, setAvatarSrc] = useState("")
 
     const popTost = (msg, success) => {
         let emote = "❌";
@@ -27,8 +29,6 @@ export default function AdminProfileCard({ user }) {
             }
         );
     }
-
-
     const getToken = async (data, setLoading) => {
         let token;
         try {
@@ -72,12 +72,14 @@ export default function AdminProfileCard({ user }) {
             setShipRocket(true)
         }
     }, [])
+
     return (
         <div>
             <Toaster
                 position="top-center"
                 reverseOrder={false}
             />
+            {user && <GetAvatar user={user} setAvatarSrc={setAvatarSrc} />}
             <div class="h-full bg-gray-200 rounded-lg py-4 px-2 sm:p-8">
                 <div class="bg-white rounded-lg shadow-xl pb-8">
                     <div x-data="{ openSettings: false }" class="absolute right-12 mt-4 rounded">
@@ -88,7 +90,7 @@ export default function AdminProfileCard({ user }) {
                     <div class="flex flex-col items-center -mt-20">
                         <img
                             // src = {user.avatar}
-                            src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg"
+                            src={avatarSrc}
                             class="w-40 border-4 border-white rounded-full" />
                         <div class="flex items-center space-x-2 mt-2">
                             <p class="text-2xl">{user.name}</p>

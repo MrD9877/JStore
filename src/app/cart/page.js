@@ -35,7 +35,7 @@ export default function CartPage() {
                                             <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                                                 <Link href={`/products/${item.productId}`} className="shrink-0 md:order-1">
                                                     {/* image  */}
-                                                    <img className="h-20 w-20" src={item.images[0]} alt="imac image" />
+                                                    <img className="h-20 w-20" src={item.imagesUrl.urls[0]} alt="imac image" />
                                                 </Link>
 
                                                 <label htmlFor="counter-input" className="sr-only">Choose quantity:</label>

@@ -1,12 +1,15 @@
 "use client"
 import React from 'react'
 import Loading from './Loading.js'
-import CustomCarousel from './CustomCarousel.js'
 import AcceptRejectBtn from '../_utility/AcceptRejectBtn.js'
-import Image from 'next/image.js'
 import Link from 'next/link.js'
+import { useRouter } from 'next/navigation.js'
 
 export default function OrdersCard({ array }) {
+    const router = useRouter()
+    const handleRocket = (orderId) => {
+        router.push(`/orders/${orderId}`)
+    }
     return (
         <>
             <div className='flex flex-wrap'>
@@ -48,7 +51,7 @@ export default function OrdersCard({ array }) {
                                 </div>
                             </div>
                             <div className="w-full px-4 mt-2 m-auto bg-white">
-                                <AcceptRejectBtn orderId={item.orderId} orderStatus={item.status} />
+                                <AcceptRejectBtn handleRocket={handleRocket} rocketValue={item.orderId} orderId={item.orderId} orderStatus={item.status} />
                             </div>
                         </div>
                     </div>

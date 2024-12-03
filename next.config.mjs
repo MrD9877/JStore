@@ -29,41 +29,10 @@ const nextConfig = {
         return config;
     },
     images: {
-        domains: ['i.imgur.com', 'www.w3.org', "j-shop.s3.eu-north-1.amazonaws.com"],
-        remotePatterns: [{
-            protocol: 'https',
-            hostname: 'fakestoreapi.com',
-            port: '',
-            pathname: '/img/**'
-        }],
+        domains: ['www.w3.org', "j-shop.s3.eu-north-1.amazonaws.com"],
         remotePatterns: [{
             protocol: 'https',
             hostname: 'j-shop.s3.eu-north-1.amazonaws.com',
-            port: '',
-            pathname: '/**'
-        }],
-
-        remotePatterns: [{
-            protocol: 'https',
-            hostname: 'i.imgur.com',
-            port: '',
-            pathname: '/**'
-        }],
-        remotePatterns: [{
-            protocol: 'https',
-            hostname: 'api.escuelajs.co/',
-            port: '',
-            pathname: '/**'
-        }],
-        remotePatterns: [{
-            protocol: 'https',
-            hostname: 'placeimg.com/',
-            port: '',
-            pathname: '/**'
-        }],
-        remotePatterns: [{
-            protocol: 'https',
-            hostname: 'unsplash.com/',
             port: '',
             pathname: '/**'
         }],
@@ -76,6 +45,12 @@ const nextConfig = {
         localPatterns: [
             {
                 pathname: '../_images/**',
+                search: '',
+            },
+        ],
+        localPatterns: [
+            {
+                pathname: '../favicon.ico',
                 search: '',
             },
         ],

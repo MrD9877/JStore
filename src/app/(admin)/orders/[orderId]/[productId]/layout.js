@@ -13,7 +13,7 @@ export default async function ModalLayout({ children, params }) {
   } catch {
     console.log("error")
   }
-  const image = product.images ? product.images[0] : ""
+  const image = product.images ? product.imagesUrl.urls[0] : ""
   return (
     <>
       <div className="orint">

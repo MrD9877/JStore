@@ -36,6 +36,7 @@ export default function LoginPage({ welcome = true, link = "/" }) {
         }, delay)
     }
     const onSubmit = async (data) => {
+        const username = data.username.trim().toLowerCase()
         try {
             const checkUser = await fetch(`${process.env.SERVER_URL}/login`, {
                 method: "POST",
@@ -44,7 +45,7 @@ export default function LoginPage({ welcome = true, link = "/" }) {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify({ username, password: data.password })
             })
             if (checkUser.status === 401) {
                 popTost("Envalid Username or password", false)
@@ -65,7 +66,7 @@ export default function LoginPage({ welcome = true, link = "/" }) {
                 position="top-center"
                 reverseOrder={false}
             />
-            <div style={{ background: "rgba(0, 10,20,0.9)" }} className="m-auto mb-52 p-6 w-5/6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div style={{ background: "rgba(0, 10,20,0.9)", maxWidth: "600px" }} className="m-auto mb-52 p-6 w-5/6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <Link style={welcome ? { display: "" } : { display: "none" }} href="/">
                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Welcome to J-shop</h5>
                 </Link>

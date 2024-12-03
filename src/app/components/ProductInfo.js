@@ -152,7 +152,7 @@ export default function ProductInfo({ product }) {
                                         spaceBetween={40}
                                         slidesPerView={1}
                                     >
-                                        {product.images.map((src, index) => {
+                                        {product.imagesUrl.urls.map((src, index) => {
                                             return <SwiperSlide>
                                                 <div key={index} className="swiper-slide">
                                                     <img style={{ maxWidth: "90vw", maxHeight: "60vh" }} className="w-auto" src={src} alt={`${product.title}`} />
@@ -165,7 +165,7 @@ export default function ProductInfo({ product }) {
                             </div>
                             <div className="swiper product-thumb max-w-[608px] mx-auto">
                                 <div className="swiper-wrapper flex">
-                                    {product.images.map((src, index) => {
+                                    {product.imagesUrl.urls.map((src, index) => {
                                         if (index > 4) return
                                         return <div key={index} >
                                             <img className="object-scale-down h-32" src={src} alt={`${product.title}`} />

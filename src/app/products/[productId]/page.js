@@ -1,6 +1,6 @@
 export default async function productIdPage({ params }) {
     return (
-        <div className="mb-20">
+        <div className="mb-16">
         </div>
     )
 }

@@ -20,7 +20,7 @@ export default function page() {
         fetchProducts()
     }, [])
     return (
-        <div className='mt-2'>
+        <div className='mt-2 mb-16'>
             <ItemsCard admin={true} array={products} />
             <AdminNavBottom />
         </div>
