@@ -13,11 +13,11 @@ export default function DisplayItemsCard({ array }) {
         e.currentTarget.style.background = `${colors.gray}`
     }
     return (
-        <div className="w-full  mx-auto max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-full  mx-auto max-w-md bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700">
             <div className="flow-root">
                 <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
                     {array.map((items, index) => {
-                        return <li onClick={(e) => handleClickOnItem(e, items.productId)} key={index} className="py-3 sm:py-4">
+                        return <li onClick={(e) => handleClickOnItem(e, items.productId)} key={index} className="p-3 sm:p-4 odd:bg-gray-700">
                             <div className="flex items-center">
                                 <div className="flex-shrink-0">
                                     <img className="w-8 h-8 rounded-full" src={index < 4 ? items.imagesUrl.urls[0] : paceholderImage.src} alt="Neil image" />

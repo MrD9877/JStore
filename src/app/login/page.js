@@ -1,4 +1,3 @@
-"use client"
 import LoginPage from "@/app/components/LoginCard"
 import bgImage from "../_images/bgImage.jpg"
 import React from 'react'

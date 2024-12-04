@@ -183,7 +183,7 @@ export default function EditProductPage({ productId }) {
                             </div>
                             {/* size  */}
                             <div>
-                                <label htmlFor="size" className="block text-sm font-medium text-gray-700">Sizes</label>
+                                <label htmlFor="size" className=" text-sm block font-medium text-gray-700">Sizes</label>
                                 <div className='flex justify-between'>
                                     <input onChange={(e) => setSize(e.target.value)} type="text" id="size" name="size"
                                         value={size} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5" placeholder='m,l,xl...' />

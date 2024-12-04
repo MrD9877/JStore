@@ -1,20 +1,26 @@
 "use client"
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import bgImage from "../_images/bgImage.jpg"
+import ShowPassword from '../_utility/ShowPassword';
+import Link from 'next/link';
 
 
 export default function SigninPage() {
     const [style, setStyle] = useState();
+    const [repeatPasswordState, setRepeatPassword] = useState()
+    const [passwordState, setPassword] = useState()
     const router = useRouter()
+    const repeatPassword = useRef();
+    const repeatPasswordDiv = useRef();
+    const passwordDiv = useRef();
     const redInputStyle = {
         background: 'rgba(225, 0, 0, 0.2)',
         border: '2px solid red',
         color: 'red',
     }
-    const repeatPassword = useRef();
     const {
         register,
         handleSubmit,
@@ -58,19 +64,25 @@ export default function SigninPage() {
                     method: "POST",
                     body: JSON.stringify({ username, password: data.password })
                 })
-                const res = await addNewUser.json();
-                if (!res.valid) {
-                    popTost(res.msg, false)
-                }
-                if (res.valid) {
+                if (addNewUser.status===200) {
                     popTost('You are now signed in', true)
                     navigateTOlogin("/login")
+                }else if(addNewUser.status===400){
+                    const res = await addNewUser.json()
+                    popTost(res.msg, false)
+                }else{
+                    popTost(`error ${addNewUser.status}`,false)
                 }
             } catch (err) {
                 popTost("Sorry server is down", false)
             }
         }
     }
+    useEffect(() => {
+        console.log(passwordDiv.current.firstChild)
+        if (repeatPasswordDiv.current) setRepeatPassword(repeatPasswordDiv.current.firstChild)
+        if (passwordDiv.current) setPassword(passwordDiv.current.firstChild)
+    }, [repeatPasswordDiv, passwordDiv])
     return (
         <>
             <Toaster
@@ -89,11 +101,21 @@ export default function SigninPage() {
                     </div>
                     <div className="mb-5">
                         <label htmlFor="password" className="block mb-2 text-sm font-medium text-white dark:text-white">Your password</label>
-                        <input style={style} type="password" {...register("password")} required className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" />
+                        <div ref={passwordDiv} className="flex justify-evenly  pr-2.5 rounded-lg">
+                            <input style={style} type="password" {...register("password")} required className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" />
+                            <span className="ml-3 flex items-center justify-center  my-auto h-fit">
+                                <ShowPassword input={passwordState} />
+                            </span>
+                        </div>
                     </div>
                     <div className="mb-5">
-                        <label htmlFor="repeat-password" className="block mb-2 text-sm font-medium text-white dark:text-white">Repeat password</label>
-                        <input style={style} ref={repeatPassword} type="password" {...register("repeatpassword")} required className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" />
+                        <label htmlFor="repeat-password" className="after:content-['*'] after:ml-0.5 after:text-red-500 block mb-2 text-sm font-medium text-white dark:text-white">Repeat password</label>
+                        <div ref={repeatPasswordDiv} className="flex justify-evenly  pr-2.5 rounded-lg">
+                            <input style={style} ref={repeatPassword} type="password" {...register("repeatpassword")} required className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" />
+                            <span className="ml-3 flex items-center justify-center  my-auto h-fit">
+                                <ShowPassword input={repeatPasswordState} />
+                            </span>
+                        </div>
                     </div>
                     <div className="flex items-start mb-5">
                         <div className="flex items-center h-5">
@@ -102,6 +124,9 @@ export default function SigninPage() {
                         <label htmlFor="terms" className="ms-2 text-sm font-medium text-blue-600 dark:text-gray-300">I agree with the terms and conditions</label>
                     </div>
                     <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register new account</button>
+                    <p className="text-sm mt-4 font-light text-gray-500 dark:text-gray-400">
+                        already have an account? <Link href="/login" className="font-medium text-blue-600 hover:underline dark:text-blue-500">Log In</Link>
+                    </p>
                 </form>
             </div>
         </>

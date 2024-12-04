@@ -8,6 +8,7 @@ import Form from './Form';
 
 export default function LoginPage({ welcome = true, link = "/" }) {
     const [style, setStyle] = useState();
+    const [loading, setLoading] = useState(false)
     const navigate = useRouter()
     const redInputStyle = {
         background: 'rgba(225, 0, 0, 0.2)',
@@ -29,14 +30,9 @@ export default function LoginPage({ welcome = true, link = "/" }) {
             }
         );
     }
-
-    const navigateTOlogin = (url, delay) => {
-        setTimeout(() => {
-            navigate.push(url)
-        }, delay)
-    }
     const onSubmit = async (data) => {
         const username = data.username.trim().toLowerCase()
+        setLoading(true)
         try {
             const checkUser = await fetch(`${process.env.SERVER_URL}/login`, {
                 method: "POST",
@@ -48,6 +44,7 @@ export default function LoginPage({ welcome = true, link = "/" }) {
                 body: JSON.stringify({ username, password: data.password })
             })
             if (checkUser.status === 401) {
+                setLoading(false)
                 popTost("Envalid Username or password", false)
                 setStyle(redInputStyle)
                 return
@@ -57,6 +54,7 @@ export default function LoginPage({ welcome = true, link = "/" }) {
                 navigate.push(link)
             }
         } catch (err) {
+            setLoading(false)
             popTost('Sorry server is down', false)
         }
     }
@@ -66,13 +64,13 @@ export default function LoginPage({ welcome = true, link = "/" }) {
                 position="top-center"
                 reverseOrder={false}
             />
-            <div style={{ background: "rgba(0, 10,20,0.9)", maxWidth: "600px" }} className="m-auto mb-52 p-6 w-5/6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div style={{ background: "rgba(0, 10,20,0.9)", maxWidth: "600px" }} className="shadow-neon m-auto mb-52 p-6 w-5/6 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                 <Link style={welcome ? { display: "" } : { display: "none" }} href="/">
                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Welcome to J-shop</h5>
                 </Link>
-                <p className="font-normal mb-5 text-white dark:text-gray-400">To start shoping please Login:</p>
+                <p className="mb-5 font-normal  text-white dark:text-gray-400">To start shoping please Login:</p>
                 <div className='w-full'>
-                    <Form onSubmit={onSubmit} style={style} />
+                    <Form onSubmit={onSubmit} style={style} loading={loading} />
                 </div>
             </div>
         </>

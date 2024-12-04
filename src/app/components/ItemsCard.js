@@ -38,7 +38,7 @@ export default function ItemsCard({ array, reviewStars = 4, admin = false }) {
                                             <div className='w-1/4 flex'>
                                                 <ReviewStars reviewStar={reviewStars} />
                                             </div>
-                                            <span className="mr-2 text-xs font-bold text-gray-900 dark:text-white">₹{item.price}</span>
+                                            <span className="mr-2 text-xs font-bold relative text-white">₹{item.price}</span>
                                         </div> : "No review"}
                                 </div>
                             </div>

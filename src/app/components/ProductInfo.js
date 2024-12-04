@@ -65,7 +65,7 @@ export default function ProductInfo({ product }) {
                             <div className="flex flex-col sm:flex-row sm:items-center mb-6">
                                 {/* price  */}
                                 <h6
-                                    className="font-manrope font-semibold text-2xl leading-9 text-gray-900 pr-5 sm:border-r border-gray-200 mr-5">
+                                    className=" font-manrope font-semibold text-2xl leading-9 text-gray-900 pr-5 sm:border-r border-gray-200 mr-5">
                                     ₹{product && product.price}</h6>
                             </div>
                             {/* description  */}
