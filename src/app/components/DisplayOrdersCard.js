@@ -48,8 +48,8 @@ export default function DisplayOrdersCard() {
                 position="top-center"
                 reverseOrder={false}
             />
-            <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800 md:p-8">
-                <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">Latest orders</h3>
+            {orders && orders.length > 0 && <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800 md:p-8">
+               <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">Latest orders</h3>
                 {loading ? <Loading /> : (orders && orders.length > 0 && orders.map((order) => {
                     var date = new Date(order.orderDate).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' })
 
@@ -146,7 +146,7 @@ export default function DisplayOrdersCard() {
                     </div> */}
                     </div>
                 }))}
-            </div>
+            </div>}
         </>
     )
 }

@@ -1,42 +1,73 @@
-"use client"
-import React, { useRef } from 'react'
-import { useRouter } from 'next/navigation'
-import { colors } from '../../../colors'
+"use client";
+import { useRouter } from "next/navigation";
+import { colors } from "../../../colors";
+import DisplayItemsCard from "@/app/components/DisplayItemsCard";
+import Loading from "@/app/components/Loading";
+import { useDeferredValue, useEffect, useState } from "react";
 
+export default function SearchBar() {
+  const router = useRouter();
+  const [searchDispaly, setSearchDisplay] = useState("none");
+  const [searchResult, setSearchResult] = useState();
+  const [searchInput, setSearchInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const difvalue = useDeferredValue(searchInput);
 
-export default function SearchBar({ searchInput, setSearchInput }) {
-    const searchBar = useRef()
-    const searchBarDiv = useRef()
-    const router = useRouter()
-
-    const handleFocus = () => {
-        searchBar.current.style.border = `solid 2px ${colors.blue}`
-        searchBar.current.style.background = `${colors.white}`
-        searchBarDiv.current.style.background = `${colors.gray}`
-        router.push("/search")
+  const fetchSearch = async () => {
+    setLoading(true);
+    try {
+      console.log(difvalue);
+      const res = await fetch(`${process.env.SERVER_URL}/product?search=${difvalue}`, { credentials: "include", difvalue });
+      const data = await res.json();
+      setLoading(false);
+      setSearchResult(data);
+    } catch (err) {
+      setLoading(false);
+      setSearchResult([]);
     }
-    const handleOffFocus = () => {
-        searchBar.current.style.background = `${colors.gray}`
-        searchBarDiv.current.style.background = `${colors.white}`
-        searchBar.current.style.border = `solid 2px ${colors.white}`
-    }
-    const handleInput = (e) => {
-        setSearchInput(e.target.value)
-    }
+  };
+  const handleFocus = (e) => {
+    e.target.style.position = "sticky";
+    setSearchDisplay("");
+  };
+  const handleInput = (e) => {
+    setSearchInput(e.target.value);
+  };
+  const handleBlur = () => {
+    setTimeout(() => {
+      setSearchDisplay("none");
+    }, 500);
+  };
+  useEffect(() => {
+    fetchSearch();
+  }, [difvalue]);
 
-    return (
-        <>
-            <div ref={searchBarDiv} className='w-screen searchBarDiv px-px'>
-                <div ref={searchBar} className='flex justify-between searchBar px-3 border rounded-xl'>
-                    <div className="flex items-center ps-3 pointer-events-none">
-                        <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
-                    </div>
-                    <input value={searchInput} onChange={handleInput} onClick={handleFocus} onFocus={handleFocus} onBlur={handleOffFocus} type='text' className='placeholder:italic placeholder:text-slate-400 searchBarInput focus:border-blue-500' placeholder="jeens,T-shirt,Men's cloths..." />
-                    <button className="text-white searchBarBtn  bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
-                </div>
-            </div>
-        </>
-    )
+  return (
+    <div className="px-2 mx-auto mt-0.5 sm:w-sm">
+      <div className="mx-auto relative">
+        <button className="absolute left-2 -translate-y-1/2 top-1/2 p-1">
+          <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search" className="w-5 h-5 text-gray-700">
+            <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" strokeWidth="1.333" strokeLinecap="round" strokeLinejoin="round"></path>
+          </svg>
+        </button>
+        <input value={searchInput} onChange={handleInput} onClick={handleFocus} onFocus={handleFocus} onBlur={handleBlur} className="input w-full rounded-lg px-8 py-3 border-2 border-transparent focus:outline-none focus:border-blue-500 placeholder-gray-400 transition-all duration-300 shadow-md" placeholder="Search..." required="" type="text" />
+        <button onClick={() => setSearchInput("")} type="reset" className="absolute right-3 -translate-y-1/2 top-1/2 p-1">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div style={{ display: searchDispaly }} className="transition ease-in-out delay-150 absolute z-50 w-full sm:w-sm sm:pr-0 pr-4 mx-auto disableTouchSelect">
+        {loading ? (
+          <Loading height="30vh" width="100vw" />
+        ) : searchResult ? (
+          <div onClick={() => setSearchDisplay("")} className="w-full h-72 overflow-scroll">
+            <DisplayItemsCard array={searchResult} />
+          </div>
+        ) : (
+          <Loading height="30vh" width="100vw" />
+        )}
+      </div>
+    </div>
+  );
 }
