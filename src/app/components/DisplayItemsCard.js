@@ -12,9 +12,9 @@ export default function DisplayItemsCard({ array }) {
     router.push(`/products/${id}`, { scroll: false });
   };
   return (
-    <div className="w-full  mx-auto max-w-md bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-full sm:w-auto  mx-auto max-w-md  border border-gray-200 rounded-lg shadow p-2 bg-gray-500">
       <div className="flow-root">
-        <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
+        <ul role="list" className="divide-y divide-gray-200 ">
           {array.length < 1 && (
             <li key="no results" className="p-3 sm:p-4 ">
               <div className="flex items-center text-white">No Results....</div>

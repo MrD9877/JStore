@@ -5,7 +5,7 @@ import GetAvatar from "../customhooks/GetAvatar";
 import { useRouter } from "next/navigation";
 
 export default function UserProfileCard({ user }) {
-  const [avatarSrc, setAvatarSrc] = useState("");
+  const [avatarSrc, setAvatarSrc] = useState(null);
   const router = useRouter();
   const handleLogout = async () => {
     try {
@@ -37,7 +37,7 @@ export default function UserProfileCard({ user }) {
               <p className="text-2xl">{user.username}</p>
               <span className="bg-blue-500 rounded-full p-1" title="Verified">
                 <svg xmlns="http://www.w3.org/2000/svg" className="text-gray-100 h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7"></path>
                 </svg>
               </span>
             </div>

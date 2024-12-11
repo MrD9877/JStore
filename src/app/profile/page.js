@@ -4,7 +4,6 @@ import Popup from "@/app/components/Popup";
 import UserProfileCard from "@/app/components/UserProfileCard";
 import { useState } from "react";
 import FetchUser from "../components/FetchUser";
-import SearchBar from "../_navbars/SearchBar";
 
 export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
@@ -12,7 +11,6 @@ export default function ProfilePage() {
   const [error, setError] = useState(false);
   return (
     <div>
-      <SearchBar />
       <FetchUser setLoading={setLoading} setError={setError} setUser={setUser} />
       <div style={{ maxWidth: "100vw" }} className="mb-20 w-screen">
         {error ? (

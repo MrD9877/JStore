@@ -15,6 +15,10 @@ module.exports = {
         lg: "1024px",
         sm: "640px",
       },
+      fontFamily: {
+        amarante: ["Amarante", "serif"],
+        ArchDaughter: ["Architects Daughter", "cursive"],
+      },
     },
   },
   plugins: [],

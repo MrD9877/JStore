@@ -7,9 +7,8 @@ import { Suspense } from "react";
 import Loading from "./components/Loading";
 import FetchToken from "./_utility/FetchToken";
 
-// todo 
+// todo
 // DisplayItemsCard
-
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,7 +24,7 @@ const geistMono = localFont({
 export const metadata = {
   title: {
     template: "%s | j-shop",
-    default: "J-Shop"
+    default: "J-Shop",
   },
   description: "A cloth store",
 };
@@ -33,15 +32,16 @@ export default function RootLayout({ children }) {
   return (
     <>
       <html lang="en" dir="ltr">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-900`}
-        >
+        <head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+          <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Architects+Daughter&display=swap" rel="stylesheet" />
+        </head>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <StoreProvider>
             <UpdateCart />
             <FetchToken />
-            <Suspense fallback={<Loading />}>
-              {children}
-            </Suspense>
+            <Suspense fallback={<Loading />}>{children}</Suspense>
           </StoreProvider>
           <script src="https://cdn.lordicon.com/lordicon.js"></script>
         </body>
