@@ -9,19 +9,21 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 
-export default function ProductInfo({ product }) {
+export default function ProductInfo({ productId }) {
+  const [product, setProduct] = useState(null);
   const products = useSelector((state) => state.products);
+  const testCount = useSelector((state) => state.count);
   const [inCart, setInCart] = useState(false);
   const [count, setCount] = useState(0);
-  const [color, setColor] = useState();
-  const [size, setSize] = useState();
+  const [color, setColor] = useState(null);
+  const [size, setSize] = useState(null);
   const dispatch = useDispatch();
 
   const handleChangeCount = (action, item) => {
     if (count === 0 && action === ACTIONS.ADD) {
       dispatch(addToCart({ product: { ...product, selectedColor: color, selectedSize: size } }));
     } else {
-      dispatch(editCart({ type: action, product: { ...item } }));
+      dispatch(editCart({ type: action, product: { ...item, selectedColor: color, selectedSize: size } }));
     }
   };
 
@@ -35,7 +37,7 @@ export default function ProductInfo({ product }) {
   };
 
   useEffect(() => {
-    if (!products) return;
+    if (!products || !product) return;
     const contain = products.find((item) => {
       return item.productId === product.productId && item.selectedColor === color && item.selectedSize === size;
     });
@@ -44,13 +46,30 @@ export default function ProductInfo({ product }) {
       setCount(contain.count);
     } else if (!contain) {
       setInCart(false);
+      setCount(0);
     }
   }, [products, color, size]);
 
   useEffect(() => {
-    if (products) return;
+    if (!product) return;
     setColor(product.colors[0]);
     setSize(product.size[0]);
+  }, [product]);
+
+  const fetchProduct = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/product?productId=${productId}`);
+      if (res.status === 200) {
+        const data = await res.json();
+        setProduct(data);
+      }
+    } catch {
+      consolr.log("reload");
+    }
+  };
+
+  useEffect(() => {
+    fetchProduct();
   }, []);
   return (
     <>
@@ -90,7 +109,7 @@ export default function ProductInfo({ product }) {
                     <p className="font-medium text-lg leading-8 text-gray-900 mb-4">size</p>
                     {/* size  */}
                     <div className="grid grid-cols-2 min-[400px]:grid-cols-3 gap-3">
-                      {product.size &&
+                      {product &&
                         product.size.map((_size) => {
                           return (
                             <button key={_size} onClick={() => handleSelect(ACTIONS.SIZE, _size)} style={_size === size ? { border: "2px solid blue" } : { border: "2px solid gray" }} className="border  text-gray-900 text-lg py-2 rounded-full px-1.5 sm:px-6 w-full font-semibold whitespace-nowrap shadow-sm shadow-transparent transition-all duration-300 hover:shadow-gray-300 hover:bg-gray-50 hover:border-gray-300">
@@ -125,32 +144,34 @@ export default function ProductInfo({ product }) {
                 </div>
               </div>
             </div>
-            <div className="">
+            <div>
               <div style={{ "--swiper-navigation-color": "#fff", "--swiper-pagination-color": "#fff" }} className="swiper product-prev mb-6">
                 <div className="swiper-wrapper">
                   <Swiper spaceBetween={40} slidesPerView={1}>
-                    {product.imagesUrl.urls.map((src, index) => {
-                      return (
-                        <SwiperSlide>
-                          <div key={index} className="swiper-slide">
-                            <img style={{ maxWidth: "90vw", maxHeight: "60vh" }} className="w-auto" src={src} alt={`${product.title}`} />
-                          </div>
-                        </SwiperSlide>
-                      );
-                    })}
+                    {product &&
+                      product.imagesUrl.urls.map((src, index) => {
+                        return (
+                          <SwiperSlide key={index}>
+                            <div key={index} className="swiper-slide">
+                              <img style={{ maxWidth: "90vw", maxHeight: "60vh" }} className="w-auto" src={src} alt={`${product.title}`} />
+                            </div>
+                          </SwiperSlide>
+                        );
+                      })}
                   </Swiper>
                 </div>
               </div>
               <div className="swiper product-thumb max-w-[608px] mx-auto">
                 <div className="swiper-wrapper flex">
-                  {product.imagesUrl.urls.map((src, index) => {
-                    if (index > 4) return;
-                    return (
-                      <div key={index}>
-                        <img className="object-scale-down h-32" src={src} alt={`${product.title}`} />
-                      </div>
-                    );
-                  })}
+                  {product &&
+                    product.imagesUrl.urls.map((src, index) => {
+                      if (index > 4) return;
+                      return (
+                        <div key={index}>
+                          <img className="object-scale-down h-32" src={src} alt={`${product.title}`} />
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             </div>

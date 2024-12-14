@@ -10,6 +10,7 @@ module.exports = {
       },
       boxShadow: {
         neon: "0 0 5px theme('colors.blue.200'),0 0 20px theme('colors.blue.700')",
+        grayesh: "0 0 5px theme('colors.gray.200'),0 0 20px theme('colors.gray.700')",
       },
       width: {
         lg: "1024px",

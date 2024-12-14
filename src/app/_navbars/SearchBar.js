@@ -19,7 +19,7 @@ export default function SearchBar({ setSearchVisible }) {
     setLoading(true);
     try {
       console.log(difvalue);
-      const res = await fetch(`${process.env.SERVER_URL}/product?search=${difvalue}`, { credentials: "include", difvalue });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/product?search=${difvalue}`, { credentials: "include", difvalue });
       const data = await res.json();
       setLoading(false);
       setSearchResult(data);

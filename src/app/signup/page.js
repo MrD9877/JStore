@@ -43,7 +43,7 @@ export default function SigninPage() {
     setStyle({ color: "black" });
     let username = data.username.trim().toLowerCase();
     try {
-      const addNewUser = await fetch(`${process.env.SERVER_URL}/signin`, {
+      const addNewUser = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/signin`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",

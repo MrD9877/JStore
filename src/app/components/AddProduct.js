@@ -56,7 +56,7 @@ export default function AddProduct() {
       console.log(formData);
     });
     try {
-      const res = await fetch(`${process.env.SERVER_URL}/product`, { method: "POST", credentials: "include", body: formData });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/product`, { method: "POST", credentials: "include", body: formData });
       if (res.status === 201) popTost("Done", true);
       setLoading(false);
     } catch {

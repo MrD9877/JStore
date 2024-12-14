@@ -23,7 +23,7 @@ export default function DeliveryInfoForm({ linkAfterDone = "/profile" }) {
   const uploadForm = async (data) => {
     console.log(data);
     try {
-      const res = await fetch(`${process.env.SERVER_URL}/user`, { method: "POST", credentials: "include", body: JSON.stringify(data) });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user`, { method: "POST", credentials: "include", body: JSON.stringify(data) });
       return res.status;
     } catch (err) {
       console.log(err);

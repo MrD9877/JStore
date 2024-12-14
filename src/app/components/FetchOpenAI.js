@@ -7,7 +7,7 @@ export default function FetchOpenAI({ aidata, description, setAiPromo, changeDat
     try {
       setPending(true);
       setAiPromo(false);
-      const response = await fetch(`${process.env.SERVER_URL}/openai`, { method: "POST", credentials: "include", body: JSON.stringify(aidata) });
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/openai`, { method: "POST", credentials: "include", body: JSON.stringify(aidata) });
       if (response.status === 200) {
         const data = await response.json();
         description.current.firstChild.value = data.description;

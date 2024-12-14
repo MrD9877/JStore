@@ -50,7 +50,7 @@ export default function AdminSigninPage() {
       setStyle({ color: "black" });
       let username = data.username.trim().toLowerCase();
       try {
-        const addNewUser = await fetch(`${process.env.SERVER_URL}/admin`, {
+        const addNewUser = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/admin`, {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",

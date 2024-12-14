@@ -32,7 +32,7 @@ export default function LoginPage({ welcome = true, link = "/" }) {
     const username = data.username.trim().toLowerCase();
     setLoading(true);
     try {
-      const checkUser = await fetch(`${process.env.SERVER_URL}/login`, {
+      const checkUser = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/login`, {
         method: "POST",
         mode: "cors",
         credentials: "include",

@@ -16,7 +16,7 @@ export default function MainProducts() {
   };
   const fetchCategories = async () => {
     try {
-      const res = await fetch(`${process.env.SERVER_URL}/category`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/category`);
       const data = await res.json();
       setCategories(data);
     } catch {
@@ -24,7 +24,7 @@ export default function MainProducts() {
     }
   };
   const fetchProducts = async () => {
-    const fetchString = productCategory === null ? `${process.env.SERVER_URL}/product` : `${process.env.SERVER_URL}/product?category=${productCategory}`;
+    const fetchString = productCategory === null ? `${process.env.NEXT_PUBLIC_SERVER_URL}/product` : `${process.env.NEXT_PUBLIC_SERVER_URL}/product?category=${productCategory}`;
     try {
       const res = await fetch(fetchString);
       const data = await res.json();

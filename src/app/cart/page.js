@@ -8,7 +8,6 @@ import Popup from "../components/Popup";
 export default function CartPage() {
   const total = useSelector((state) => state.total);
   const products = useSelector((state) => state.products);
-  const count = useSelector((state) => state.count);
   const dispatch = useDispatch();
 
   const removeItem = (product) => {
@@ -32,7 +31,7 @@ export default function CartPage() {
                 {products ? (
                   products.map((item, index) => {
                     return (
-                      <div key={item.productId} className="rounded-lg border  p-4 shadow-sm border-gray-700 bg-gray-800 md:p-6 overflow-hidden">
+                      <div key={index} className="rounded-lg border  p-4 shadow-sm border-gray-700 bg-gray-800 md:p-6 overflow-hidden">
                         <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                           <Link href={`/products/${item.productId}`} className="shrink-0 md:order-1">
                             {/* image  */}
@@ -119,9 +118,9 @@ export default function CartPage() {
                 <div className="space-y-4">
                   <div className="space-y-2">
                     {products
-                      ? products.map((item) => {
+                      ? products.map((item, index) => {
                           return (
-                            <dl key={item.productId} className="flex items-center justify-between gap-4">
+                            <dl key={item.productId + index} className="flex items-center justify-between gap-4">
                               <dt className="text-base font-normal text-gray-400">
                                 <span className="text-red-600">{item.count}</span>
                                 <span>

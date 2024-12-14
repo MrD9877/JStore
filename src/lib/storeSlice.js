@@ -11,7 +11,7 @@ const findAmount = (products) => {
 
 const updateCart = async (state) => {
   try {
-    const res = await fetch(`${process.env.SERVER_URL}/cart`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/cart`, {
       method: "POST",
       credentials: "include",
       body: JSON.stringify(state),
@@ -23,7 +23,6 @@ const updateCart = async (state) => {
 
 const findGivenIndex = (temp, action) => {
   const index = temp.findIndex((item) => item.productId === action.payload.product.productId && item.selectedColor === action.payload.product.selectedColor && item.selectedSize === action.payload.product.selectedSize);
-  console.log(index);
   return index;
 };
 

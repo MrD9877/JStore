@@ -18,7 +18,7 @@ export default function MainNavBar() {
 
   const fetchCategories = async () => {
     try {
-      const res = await fetch(`${process.env.SERVER_URL}/category`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/category`);
       const data = await res.json();
       setCategories(data);
     } catch {
@@ -27,10 +27,10 @@ export default function MainNavBar() {
   };
   const fetchUser = async () => {
     try {
-      const res = await fetch(`${process.env.SERVER_URL}/user`, { credentials: "include" });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user`, { credentials: "include" });
       const data = await res.json();
       const avatarId = data.avatarId;
-      const avatar = await fetch(`${process.env.SERVER_URL}/avatar?avatarId=${avatarId}`, { credentials: "include" });
+      const avatar = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/avatar?avatarId=${avatarId}`, { credentials: "include" });
       const avatarData = await avatar.json();
       setUserAvatar(avatarData.url);
     } catch {
@@ -39,6 +39,7 @@ export default function MainNavBar() {
   };
 
   useEffect(() => {
+    if (UserAvatar) return;
     fetchCategories();
     fetchUser();
   }, []);

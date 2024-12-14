@@ -11,7 +11,7 @@ export default function UpdateCart() {
   };
   const fetchCart = async () => {
     try {
-      const res = await fetch(`${process.env.SERVER_URL}/cart`, { credentials: "include" });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/cart`, { credentials: "include" });
       const data = await res.json();
       setuser(data);
       console.log(data);

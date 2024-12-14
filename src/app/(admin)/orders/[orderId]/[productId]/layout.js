@@ -1,19 +1,18 @@
-import AdminNavBottom from "@/app/_navbars/AdminNavBottom"
-import Modal from "@/app/components/Modal"
-import OrderItemCard from "@/app/components/OrderItemCard"
+import AdminNavBottom from "@/app/_navbars/AdminNavBottom";
+import Modal from "@/app/components/Modal";
+import OrderItemCard from "@/app/components/OrderItemCard";
 
 export default async function ModalLayout({ children, params }) {
-  const id = await params
-  const { productId } = id
-  let product = []
+  const id = await params;
+  const { productId } = id;
+  let product = [];
   try {
-
-    const res = await fetch(`${process.env.SERVER_URL}/product?productId=${productId}`)
-    product = await res.json()
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/product?productId=${productId}`);
+    product = await res.json();
   } catch {
-    console.log("error")
+    console.log("error");
   }
-  const image = product.images ? product.imagesUrl.urls[0] : ""
+  const image = product.images ? product.imagesUrl.urls[0] : "";
   return (
     <>
       <div className="orint">
@@ -23,5 +22,5 @@ export default async function ModalLayout({ children, params }) {
         </div>
       </div>
     </>
-  )
+  );
 }

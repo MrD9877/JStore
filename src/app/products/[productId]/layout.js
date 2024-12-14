@@ -1,19 +1,14 @@
-import ProductInfo from "@/app/components/ProductInfo"
-import ProductBottomNav from "@/app/components/ProductBottomNav"
-import GetImages from "@/app/_utility/GetImages"
-import NavBottom from "@/app/components/NavBottom"
+import MainNavBar from "@/app/_navbars/MainNavBar";
+import ProductInfo from "@/app/components/ProductInfo";
 
 export default async function Layout({ children, params }) {
-  const id = await params
-  const { productId } = id
-  const res = await fetch(`${process.env.SERVER_URL}/product?productId=${productId}`)
-  const product = res.status === 200 ? await res.json() : {}
-
+  const id = await params;
+  const { productId } = id;
   return (
     <>
-      <ProductInfo product={product} />
+      <MainNavBar />
+      <ProductInfo productId={productId} />
       {children}
-      <NavBottom />
     </>
-  )
+  );
 }
