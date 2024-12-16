@@ -21,7 +21,7 @@ export default function page() {
   }, []);
   return (
     <div className="mt-2 mb-16">
-      <ItemsCard admin={true} array={products} />
+      <ItemsCard array={products} />
       <AdminNavBottom />
     </div>
   );

@@ -1,11 +1,8 @@
 import Link from "next/link";
-import MainNavBar from "../_navbars/MainNavBar";
 import MainCard from "./cards/MainCard";
 import imageMen from "@/app/_images/homeMen.png";
 import imageWomen from "@/app/_images/homeKids.png";
 import imageKid from "@/app/_images/homeWomen.png";
-import ProductItemCard from "./cards/ProductItemCard";
-import Footer from "./Footer";
 import MainProducts from "./MainProducts";
 import coverImage from "@/app/_images/cover.png";
 
@@ -39,12 +36,6 @@ export default function HomePage() {
         </MainCard>
       </div>
       <MainProducts />
-      <div className="px-3">
-        <h2 className="text-lg font-bold py-6">Limited Time Offers</h2>
-        <div className="flex justify-center">
-          <ProductItemCard />
-        </div>
-      </div>
     </div>
   );
 }

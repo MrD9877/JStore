@@ -38,7 +38,7 @@ export default function OrderDetailCard({ order }) {
                   return (
                     <tr key={index} className="bg-white dark:bg-gray-800">
                       <th onClick={(e) => (e.target.style.color = "blue")} scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <Link href={`/orders/${order.orderId}/${product.productId}`} scroll={false}>
+                        <Link href={`/orders/${order.orderId}/${product.images[0]}`} scroll={false}>
                           {product.title}
                         </Link>
                       </th>

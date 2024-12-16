@@ -5,6 +5,10 @@ const nextConfig = {
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.(".svg"));
 
     config.module.rules.push(
+      {
+        test: /\.(png|jpg|jpeg|gif|svg|ico|webp|avif)$/i,
+        type: "asset/resource",
+      },
       // Reapply the existing rule, but only for svg imports ending in ?url
       {
         ...fileLoaderRule,
@@ -60,6 +64,12 @@ const nextConfig = {
     localPatterns: [
       {
         pathname: "../favicon.ico",
+        search: "",
+      },
+    ],
+    localPatterns: [
+      {
+        pathname: "../www.w3.org/",
         search: "",
       },
     ],

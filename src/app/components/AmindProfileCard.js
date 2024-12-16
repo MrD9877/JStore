@@ -92,7 +92,7 @@ export default function AdminProfileCard({ user }) {
             <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" className="w-full h-full rounded-tl-lg rounded-tr-lg" alt="Background" />
           </div>
           <div className="flex flex-col items-center -mt-20">
-            <img alt="Avatar" src={avatarSrc} className="w-40 border-4 border-white rounded-full" />
+            <img alt="Avatar" src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/${avatarSrc}`} className="w-40 border-4 border-white rounded-full" />
             <div className="flex items-center space-x-2 mt-2">
               <p className="text-2xl">{user.name}</p>
               <span className="bg-blue-500 rounded-full p-1" title="Verified">

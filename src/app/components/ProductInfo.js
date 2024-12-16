@@ -149,11 +149,11 @@ export default function ProductInfo({ productId }) {
                 <div className="swiper-wrapper">
                   <Swiper spaceBetween={40} slidesPerView={1}>
                     {product &&
-                      product.imagesUrl.urls.map((src, index) => {
+                      product.images.map((src, index) => {
                         return (
                           <SwiperSlide key={index}>
                             <div key={index} className="swiper-slide">
-                              <img style={{ maxWidth: "90vw", maxHeight: "60vh" }} className="w-auto" src={src} alt={`${product.title}`} />
+                              <img style={{ maxWidth: "90vw", maxHeight: "60vh" }} className="w-auto" src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/${src}`} alt={`${product.title}`} />
                             </div>
                           </SwiperSlide>
                         );

@@ -12,7 +12,7 @@ export default function ProfilePage() {
   return (
     <div>
       <FetchUser setLoading={setLoading} setError={setError} setUser={setUser} />
-      <div style={{ maxWidth: "100vw" }} className="mb-20 w-screen">
+      <div style={{ maxWidth: "100vw" }}>
         {error ? (
           <Popup link={"/profile"} msg={"Error!! reload page?"} />
         ) : loading ? (

@@ -9,7 +9,8 @@ export default function MainProducts() {
   const [loadAgain, setLoadAgain] = useState(false);
   const [products, setProducts] = useState(null);
   const [productCategory, setProductCategoty] = useState(null);
-  const [loadmeter, setLoadMeter] = useState(4);
+  const [loadmeter, setLoadMeter] = useState(8);
+  const [offerProducts, setOfferProducts] = useState(null);
   const buttonActiveStyle = {
     background: "black",
     color: "white",
@@ -33,8 +34,19 @@ export default function MainProducts() {
       setLoadAgain(true);
     }
   };
+  const fetchOffer = async () => {
+    const fetchString = `${process.env.NEXT_PUBLIC_SERVER_URL}/product?category=offer`;
+    try {
+      const res = await fetch(fetchString);
+      const data = await res.json();
+      if (data.length > 0) setOfferProducts(data);
+    } catch {
+      setOfferProducts(null);
+    }
+  };
   useEffect(() => {
     fetchCategories();
+    fetchOffer();
   }, []);
   useEffect(() => {
     fetchProducts();
@@ -44,7 +56,7 @@ export default function MainProducts() {
     setProductCategoty(type);
     setLoadMeter(4);
   };
-  if (loadAgain) return <LoadagainBtn />;
+  if (loadAgain) return <LoadagainBtn fetchCategories={fetchCategories} fetchOffer={fetchOffer} fetchProducts={fetchProducts} setLoadAgain={setLoadAgain} />;
   return (
     <>
       <div className="mt-6 w-full px-3">
@@ -72,8 +84,18 @@ export default function MainProducts() {
             Load More
           </button>
         </div>
-        <hr className="h-px bg-black" />
       </div>
+      {offerProducts && (
+        <>
+          <hr className="h-px bg-black mx-auto w-2/3 my-10" />
+          <div className="px-3">
+            <h1 className="mx-auto w-fit font-bold text-2xl">Limited Time Offers</h1>
+            <div className="flex justify-center">
+              <ProductItemCard array={offerProducts} />
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }

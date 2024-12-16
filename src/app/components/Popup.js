@@ -1,51 +1,50 @@
-import Link from 'next/link'
-import React from 'react'
+"use client";
+import Link from "next/link";
+import React, { useState } from "react";
+{
+  /* <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+  {msg}
+</h3>; */
+}
+{
+  /* <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
 
-export default function Popup({ msg, link }) {
-    return (
-        <div >
-            <div id="YOUR_ID" className="fixed z-50 inset-0 overflow-y-auto">
-                <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-
-                    <div className="fixed inset-0 transition-opacity" aria-hidden="true">
-                        <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                    </div>
-
-                    <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
-
-                    <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
-                        role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                        <div className="sm:flex sm:items-start">
-                            <div
-                                className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
-                                <svg className="h-6 w-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                </svg>
-                            </div>
-                            <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                                    {msg}
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                            <Link href={link} replace>
-                                <button type="button" data-behavior="commit" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
-                                    Confirm
-                                </button>
-                            </Link>
-                            <Link href="/">
-                                <button type="button" data-behavior="cancel" className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:w-auto sm:text-sm">
-                                    Cancel
-                                </button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
+<Link href="/">
+  <button type="button" data-behavior="cancel" className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:w-auto sm:text-sm">
+    Cancel
+  </button>
+</Link>
+</div> */
+}
+export default function Popup({ msg = "somthing went wrong!!Go to home page", link = "/" }) {
+  const [display, setDispay] = useState("");
+  return (
+    <>
+      <div style={{ display }} className="w-screen h-[70vh] flex justify-center align-middle fixed z-20 items-center ">
+        <div id="toast-notification" className="shadow-grayesh mx-auto w-full max-w-xs p-4 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
+          <div className="flex items-center mb-3 border-b border-gray-400">
+            <span className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">New notification</span>
+            <button onClick={() => setDispay("none")} type="button" className="ms-auto -mx-1.5 -my-1.5 bg-white justify-center items-center flex-shrink-0 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-notification" aria-label="Close">
+              <span className="sr-only">Close</span>
+              <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"></path>
+              </svg>
+            </button>
+          </div>
+          <div className="flex items-center">
+            <div className="ms-3 text-sm font-normal w-full">
+              <div className="text-sm font-semibold text-gray-900 dark:text-white mx-auto">{msg}</div>
+              <div className="text-sm font-normal w-full flex justify-end px-5">
+                <Link href={link} replace>
+                  <button type="button" data-behavior="commit" className="py-2 px-3 my-2 bg-blue-600 rounded-md">
+                    OK
+                  </button>
+                </Link>
+              </div>
             </div>
+          </div>
         </div>
-    )
+      </div>
+    </>
+  );
 }

@@ -85,7 +85,7 @@ export default function DeliveryForm({ submitForm }) {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <button type="submit" class="flex items-center justify-center gap-2 hover:bg-neutral-200 bg-neutral-50 rounded text-neutral-800 font-extrabold w-full p-3">
+                  <button type="submit" className="flex items-center justify-center gap-2 hover:bg-neutral-200 bg-neutral-50 rounded text-neutral-800 font-extrabold w-full p-3">
                     <svg className="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14m-7 7V5" />
                     </svg>
