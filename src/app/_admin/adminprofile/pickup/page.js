@@ -26,14 +26,12 @@ export default function page() {
       const user = await res.json();
       shipRocketToken = user.shiprocket.token;
     } catch (err) {
-      console.log(err);
       return popTost("somthing is not working try reloading or Login...");
     }
     try {
       const headers = { Authorization: `Bearer ${shipRocketToken}`, "Content-Type": "application/json" };
       const res = await fetch("https://apiv2.shiprocket.in/v1/external/settings/company/addpickup", { method: "POST", headers, body: JSON.stringify(data) });
       const msg = await res.json();
-      console.log(msg);
       if (res.status === 200) {
         popTost("Done", true);
         router.push("/adminprofile");

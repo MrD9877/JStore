@@ -2,7 +2,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import StoreProvider from "@/lib/StoreProvider";
 import UpdateCart from "@/app/components/UpdateCart";
-import Home from "./page";
 import { Suspense } from "react";
 import Loading from "./components/Loading";
 import FetchToken from "./_utility/FetchToken";

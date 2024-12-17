@@ -73,7 +73,6 @@ export default function AdminSigninPage() {
     }
   };
   useEffect(() => {
-    console.log(passwordDiv.current.firstChild);
     if (repeatPasswordDiv.current) setRepeatPassword(repeatPasswordDiv.current.firstChild);
     if (passwordDiv.current) setPassword(passwordDiv.current.firstChild);
   }, [repeatPasswordDiv, passwordDiv]);

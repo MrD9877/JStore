@@ -1,5 +1,5 @@
 import MainNavBar from "@/app/_navbars/MainNavBar";
-import ProductItemCard from "@/app/components/cards/ProductItemCard";
+import ProductItemCard from "@/app/components/ProductItemCard";
 
 export default async function CategoriesLayout({ children, params }) {
   const id = await params;

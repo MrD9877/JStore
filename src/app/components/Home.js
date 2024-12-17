@@ -1,5 +1,5 @@
 import Link from "next/link";
-import MainCard from "./cards/MainCard";
+import MainCard from "./MainCard";
 import imageMen from "@/app/_images/homeMen.png";
 import imageWomen from "@/app/_images/homeKids.png";
 import imageKid from "@/app/_images/homeWomen.png";

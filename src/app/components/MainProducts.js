@@ -1,6 +1,6 @@
 "use client";
 import { Suspense, useEffect, useState } from "react";
-import ProductItemCard from "./cards/ProductItemCard";
+import ProductItemCard from "./ProductItemCard";
 import Loading from "./Loading";
 import LoadagainBtn from "../_utility/LoadagainBtn";
 

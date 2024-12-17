@@ -22,7 +22,6 @@ export default function PickupAddress({ user }) {
 
   const fetchPickupAddress = async () => {
     const address = await FetchAddress(user.shiprocket.token);
-    console.log(address);
     setPickup(address);
   };
   useEffect(() => {
