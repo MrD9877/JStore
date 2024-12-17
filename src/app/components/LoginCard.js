@@ -34,7 +34,6 @@ export default function LoginPage({ welcome = true, link = "/" }) {
     try {
       const checkUser = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/login`, {
         method: "POST",
-        mode: "cors",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
