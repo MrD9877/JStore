@@ -58,7 +58,7 @@ export default function LoginPage({ welcome = true, link = "/" }) {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-      <div style={{ background: "rgba(0, 10,20,0.9)", maxWidth: "600px" }} className="shadow-neon lg:mb-32 xl:mb-16 m-auto mb-52 p-6 w-5/6 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+      <div style={{ background: "rgba(0, 10,20,0.9)", maxWidth: "400px" }} className="shadow-neon  px-12 pb-1  lg:mb-32 xl:mb-16 m-auto mb-52 p-6 w-5/6 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
         <Link style={welcome ? { display: "" } : { display: "none" }} href="/">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Welcome to J-shop</h5>
         </Link>

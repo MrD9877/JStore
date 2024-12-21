@@ -1,89 +1,121 @@
-import { Body, Container, Column, Head, Heading, Html, Img, Link, Preview, Row, Section, Text, Tailwind, Button } from "@react-email/components";
+import { Body, Container, Column, Head, Heading, Html, Img, Link, Preview, Row, Section, Text, Tailwind, Button, Hr } from "@react-email/components";
 import * as React from "react";
 
 export default function Content({ otp = "0000", user }) {
+  const headerContent = { padding: "20px 30px 15px" };
+
+  const headerContentTitle = {
+    color: "#fff",
+    fontSize: "27px",
+    fontWeight: "bold",
+    lineHeight: "27px",
+  };
+
+  const headerContentSubtitle = {
+    color: "#fff",
+    fontSize: "17px",
+  };
+
+  const headerImageContainer = {
+    padding: "30px 10px",
+  };
+
+  const headerImage = {
+    maxWidth: "100%",
+  };
+  const header = {
+    borderRadius: "5px 5px 0 0",
+    display: "flex",
+    flexDireciont: "column",
+    backgroundColor: "#2b2d6e",
+    maxWidth: "350px",
+    marginTop: "20px",
+  };
   return (
     <>
       <Html>
-        <Body>
-          <Tailwind>
+        <Tailwind>
+          <Body className="bg-white m-0 p-4">
             <Preview>Confirm your email address</Preview>
-            <Container>
-              <div className="flex justify-center items-center align-middle my-8">
-                <Img className="inline" src="http://localhost:3001/images/icon.ico" alt="Slack" />
-                <span className="text-bold text-xl ml-2">JAGRAON GARMENTS</span>
-              </div>
-              <div className="h-32 rounded-md text-purple-600 flex flex-col justify-center " style={{ backgroundImage: `url("http://localhost:3001/images/emailBack.png")` }}>
-                <div className="flex flex-col ml-10">
-                  <span style={{ fontSize: "2em", fontWeight: "bold" }} className=" text-2xl ">
-                    J G
-                  </span>
-                  <span className="text-xs">Where Trends Meet Timeless.</span>
-                </div>
-              </div>
+            <Row className="w-1/2">
+              <Column align="center" className="h-[40px] w-fit">
+                <Img src={`https://j-shop.s3.eu-north-1.amazonaws.com/icon.ico`} alt="Slack" />
+              </Column>
+              <Column align="center" className="h-[40px] w-fit px-2">
+                <span className="text-bold text-xl">JAGRAON GARMENTS</span>
+              </Column>
+            </Row>
+            <Section style={header}>
+              <Row>
+                <Column style={headerContent}>
+                  <Heading style={headerContentTitle}>J G</Heading>
+                  <Text style={headerContentSubtitle}>Where Trends Meet Timeless.</Text>
+                </Column>
+                <Column style={headerImageContainer}>
+                  <Img style={headerImage} width={340} src={`https://j-shop.s3.eu-north-1.amazonaws.com/emailcover.png`} />
+                </Column>
+              </Row>
+            </Section>
+            <div className="bg-white px-8 pt-8 pb-4 rounded-md shadow-md">
               <Heading>Hi {user},</Heading>
               <div className="text-gray-700">
                 <div>Here is your One Time Password(OTP).</div>
                 <div>Enter in browser To reset your password.</div>
               </div>
-              <div className="py-8">
-                <div className="flex gap-2 justify-center mx-auto">
+              <div className="py-8 w-full">
+                <div className="w-fit mx-auto">
                   {otp.split("").map((number, index) => {
                     return (
-                      <span key={index} style={{ fontSize: "1.5em", fontWeight: "bold" }} className="bg-purple-100 px-6 py-4 rounded-md">
+                      <span key={index} style={{ fontSize: "1.5em", fontWeight: "bold" }} className="bg-purple-100 ml-2 px-6 py-4 rounded-md">
                         {number}
                       </span>
                     );
                   })}
                 </div>
               </div>
-              <div className="text-gray-700">
-                <div>
-                  OTP will expire in<span className="text-black"> 5 minutes.</span>
+              <Section>
+                <div className="text-gray-700">
+                  <div>
+                    OTP will expire in<span className="text-black"> 5 minutes.</span>
+                  </div>
                 </div>
-              </div>
-              <div className="text-gray-700 my-8">
-                <div>Best Regards,</div>
-                <div className="text-purple-600">JG Team.</div>
-              </div>
-              <hr className="bg-gray-300 border-0 h-0.5 mt-10" />
-              <div className=" flex justify-center  items-center gap-2">
-                <Link href="http://localhost:3001">
-                  <Img className="inline" height="70px" src="http://localhost:3001/images/web.jpg" alt="Slack" />
-                </Link>
-                <Link>
-                  <Img className="bg-white" height="48px" src="http://localhost:3001/images/instaLogo.avif" alt="Slack" />
-                </Link>
-              </div>
-              <hr className="bg-gray-300 border-0 h-0.5 " />
-              <Section className="text-gray-500 my-10">
-                <Section className="w-fit mx-auto">
-                  <Link className="text-gray-500" href="https://slackhq.com" target="_blank" rel="noopener noreferrer">
-                    Our blog
-                  </Link>
-                  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                  <Link className="text-gray-500" href="https://slack.com/legal" target="_blank" rel="noopener noreferrer">
-                    Policies
-                  </Link>
-                  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                  <Link className="text-gray-500" href="https://slack.com/help" target="_blank" rel="noopener noreferrer">
-                    Help center
-                  </Link>
-                  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                  <Link className="text-gray-500" href="https://slack.com/community" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-linkindex="6">
-                    Slack Community
-                  </Link>
-                </Section>
-                <Text>
-                  © 2024 JAGRAON GARMENTS. <br />
-                  V.P.O Daudhar, Dist:- Moga,Punjab,India <br />
-                  <br />
-                  All rights reserved.
-                </Text>
+                <div className="text-gray-700 my-8">
+                  <div>Best Regards,</div>
+                  <div className="text-purple-600">JG Team.</div>
+                </div>
+                <Hr className="my-[16px] border-t-2 border-gray-300" />
+                <div className=" w-full">
+                  <div className="w-fit mx-auto flex">
+                    <Link href="https://j-store-mrd9877s-projects.vercel.app">
+                      <Img className="" height="48px" src={`https://j-shop.s3.eu-north-1.amazonaws.com/web.jpg`} alt="Slack" />
+                    </Link>
+                    <Link href="https://www.instagram.com/jagraongarments">
+                      <Img className="" height="48px" src={`https://j-shop.s3.eu-north-1.amazonaws.com/instaLogo.avif`} alt="Slack" />
+                    </Link>
+                  </div>
+                </div>
+                <Hr className="my-[16px] border-t-2 border-gray-300" />
+                <div className="text-gray-500 my-10">
+                  <div className="w-fit mx-auto">
+                    <Link className="text-gray-500" href="https://slackhq.com" target="_blank" rel="noopener noreferrer">
+                      Our blog
+                    </Link>
+                    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                    <Link className="text-gray-500" href="https://slack.com/legal" target="_blank" rel="noopener noreferrer">
+                      Policies
+                    </Link>
+                  </div>
+                  <p className="text-center">
+                    © 2024 JAGRAON GARMENTS. <br />
+                    V.P.O Daudhar, Dist:- Moga,Punjab,India <br />
+                    <br />
+                    All rights reserved.
+                  </p>
+                </div>
               </Section>
-            </Container>
-          </Tailwind>
-        </Body>
+            </div>
+          </Body>
+        </Tailwind>
         <script src="https://cdn.lordicon.com/lordicon.js"></script>
       </Html>
     </>

@@ -32,9 +32,7 @@ export default function SigninPage() {
     });
   };
   const [error, submitAction, isPending] = useActionState(async (previousState, formData) => {
-    console.log(previousState);
     const data = Object.fromEntries(formData);
-    console.log(data);
     if (data.password !== data.repeatpassword) {
       popTost("Password does't match");
       setStyle(redInputStyle);
