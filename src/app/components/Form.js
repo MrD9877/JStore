@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import LoadingBtn from "../_utility/LoadingBtn";
 import { useEffect, useRef, useState } from "react";
 import ShowPassword from "../_utility/ShowPassword";
+import { useRouter } from "next/navigation";
 
 export default function Form({ onSubmit, style, loading }) {
+  const router = useRouter();
   const passwordInput = useRef(null);
   const [inputState, setInputState] = useState({});
   const { register, handleSubmit } = useForm();
@@ -57,7 +59,9 @@ export default function Form({ onSubmit, style, loading }) {
         <div className="w-4/5 mx-auto text-white">
           <div className="flex mx-auto items-center justify-center my-1">
             <hr className="w-24 h-1 my-1 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
-            <span className="mx-2">or</span>
+            <button onDoubleClick={() => router.push("/adminsignin")} className="mx-2">
+              or
+            </button>
             <hr className="w-24 h-1 my-1 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
           </div>
           <div className="mb-2">

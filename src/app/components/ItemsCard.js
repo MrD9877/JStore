@@ -7,35 +7,28 @@ import EditProductsBtn from "../_utility/EditProductsBtn.js";
 export default function ItemsCard({ array }) {
   return (
     <>
-      <div className="flex flex-wrap justify-center sm:grid sm:grid-cols-3 sm:gap-3 sm:p-6">
+      <div className="sm:flex sm:flex-wrap sm:gap-3 sm:justify-center">
         {array ? (
-          array.map((item) => {
+          array.map((product, index) => {
             return (
-              <div key={item.productId} className="w-32 mb-2  m-auto sm:w-auto sm:grid lg:grid-cols-2  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <Link href={`/editproducts/${item.productId}`}>
-                  <img className="p-2  rounded-t-lg" src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/${item.images[0]}`} alt="product image" />
-                </Link>
-                <div className="px-2 pb-2 lg:flex lg:flex-col lg:justify-around">
-                  <div>
-                    <div className="w-full lg:pt-3">
-                      <Link href={`/editproducts/${item.productId}`}>
-                        <h3 className=" hidden lg:flex font-bold text-lg tracking-tight text-blue-700  overflow-hidden">{item.title}</h3>
-                      </Link>
-                      <Link href={`/editproducts/${item.productId}`}>
-                        <h5 className="text-xs font-semibold tracking-tight text-white overflow-hidden">{item.description.slice(0, 60)}...</h5>
-                      </Link>
-                    </div>
+              <div key={product.productId} className="pb-4 mt-4 border border-black rounded-md max-w-80 mx-auto">
+                <Link href={`../products/${product.productId}`}>
+                  <img src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/${product.images[0]}`} alt="men cloth" />
+                  <div className="pl-2 py-1">
+                    <div className="font-bold leading-snug">{product.title}</div>
+                    <div className="test-sm text-gray-400 leading-snug">{product.description}</div>
                   </div>
-                </div>
-                <div className="flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">stock:</span>
-                  <EditProductsBtn product={item} />
+                  <div className="pl-1">Rs. {product.price}</div>
+                </Link>
+                <div className="flex pl-2 py-2">
+                  <span className="text-gray-900 text-lg mr-1 font-bold">stock:</span>
+                  <EditProductsBtn product={product} />
                 </div>
               </div>
             );
           })
         ) : (
-          <Loading />
+          <Loading width="100vw" />
         )}
       </div>
     </>
