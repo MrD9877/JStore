@@ -12,7 +12,6 @@ import "swiper/css";
 export default function ProductInfo({ productId }) {
   const [product, setProduct] = useState(null);
   const products = useSelector((state) => state.products);
-  const testCount = useSelector((state) => state.count);
   const [inCart, setInCart] = useState(false);
   const [count, setCount] = useState(0);
   const [color, setColor] = useState(null);
@@ -164,11 +163,11 @@ export default function ProductInfo({ productId }) {
               <div className="swiper product-thumb max-w-[608px] mx-auto">
                 <div className="swiper-wrapper flex">
                   {product &&
-                    product.imagesUrl.urls.map((src, index) => {
+                    product.images.map((src, index) => {
                       if (index > 4) return;
                       return (
                         <div key={index}>
-                          <img className="object-scale-down h-32" src={src} alt={`${product.title}`} />
+                          <img className="object-scale-down h-32" src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/${src}`} alt={`${product.title}`} />
                         </div>
                       );
                     })}

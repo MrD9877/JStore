@@ -66,9 +66,9 @@ export default function MainProducts() {
             All
           </button>
           {categories &&
-            categories.map((item) => {
+            categories.map((item, index) => {
               return (
-                <button style={productCategory === item.category ? buttonActiveStyle : {}} onClick={() => handler(item.category)} key={item.category} type="button" className="px-4 font-bold text-lg m-1 rounded-lg bg-white border-2 border-black ">
+                <button style={productCategory === item.category ? buttonActiveStyle : {}} onClick={() => handler(item.category)} key={index} type="button" className="px-4 font-bold text-lg m-1 rounded-lg bg-white border-2 border-black ">
                   {item.category}
                 </button>
               );

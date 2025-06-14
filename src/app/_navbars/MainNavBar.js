@@ -112,9 +112,9 @@ export default function MainNavBar() {
           <select onChange={handleChange} defaultValue="null" className="bg-black text-white text-sm" name="Categories">
             <option value="null">BROWSE CATEGORIES</option>
             {categories &&
-              categories.map((item) => {
+              categories.map((item, index) => {
                 return (
-                  <option key={item.category} value={item.category}>
+                  <option key={index} value={item.category}>
                     {item.category.toUpperCase()}
                   </option>
                 );

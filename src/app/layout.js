@@ -6,9 +6,6 @@ import { Suspense } from "react";
 import Loading from "./components/Loading";
 import FetchToken from "./_utility/FetchToken";
 
-// todo
-// DisplayItemsCard
-
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",

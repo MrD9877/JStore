@@ -1,6 +1,5 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { colors } from "../../../colors";
 import DisplayItemsCard from "@/app/components/DisplayItemsCard";
 import Loading from "@/app/components/Loading";
 import { useDeferredValue, useEffect, useRef, useState } from "react";
