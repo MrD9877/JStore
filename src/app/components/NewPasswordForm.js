@@ -3,23 +3,12 @@ import LoadingBtn from "@/app/_utility/LoadingBtn";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useActionState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import useToast from "@/hooks/useToast";
 
 export default function NewPasswordForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const popTost = (msg, success) => {
-    let emote = "❌";
-    if (success) emote = "✅";
-    toast(`${msg}`, {
-      icon: `${emote}`,
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  };
+  const popTost = useToast();
   const [error, submitAction, isPending] = useActionState(async (previousState, formData) => {
     const data = Object.fromEntries(formData);
     console.log(data);
@@ -54,7 +43,6 @@ export default function NewPasswordForm() {
   let username = searchParams.get("username");
   return (
     <div>
-      <Toaster position="top-center" reverseOrder={false} />
       <section className="bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <Link href="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">

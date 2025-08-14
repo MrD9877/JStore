@@ -1,22 +1,11 @@
 "use client";
 import { useForm } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import useToast from "@/hooks/useToast";
 
 export default function page() {
   const router = useRouter();
-  const popTost = (msg, success) => {
-    let emote = "❌";
-    if (success) emote = "✅";
-    toast(`${msg}`, {
-      icon: `${emote}`,
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  };
+  const popTost = useToast();
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
@@ -45,7 +34,6 @@ export default function page() {
 
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} />
       <div className="bg-gray-900">
         <div className="max-w-lg mx-auto mt-10 bg-gray-600 text-white p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold text-center mb-6 ">Pickup Location Form</h2>

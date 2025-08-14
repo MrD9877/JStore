@@ -1,9 +1,11 @@
+"use client";
 import MainNavBar from "@/app/_navbars/MainNavBar";
 import ProductInfo from "@/app/components/ProductInfo";
+import { useParams } from "next/navigation";
 
-export default async function Layout({ children, params }) {
-  const id = await params;
-  const { productId } = id;
+export default function Layout({ children }) {
+  const params = useParams();
+  const productId = params?.productId;
   return (
     <>
       <MainNavBar />

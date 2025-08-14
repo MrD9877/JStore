@@ -1,24 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import useToast from "@/hooks/useToast";
 import Loading from "./Loading";
 import CopytoClip from "../_utility/CopytoClip";
 
 export default function DisplayOrdersCard() {
   const [orders, setOrders] = useState();
   const [loading, setLoading] = useState(true);
-  const popTost = (msg, success) => {
-    let emote = "❌";
-    if (success) emote = "✅";
-    toast(`${msg}`, {
-      icon: `${emote}`,
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  };
+  const popTost = useToast();
   const fetchOrders = async () => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/order`, { credentials: "include" });
@@ -42,7 +31,6 @@ export default function DisplayOrdersCard() {
   }, []);
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} />
       {orders && orders.length > 0 && (
         <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800 md:p-8">
           <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">Latest orders</h3>

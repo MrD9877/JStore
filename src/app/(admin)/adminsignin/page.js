@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
+import useToast from "@/hooks/useToast";
 import { useRouter } from "next/navigation";
 import bgImage from "@/app/_images/bgImage.jpg";
 import ShowPassword from "@/app/_utility/ShowPassword";
@@ -22,18 +22,7 @@ export default function AdminSigninPage() {
   };
   const { register, handleSubmit } = useForm();
 
-  const popTost = (msg, success) => {
-    let emote = "❌";
-    if (success) emote = "✅";
-    toast(`${msg}`, {
-      icon: `${emote}`,
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  };
+  const popTost = useToast();
 
   const navigateTOlogin = (nav) => {
     setTimeout(() => {
@@ -78,7 +67,6 @@ export default function AdminSigninPage() {
   }, [repeatPasswordDiv, passwordDiv]);
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} />
       <div style={{ backgroundImage: `url(${bgImage.src})` }} className="flex h-screen">
         <form style={{ background: "rgba(0, 10,20,0.9)" }} className="border rounded-xl max-w-sm mx-auto bg-white p-12 my-auto" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-5">

@@ -2,24 +2,13 @@
 import React from "react";
 
 import { useRouter } from "next/navigation";
-import toast, { Toaster } from "react-hot-toast";
+import useToast from "@/hooks/useToast";
 import avatar from "../_images/avatars/avatar.png";
 import DeliveryForm from "./DeliveryForm";
 
 export default function DeliveryInfoForm({ linkAfterDone = "/profile" }) {
   const router = useRouter();
-  const popTost = (msg, success) => {
-    let emote = "❌";
-    if (success) emote = "✅";
-    toast(`${msg}`, {
-      icon: `${emote}`,
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  };
+  const popTost = useToast();
   const uploadForm = async (data) => {
     console.log(data);
     try {
@@ -42,7 +31,6 @@ export default function DeliveryInfoForm({ linkAfterDone = "/profile" }) {
   };
   return (
     <div>
-      <Toaster position="top-center" reverseOrder={false} />
       <div className="p-8 md:mt-5 lg:mt-10 h-fit lg:w-lg lg:mx-auto">
         <div className="duration-500 group overflow-hidden relative rounded bg-neutral-800 text-neutral-50 p-4 flex flex-col justify-evenly">
           <div className="absolute blur duration-500 group-hover:blur-none w-72 h-72 rounded-full group-hover:translate-x-12 group-hover:translate-y-12 bg-sky-900 right-1 -bottom-24"></div>

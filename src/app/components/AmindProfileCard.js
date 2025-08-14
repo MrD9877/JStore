@@ -5,7 +5,7 @@ import Gif from "../_images/check.gif";
 import Image from "next/image";
 import ShipRocketLogin from "./ShipRocketLogin";
 import PickupAddress from "./PickupAddress";
-import toast, { Toaster } from "react-hot-toast";
+import useToast from "@/hooks/useToast";
 import GetAvatar from "../customhooks/GetAvatar";
 import { handleLogout } from "../_utility/LogoutFn";
 
@@ -14,18 +14,7 @@ export default function AdminProfileCard({ user }) {
   const [loading, setLoading] = useState(false);
   const [avatarSrc, setAvatarSrc] = useState(null);
 
-  const popTost = (msg, success) => {
-    let emote = "❌";
-    if (success) emote = "✅";
-    toast(`${msg}`, {
-      icon: `${emote}`,
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  };
+  const popTost = useToast();
   const getToken = async (data, setLoading) => {
     let token;
     try {
@@ -83,7 +72,6 @@ export default function AdminProfileCard({ user }) {
 
   return (
     <div>
-      <Toaster position="top-center" reverseOrder={false} />
       {user && <GetAvatar user={user} setAvatarSrc={setAvatarSrc} />}
       <div className="h-full bg-gray-200 rounded-lg py-4 px-2 sm:p-8">
         <div className="bg-white rounded-lg shadow-xl pb-8">

@@ -1,6 +1,6 @@
 "use client";
 import React, { use, useEffect, useRef } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import useToast from "@/hooks/useToast";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { set } from "react-hook-form";
@@ -18,18 +18,7 @@ export default function RecoverPage() {
 
   const username = searchParams.get("username");
 
-  const popTost = (msg, success) => {
-    let emote = "❌";
-    if (success) emote = "✅";
-    toast(`${msg}`, {
-      icon: `${emote}`,
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  };
+  const popTost = useToast();
 
   const handleSendEmail = async () => {
     if (!username) {
@@ -159,7 +148,6 @@ export default function RecoverPage() {
 
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex align-middle justify-center items-center h-screen">
         <div className="max-w-md mx-auto text-center bg-white px-4 sm:px-8 py-10 rounded-xl shadow-grayesh">
           <header className="mb-8">

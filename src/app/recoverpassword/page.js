@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import toast, { Toaster } from "react-hot-toast";
+import useToast from "@/hooks/useToast";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import bgImage from "../_images/bgImage.jpg";
@@ -11,18 +11,7 @@ export default function RecoverPage() {
   const [loading, setLoading] = useState(false);
   const [userName, setUserName] = useState("");
 
-  const popTost = (msg, success) => {
-    let emote = "❌";
-    if (success) emote = "✅";
-    toast(`${msg}`, {
-      icon: `${emote}`,
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  };
+  const popTost = useToast();
   const handleSendEmail = async () => {
     if (!userName) {
       popTost("Please enter your username", false);
@@ -66,7 +55,6 @@ export default function RecoverPage() {
 
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} />
       <div style={{ backgroundImage: `url(${bgImage.src})` }} className="flex align-middle justify-center items-center h-screen">
         <div style={{ background: "rgba(0, 10,20,0.9)", maxWidth: "400px" }} className="shadow-neon  px-12 pb-1 h-fit  lg:mb-32 xl:mb-16 mx-auto mb-52 p-6 w-5/6 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
           <div className="w-full">

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
+import useToast from "@/hooks/useToast";
 import Loading from "./Loading.js";
 import Link from "next/link.js";
 import AddnewOptions from "../_navbars/AddnewOptions.js";
@@ -21,18 +21,7 @@ export default function AddProduct() {
     });
   };
 
-  const popTost = (msg, success) => {
-    let emote = "❌";
-    if (success) emote = "✅";
-    toast(`${msg}`, {
-      icon: `${emote}`,
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  };
+  const popTost = useToast();
 
   const submit = async (data) => {
     if (file.length < 2) return popTost("Atleast 2 images...");
@@ -78,7 +67,6 @@ export default function AddProduct() {
   return (
     <>
       {aiPromo && <FetchOpenAI aidata={aidata} changeData={changeData} description={description} setAiPromo={setAiPromo} popTost={popTost} />}
-      <Toaster position="top-center" reverseOrder={false} />
       <div className="bg-gray-100 w-full flex flex-col">
         <AddnewOptions />
         {loading ? (

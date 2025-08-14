@@ -1,24 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import useToast from "@/hooks/useToast";
 import Loading from "./Loading";
 import Link from "next/link";
 import FetchAddress from "../_utility/FetchAddress";
 
 export default function PickupAddress({ user }) {
   const [pickup, setPickup] = useState();
-  const popTost = (msg, success) => {
-    let emote = "❌";
-    if (success) emote = "✅";
-    toast(`${msg}`, {
-      icon: `${emote}`,
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  };
+  const popTost = useToast();
 
   const fetchPickupAddress = async () => {
     const address = await FetchAddress(user.shiprocket.token);
@@ -31,7 +20,6 @@ export default function PickupAddress({ user }) {
   }, []);
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} />
       <div className="my-4 flex flex-col ">
         <div className="w-full flex flex-col ">
           <div className="flex-1 bg-white rounded-lg shadow-xl p-8">

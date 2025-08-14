@@ -1,10 +1,9 @@
-'use client'
-import { Provider } from 'react-redux'
-import { makeStore } from './Store'
+"use client";
+import { Provider } from "react-redux";
+import { store } from "@/lib/Store";
 
 const StoreProvider = ({ children }) => {
+  return <Provider store={store}>{children}</Provider>;
+};
 
-    return <Provider store={makeStore}>{children}</Provider>
-}
-
-export default StoreProvider
+export default StoreProvider;

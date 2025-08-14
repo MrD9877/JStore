@@ -1,7 +1,7 @@
 "use client";
 import ACTIONS from "@/lib/action";
 import React, { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import useToast from "@/hooks/useToast";
 import Loading from "./Loading";
 import EditProductsBtn from "../_utility/EditProductsBtn";
 import { useRouter } from "next/navigation";
@@ -18,18 +18,7 @@ export default function EditProductPage({ productId }) {
     description: "",
   });
   const router = useRouter();
-  const popTost = (msg, success) => {
-    let emote = "❌";
-    if (success) emote = "✅";
-    toast(`${msg}`, {
-      icon: `${emote}`,
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  };
+  const popTost = useToast();
 
   const deleteProduct = async () => {
     try {
@@ -104,7 +93,6 @@ export default function EditProductPage({ productId }) {
   }, [productId]);
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} />
       {loading && (
         <div className="absolute w-screen mt-20 pointer-events-none">
           <div className="mx-auto">

@@ -63,7 +63,7 @@ export default function ProductInfo({ productId }) {
         setProduct(data);
       }
     } catch {
-      consolr.log("reload");
+      console.log("reload");
     }
   };
 

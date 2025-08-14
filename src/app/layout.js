@@ -5,6 +5,7 @@ import UpdateCart from "@/app/components/UpdateCart";
 import { Suspense } from "react";
 import Loading from "./components/Loading";
 import FetchToken from "./_utility/FetchToken";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
     <>
       <html lang="en" dir="ltr">
         <head>
+          <script src="http://localhost:8097"></script>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
           <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Architects+Daughter&display=swap" rel="stylesheet" />

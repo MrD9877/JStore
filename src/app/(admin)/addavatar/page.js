@@ -2,7 +2,6 @@
 import AddnewOptions from "@/app/_navbars/AddnewOptions";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Toaster } from "react-hot-toast";
 
 export default function page() {
   const [file, setFile] = useState([]);
@@ -28,7 +27,6 @@ export default function page() {
   };
   return (
     <div className="w-full">
-      <Toaster position="top-center" reverseOrder={false} />
       <AddnewOptions />
       <form style={{ maxWidth: "650px" }} className="p-8 mx-auto" onSubmit={handleSubmit(submit)}>
         <div className="w-fit mx-auto mb-5 bg-purple-600 text-white font-medium py-2 px-4 rounded-lg shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">Images: {file.length}</div>

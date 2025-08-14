@@ -1,23 +1,12 @@
 "use client";
 import { Menu, MenuHandler, MenuList, MenuItem, Button } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import useToast from "@/hooks/useToast";
 
 export default function FilterBar({ setOrders, setLoading }) {
   const [filter, setFilter] = useState();
 
-  const popTost = (msg, success) => {
-    let emote = "❌";
-    if (success) emote = "✅";
-    toast(`${msg}`, {
-      icon: `${emote}`,
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  };
+  const popTost = useToast();
 
   const fetchOrders = async () => {
     setLoading(true);
@@ -47,7 +36,6 @@ export default function FilterBar({ setOrders, setLoading }) {
   }, [filter]);
   return (
     <div className="pt-6 pr-6 flex justify-end">
-      <Toaster position="top-center" reverseOrder={false} />
       <Menu>
         <MenuHandler>
           <Button className="bg-gray-400">Filter Results</Button>

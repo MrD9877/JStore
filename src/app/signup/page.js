@@ -1,6 +1,6 @@
 "use client";
 import React, { useActionState, useEffect, useRef, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import useToast from "@/hooks/useToast";
 import { useRouter } from "next/navigation";
 import bgImage from "../_images/bgImage.jpg";
 import ShowPassword from "../_utility/ShowPassword.js";
@@ -19,18 +19,7 @@ export default function SigninPage() {
     border: "2px solid red",
     color: "red",
   };
-  const popTost = (msg, success) => {
-    let emote = "❌";
-    if (success) emote = "✅";
-    toast(`${msg}`, {
-      icon: `${emote}`,
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  };
+  const popTost = useToast();
   const [error, submitAction, isPending] = useActionState(async (previousState, formData) => {
     const data = Object.fromEntries(formData);
     if (data.password !== data.repeatpassword) {
@@ -71,7 +60,6 @@ export default function SigninPage() {
   }, [repeatPasswordDiv, passwordDiv]);
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} />
       <div style={{ backgroundImage: `url(${bgImage.src})` }} className="flex h-screen">
         <form style={{ background: "rgba(0, 10,20,0.9)" }} className="border rounded-xl max-w-sm mx-auto bg-white p-12 my-auto" action={submitAction}>
           <div className="mb-5">

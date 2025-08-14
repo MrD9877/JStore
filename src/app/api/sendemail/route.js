@@ -1,3 +1,4 @@
+"use server";
 import Content from "@/app/_email/content";
 import { Resend } from "resend";
 

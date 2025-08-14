@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import UserProfileCard from "./UserProfileCard";
-import toast, { Toaster } from "react-hot-toast";
+import useToast from "@/hooks/useToast";
 import { useRouter } from "next/navigation";
 import { clearCart } from "@/lib/storeSlice";
 import OrderSummary from "./OrderSummary";
@@ -14,18 +13,7 @@ export default function DisplayOrderSummary({ user }) {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const popTost = (msg, success) => {
-    let emote = "❌";
-    if (success) emote = "✅";
-    toast(`${msg}`, {
-      icon: `${emote}`,
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  };
+  const popTost = useToast();
 
   const handleOrder = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/order`, { method: "POST", credentials: "include", body: JSON.stringify({ products: products, total: total }) });
@@ -42,7 +30,6 @@ export default function DisplayOrderSummary({ user }) {
   };
   return (
     <div className="p-1">
-      <Toaster position="top-center" reverseOrder={false} />
       <div>
         <OrderSummary order={{ products: products, total: total }} />
         <div className="gap-4 sm:flex sm:items-center w-3/5 m-auto pb-28">
