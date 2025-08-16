@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, editCart } from "@/lib/storeSlice";
 import ACTIONS from "@/lib/action";
 import Link from "next/link";
-import Popup from "../components/Popup";
+import Popup from "@/components/Popup";
 import { useEffect } from "react";
 
 export default function CartPage() {

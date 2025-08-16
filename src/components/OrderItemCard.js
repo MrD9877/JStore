@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import AcceptRejectBtn from "../_utility/AcceptRejectBtn";
+import AcceptRejectBtn from "@/utility/AcceptRejectBtn";
 import CustomerDetailCard from "./CustomerDetailCard";
 import OrderDetailCard from "./OrderDetailCard";
 import PackageForm from "./PackageForm";

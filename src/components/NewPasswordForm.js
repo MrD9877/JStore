@@ -1,5 +1,5 @@
 "use client";
-import LoadingBtn from "@/app/_utility/LoadingBtn";
+import LoadingBtn from "@/utility/LoadingBtn";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useActionState } from "react";

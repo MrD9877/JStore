@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import gif from "../_images/check.gif";
-import Loading from "../components/Loading";
-import CreateRocketOrder from "../components/CreateRocketOrder";
+import Loading from "@/components/Loading";
 
 export default function AcceptRejectBtn({ orderId, orderStatus, handleRocket, rocketValue }) {
   const [orderState, setOrderState] = useState();
@@ -33,7 +31,7 @@ export default function AcceptRejectBtn({ orderId, orderStatus, handleRocket, ro
         (orderState === "deliver" && (
           <>
             <div className="flex justify-center w-full align-middle text-white bg-blue-700  rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 ">
-              <img className="me-1 h-3 w-3" src={gif.src} />
+              <img className="me-1 h-3 w-3" src="/images/check.gif" />
             </div>
           </>
         )) ||

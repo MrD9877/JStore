@@ -1,20 +1,19 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import DisplayOrdersCard from "./DisplayOrdersCard";
-import GetAvatar from "../customhooks/GetAvatar";
 import { useRouter } from "next/navigation";
-import { handleLogout } from "../_utility/LogoutFn";
+import { handleLogout } from "@/utility/LogoutFn";
+import useAvatar from "@/hooks/useAvatar";
 
 export default function UserProfileCard({ user }) {
   const [avatarSrc, setAvatarSrc] = useState(null);
   const router = useRouter();
-
+  useAvatar({ user, setAvatarSrc });
   const handleAdminSignIn = async () => {
     router.push("/adminsignin");
   };
   return (
     <div>
-      {user && <GetAvatar user={user} setAvatarSrc={setAvatarSrc} />}
       <div className="h-full bg-gray-200 rounded-lg  sm:p-8">
         <div className="bg-white rounded-lg shadow-xl pb-8">
           <div x-data="{ openSettings: false }" className="absolute right-12 mt-4 rounded"></div>

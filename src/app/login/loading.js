@@ -1,4 +1,4 @@
-import Loading from "../components/Loading.js";
+import Loading from "@/components/Loading.js";
 
 export default function loading() {
   return (

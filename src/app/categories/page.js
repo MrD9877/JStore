@@ -1,4 +1,4 @@
-import MainProducts from "../components/MainProducts.js";
+import MainProducts from "@/components/MainProducts.js";
 
 export default function page() {
   return (

@@ -1,7 +1,7 @@
 "use client";
-import DisplayOrderSummary from "@/app/components/DisplayOrderSummary";
-import FetchUser from "@/app/components/FetchUser";
-import Loading from "@/app/components/Loading";
+import DisplayOrderSummary from "@/components/DisplayOrderSummary";
+import FetchUser from "@/components/FetchUser";
+import Loading from "@/components/Loading";
 import Link from "next/link";
 import React, { useState } from "react";
 

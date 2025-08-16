@@ -1,4 +1,4 @@
-import MainNavBar from "../_navbars/MainNavBar";
+import MainNavBar from "../../navbars/MainNavBar";
 
 export default async function ProductsLayout({ children }) {
   return (

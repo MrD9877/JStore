@@ -1,15 +1,14 @@
-import AdminNavBottom from "@/app/_navbars/AdminNavBottom"
-import EditProductsBtn from "@/app/_utility/EditProductsBtn"
-import EditProductPage from "@/app/components/EditProductPage"
+import AdminNavBottom from "@/navbars/AdminNavBottom";
+import EditProductPage from "@/components/EditProductPage";
 
 export default async function layout({ children, params }) {
-    const id = await params
-    const { productId } = id
-    return (
-        <div>
-            {children}
-            <EditProductPage productId={productId} />
-            <AdminNavBottom />
-        </div>
-    )
+  const id = await params;
+  const { productId } = id;
+  return (
+    <div>
+      {children}
+      <EditProductPage productId={productId} />
+      <AdminNavBottom />
+    </div>
+  );
 }

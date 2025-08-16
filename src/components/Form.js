@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import LoadingBtn from "../_utility/LoadingBtn";
+import LoadingBtn from "@/utility/LoadingBtn";
 import { useEffect, useRef, useState } from "react";
-import ShowPassword from "../_utility/ShowPassword";
+import ShowPassword from "@/utility/ShowPassword";
 import { useRouter } from "next/navigation";
 
 export default function Form({ onSubmit, style, loading }) {

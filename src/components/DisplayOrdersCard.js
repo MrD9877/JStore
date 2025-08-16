@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Loading from "./Loading";
-import CopytoClip from "../_utility/CopytoClip";
+import CopytoClip from "@/utility/CopytoClip";
 
 export default function DisplayOrdersCard() {
   const [orders, setOrders] = useState();

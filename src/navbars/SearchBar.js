@@ -1,9 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
-import DisplayItemsCard from "@/app/components/DisplayItemsCard";
-import Loading from "@/app/components/Loading";
+import DisplayItemsCard from "@/components/DisplayItemsCard";
+import Loading from "@/components/Loading";
 import { useDeferredValue, useEffect, useRef, useState } from "react";
-import OutSideAlart from "../_utility/OutSideAlart";
+import OutSideAlart from "@/utility/OutSideAlart";
 
 export default function SearchBar({ setSearchVisible }) {
   const router = useRouter();

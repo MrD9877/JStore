@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import OutSideAlart from "../_utility/OutSideAlart";
+import OutSideAlart from "@/utility/OutSideAlart";
 import SearchBar from "./SearchBar";
 import { useRouter } from "next/navigation";
 

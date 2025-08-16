@@ -9,18 +9,6 @@ const findAmount = (products) => {
   return sum;
 };
 
-const updateCart = async (state) => {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/cart`, {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify(state),
-    });
-  } catch (err) {
-    console.log("error in saving cart items");
-  }
-};
-
 const findGivenIndex = (temp, action) => {
   const index = temp.findIndex((item) => item.productId === action.payload.product.productId && item.selectedColor === action.payload.product.selectedColor && item.selectedSize === action.payload.product.selectedSize);
   return index;
@@ -56,7 +44,6 @@ export const cartSlice = createSlice({
         state.products = [...state.products, { ...action.payload.product, count: 1 }];
       }
       state.total = findAmount(state.products);
-      updateCart(state);
     },
     removeFromCart: (state, action) => {
       state.count -= 1;
@@ -68,7 +55,6 @@ export const cartSlice = createSlice({
         state.products = [...state.products.slice(0, index), ...state.products.slice(index + 1)];
       }
       state.total = findAmount(state.products);
-      updateCart(state);
     },
     editCart: (state, action) => {
       if (action.payload.type === ACTIONS.ADD) {
@@ -86,13 +72,11 @@ export const cartSlice = createSlice({
         }
       }
       state.total = findAmount(state.products);
-      updateCart(state);
     },
     clearCart: (state) => {
       state.count = 0;
       state.products = undefined;
       state.total = 0;
-      updateCart(state);
     },
   },
 });

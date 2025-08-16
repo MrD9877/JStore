@@ -1,6 +1,6 @@
 "use client";
-import AdminNavBottom from "@/app/_navbars/AdminNavBottom";
-import ItemsCard from "@/app/components/ItemsCard";
+import AdminNavBottom from "@/navbars/AdminNavBottom";
+import ItemsCard from "@/components/ItemsCard";
 import React, { useEffect, useState } from "react";
 
 export default function page() {

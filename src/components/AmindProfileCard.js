@@ -1,19 +1,17 @@
 "use client";
 import Link from "next/link";
-import React, { useActionState, useEffect, useState } from "react";
-import Gif from "../_images/check.gif";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import ShipRocketLogin from "./ShipRocketLogin";
 import PickupAddress from "./PickupAddress";
 import toast, { Toaster } from "react-hot-toast";
-import GetAvatar from "../customhooks/GetAvatar";
-import { handleLogout } from "../_utility/LogoutFn";
+import { handleLogout } from "@/utility/LogoutFn";
 
 export default function AdminProfileCard({ user }) {
   const [shipRocket, setShipRocket] = useState(false);
   const [loading, setLoading] = useState(false);
   const [avatarSrc, setAvatarSrc] = useState(null);
-
+  useAvatar({ user, setAvatarSrc });
   const popTost = (msg, success) => {
     let emote = "❌";
     if (success) emote = "✅";
@@ -84,7 +82,6 @@ export default function AdminProfileCard({ user }) {
   return (
     <div>
       <Toaster position="top-center" reverseOrder={false} />
-      {user && <GetAvatar user={user} setAvatarSrc={setAvatarSrc} />}
       <div className="h-full bg-gray-200 rounded-lg py-4 px-2 sm:p-8">
         <div className="bg-white rounded-lg shadow-xl pb-8">
           <div x-data="{ openSettings: false }" className="absolute right-12 mt-4 rounded"></div>
@@ -181,7 +178,7 @@ export default function AdminProfileCard({ user }) {
                         </svg>
                       ) : (
                         <span className="flex">
-                          <Image className="ml-2" width={20} height={20} src={Gif.src} alt="Check svg" />
+                          <Image className="ml-2" width={20} height={20} src={"/images/check.gif"} alt="Check svg" />
                           <button onClick={reloadToken} className="ml-4">
                             <svg style={{ width: "20px", height: "20px" }} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                               <path

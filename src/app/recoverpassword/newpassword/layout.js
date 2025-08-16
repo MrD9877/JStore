@@ -1,4 +1,4 @@
-import NewPasswordForm from "@/app/components/NewPasswordForm";
+import NewPasswordForm from "@/components/NewPasswordForm";
 
 export default function NewPasswordLayout({ children }) {
   return (

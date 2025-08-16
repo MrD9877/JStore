@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-export default function GetAvatar({ user, setAvatarSrc }) {
+export default function useAvatar({ user, setAvatarSrc }) {
   const getAvatar = async () => {
     const avatarId = user.avatarId ? user.avatarId : 2;
     try {
@@ -15,5 +15,5 @@ export default function GetAvatar({ user, setAvatarSrc }) {
     if (!user) return;
     getAvatar();
   }, [user]);
-  return <></>;
+  return {};
 }

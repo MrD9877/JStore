@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import CheckoutBar from "../_navbars/CheckoutBar";
-import FetchUser from "../components/FetchUser";
-import Loading from "../components/Loading";
+import CheckoutBar from "../../navbars/CheckoutBar";
+import FetchUser from "@/components/FetchUser";
+import Loading from "@/components/Loading";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { editProgress } from "@/lib/storeSlice";

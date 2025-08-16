@@ -1,5 +1,5 @@
-import MainNavBar from "@/app/_navbars/MainNavBar";
-import ProductInfo from "@/app/components/ProductInfo";
+import MainNavBar from "@/navbars/MainNavBar";
+import ProductInfo from "@/components/ProductInfo";
 
 export default async function Layout({ children, params }) {
   const id = await params;

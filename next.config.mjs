@@ -10,30 +10,6 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
-    localPatterns: [
-      {
-        pathname: "../images/**",
-        search: "",
-      },
-    ],
-    localPatterns: [
-      {
-        pathname: "../_images/**",
-        search: "",
-      },
-    ],
-    localPatterns: [
-      {
-        pathname: "../favicon.ico",
-        search: "",
-      },
-    ],
-    localPatterns: [
-      {
-        pathname: "../www.w3.org/",
-        search: "",
-      },
-    ],
   },
 };
 

@@ -1,16 +1,12 @@
 import Link from "next/link";
 import MainCard from "./MainCard";
-import imageMen from "@/app/_images/homeMen.png";
-import imageWomen from "@/app/_images/homeKids.png";
-import imageKid from "@/app/_images/homeWomen.png";
 import MainProducts from "./MainProducts";
-import coverImage from "@/app/_images/cover.png";
 
 export default function HomePage() {
   return (
     <div className="bg-white ">
       <div className="h-fit">
-        <img className="hidden md:block w-full" src={coverImage.src} alt="cover image" />
+        <img className="hidden md:block w-full" src="/images/cover.png" alt="cover image" />
         <div className="md:hidden">
           <MainCard background="#EEEEEE">
             <span className="flex flex-col items-start px-5 py-10">
@@ -26,13 +22,13 @@ export default function HomePage() {
       </div>
       <div className="sm:flex sm:flex-wrap sm:justify-center">
         <MainCard background="#EEEEEE">
-          <img className="w-full object-cover sm:w-auto sm:object-none" src={imageMen.src} alt="men cloths example" />
+          <img className="w-full object-cover sm:w-auto sm:object-none" src="/images/homeMen.png" alt="men cloths example" />
         </MainCard>
         <MainCard background="#EEEEEE">
-          <img className="w-full object-cover sm:w-auto sm:object-none" src={imageWomen.src} alt="men cloths example" />
+          <img className="w-full object-cover sm:w-auto sm:object-none" src="/images/homeWomen.png" alt="men cloths example" />
         </MainCard>
         <MainCard background="#EEEEEE">
-          <img className="w-full object-cover sm:w-auto sm:object-none" src={imageKid.src} alt="men cloths example" />
+          <img className="w-full object-cover sm:w-auto sm:object-none" src="/images/homeKids.png" alt="men cloths example" />
         </MainCard>
       </div>
       <MainProducts />

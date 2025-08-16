@@ -1,10 +1,9 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import Loading from "./Loading.js";
-import Link from "next/link.js";
-import AddnewOptions from "../_navbars/AddnewOptions.js";
+import AddnewOptions from "@/navbars/AddnewOptions";
 import FetchOpenAI from "./FetchOpenAI.js";
 
 export default function AddProduct() {

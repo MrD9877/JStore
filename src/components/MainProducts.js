@@ -2,7 +2,7 @@
 import { Suspense, useEffect, useState } from "react";
 import ProductItemCard from "./ProductItemCard";
 import Loading from "./Loading";
-import LoadagainBtn from "../_utility/LoadagainBtn";
+import LoadagainBtn from "@/utility/LoadagainBtn";
 
 export default function MainProducts() {
   const [categories, setCategories] = useState(null);

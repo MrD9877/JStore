@@ -3,7 +3,7 @@ import ACTIONS from "@/lib/action";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Loading from "./Loading";
-import EditProductsBtn from "../_utility/EditProductsBtn";
+import EditProductsBtn from "@/utility/EditProductsBtn";
 import { useRouter } from "next/navigation";
 
 export default function EditProductPage({ productId }) {

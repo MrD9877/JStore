@@ -3,9 +3,7 @@ import React, { use, useEffect, useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { set } from "react-hook-form";
-import FetchUser from "@/app/components/FetchUser";
-import LoadingBtn from "@/app/_utility/LoadingBtn";
+import LoadingBtn from "@/utility/LoadingBtn";
 
 export default function RecoverPage() {
   const [email, setEmail] = useState("");

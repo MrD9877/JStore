@@ -3,8 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import bgImage from "@/app/_images/bgImage.jpg";
-import ShowPassword from "@/app/_utility/ShowPassword";
+import ShowPassword from "@/utility/ShowPassword";
 import Link from "next/link";
 
 export default function AdminSigninPage() {
@@ -79,7 +78,7 @@ export default function AdminSigninPage() {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-      <div style={{ backgroundImage: `url(${bgImage.src})` }} className="flex h-screen">
+      <div style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_HOSTED_URL}/images/bgImage.jpg)` }} className="flex h-screen">
         <form style={{ background: "rgba(0, 10,20,0.9)" }} className="border rounded-xl max-w-sm mx-auto bg-white p-12 my-auto" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-5">
             <label htmlFor="username" className="block mb-2 text-sm font-medium text-white dark:text-white">

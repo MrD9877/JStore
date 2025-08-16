@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Loading from "./Loading.js";
-import AcceptRejectBtn from "../_utility/AcceptRejectBtn.js";
+import AcceptRejectBtn from "@/utility/AcceptRejectBtn";
 import Link from "next/link.js";
 import { useRouter } from "next/navigation.js";
 

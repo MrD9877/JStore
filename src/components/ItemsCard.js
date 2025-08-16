@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Loading from "./Loading.js";
 import Link from "next/link.js";
-import EditProductsBtn from "../_utility/EditProductsBtn.js";
+import EditProductsBtn from "@/utility/EditProductsBtn";
 
 export default function ItemsCard({ array }) {
   return (

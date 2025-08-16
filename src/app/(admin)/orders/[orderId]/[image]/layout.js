@@ -1,4 +1,4 @@
-import Modal from "@/app/components/Modal";
+import Modal from "@/components/Modal";
 
 export default async function ModalLayout({ children, params }) {
   const id = await params;

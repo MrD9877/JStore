@@ -1,9 +1,9 @@
-import AdminNavBottom from "@/app/_navbars/AdminNavBottom"
-import OrderItemCard from "@/app/components/OrderItemCard"
+import AdminNavBottom from "@/navbars/AdminNavBottom";
+import OrderItemCard from "@/components/OrderItemCard";
 
 export default async function OrderIdLayout({ children, params }) {
-  const id = await params
-  const { orderId } = id
+  const id = await params;
+  const { orderId } = id;
 
   return (
     <>
@@ -15,5 +15,5 @@ export default async function OrderIdLayout({ children, params }) {
         </div>
       </div>
     </>
-  )
+  );
 }

@@ -3,7 +3,6 @@ import React from "react";
 
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
-import avatar from "../_images/avatars/avatar.png";
 import DeliveryForm from "./DeliveryForm";
 
 export default function DeliveryInfoForm({ linkAfterDone = "/profile" }) {
@@ -32,7 +31,7 @@ export default function DeliveryInfoForm({ linkAfterDone = "/profile" }) {
   };
 
   const submitForm = async (data) => {
-    const user = { name: data.name, phonenumber: data.phonenumber, email: data.email, avatar: avatar.src };
+    const user = { name: data.name, phonenumber: data.phonenumber, email: data.email, avatar: `${process.env.NEXT_PUBLIC_HOSTED_URL}/images/avatars/avatar.png` };
     const deliveryaddress = { state: data.state, pin: data.pin, city: data.city, streetname: data.streetname, housenumber: data.housenumber };
     const res = await uploadForm({ user: user, deliveryaddress: deliveryaddress });
     if (res === 201) router.back();

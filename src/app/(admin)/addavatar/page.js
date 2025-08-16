@@ -1,5 +1,5 @@
 "use client";
-import AddnewOptions from "@/app/_navbars/AddnewOptions";
+import AddnewOptions from "@/navbars/AddnewOptions";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Toaster } from "react-hot-toast";

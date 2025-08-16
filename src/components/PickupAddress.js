@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Loading from "./Loading";
 import Link from "next/link";
-import FetchAddress from "../_utility/FetchAddress";
+import FetchAddress from "@/utility/FetchAddress";
 
 export default function PickupAddress({ user }) {
   const [pickup, setPickup] = useState();
