@@ -23,7 +23,7 @@ export default function UserProfileCard({ user }) {
           <div className="flex flex-col items-center -mt-20">
             <img
               // src = {user.avatar}
-              src={avatarSrc}
+              src="/images/avatar4.png"
               className="w-40 border-4 border-white rounded-full"
             />
             <div className="flex items-center space-x-2 mt-2">

@@ -74,7 +74,7 @@ export default function CartPage() {
                             <div className="flex items-center justify-between md:w-64 md:max-w-md  md:order-2">
                               <div className="w-full min-w-0 flex-1 space-y-4 ">
                                 {/* title  */}
-                                <span className="text-base font-medium  text-white">{item.title}</span>
+                                <span className="text-base font-medium  text-white">{item.title.split(" ") > 4 ? `${item.title.split(" ").slice(0, 4)}...` : item.title}</span>
                                 <div className="flex items-center gap-4">
                                   {/* remove btn  */}
                                   <button type="button" onClick={() => removeItem(item)} className="inline-flex items-center text-sm font-medium hover:underline text-red-500">
@@ -91,7 +91,7 @@ export default function CartPage() {
                                 <div className="flex justify-end md:justify-start">
                                   <span className="text-base font-medium  text-white">
                                     <span className="text-white font-bold">Size:</span>
-                                    {item.selectedSize}
+                                    <span className="text-blue-500 capitalize">{item.selectedSize}</span>
                                   </span>
                                 </div>
                                 <div className="flex items-center justify-end md:justify-start">

@@ -27,9 +27,9 @@ export const cartSlice = createSlice({
       state.progress = action.payload;
     },
     setCart: (state, action) => {
-      state.count = action.payload.count;
+      state.count = action.payload.products ? action.payload.products.length : 0;
       state.products = action.payload.products;
-      state.total = action.payload.total;
+      state.total = action.payload.products ? findAmount(action.payload.products) : 0;
     },
     addToCart: (state, action) => {
       state.count = state.count + 1;

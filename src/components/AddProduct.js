@@ -12,7 +12,7 @@ export default function AddProduct() {
   const [aidata, setData] = useState({});
   const { register, handleSubmit } = useForm();
   const [aiPromo, setAiPromo] = useState(false);
-  const description = useRef();
+  const description = useRef(null);
   const changeData = (title, e) => {
     const description = e.target.value;
     setData((pre) => {

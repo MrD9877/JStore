@@ -16,6 +16,7 @@ export default function ProductBottomNav({ product, inCart, selectedColor, selec
       setCartBtnStyle({ addtocart: { display: "" }, gotocart: { display: "none" } });
     }
   };
+
   const handleAddcart = (e) => {
     changebutton(true);
     const color = selectedColor ? selectedColor : product.colors[0];

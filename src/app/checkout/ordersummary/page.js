@@ -1,4 +1,5 @@
 "use client";
+import CheckOutCard from "@/components/checkout/CheckOutCard";
 import DisplayOrderSummary from "@/components/DisplayOrderSummary";
 import FetchUser from "@/components/FetchUser";
 import Loading from "@/components/Loading";
@@ -12,7 +13,7 @@ export default function page() {
 
   return (
     <div>
-      <FetchUser setLoading={setLoading} setError={setError} setUser={setUser} />
+      {/* <FetchUser setLoading={setLoading} setError={setError} setUser={setUser} />
       <div className="px-0.5 mx-auto mt-10 sm:mx-10">
         <div className="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
           <div className="w-full flex flex-col mx-auto 2xl:w-1/3">
@@ -67,7 +68,8 @@ export default function page() {
           </div>
         </div>
       </div>
-      <div>{user && <DisplayOrderSummary user={user} />}</div>
+      <div>{user && <DisplayOrderSummary user={user} />}</div> */}
+      <CheckOutCard />
     </div>
   );
 }

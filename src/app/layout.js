@@ -4,6 +4,7 @@ import StoreProvider from "@/lib/StoreProvider";
 import { Suspense } from "react";
 import Loading from "@/components/Loading";
 import InitApp from "@/components/InitApp";
+import Script from "next/script";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -33,9 +34,10 @@ export default function RootLayout({ children }) {
           <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Architects+Daughter&display=swap" rel="stylesheet" />
         </head>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" />
           <StoreProvider>
-            <InitApp />
             <Suspense fallback={<Loading />}>{children}</Suspense>
+            <InitApp />
           </StoreProvider>
           <script src="https://cdn.lordicon.com/lordicon.js"></script>
         </body>

@@ -30,7 +30,7 @@ export default function layout({ children }) {
     }
   }, [progress, user]);
   return (
-    <div className="bg-gray-900 min-h-screen">
+    <div className="min-h-screen bg-[rgba(18,18,18,0.82)]">
       <CheckoutBar />
       <FetchUser setLoading={setLoading} setError={setError} setUser={setUser} />
       {error ? "error" : loading && <Loading />}

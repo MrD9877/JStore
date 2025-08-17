@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-export default function FetchToken() {
+export default function useToken() {
   const fetchToken = async () => {
     try {
       await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/token`, { credentials: "include" });
@@ -11,5 +11,5 @@ export default function FetchToken() {
   useEffect(() => {
     fetchToken();
   }, []);
-  return <></>;
+  return {};
 }

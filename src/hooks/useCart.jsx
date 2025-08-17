@@ -1,4 +1,5 @@
 "use client";
+import { setCart } from "@/lib/storeSlice";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -22,9 +23,15 @@ export default function useCart() {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/cart`, { credentials: "include" });
       const data = await res.json();
-      dispatch(setCart(data));
-      console.log(data);
-    } catch {}
+      if (data) {
+        console.log(data);
+        dispatch(setCart({ products: data }));
+      } else {
+        throw Error("no Data found in cart");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
