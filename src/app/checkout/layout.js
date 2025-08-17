@@ -1,17 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
-import CheckoutBar from "../../navbars/CheckoutBar";
-import FetchUser from "@/components/FetchUser";
+import { useEffect } from "react";
 import Loading from "@/components/Loading";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { editProgress } from "@/lib/storeSlice";
+import useFetchUser from "@/hooks/useFetchUser";
 
 export default function layout({ children }) {
   const router = useRouter();
-  const [user, setUser] = useState();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const { user, error, loading } = useFetchUser();
   const count = useSelector((state) => state.count);
   const dispatch = useDispatch();
   const progress = useSelector((state) => state.progress);
@@ -31,8 +28,6 @@ export default function layout({ children }) {
   }, [progress, user]);
   return (
     <div className="min-h-screen bg-[rgba(18,18,18,0.82)]">
-      <CheckoutBar />
-      <FetchUser setLoading={setLoading} setError={setError} setUser={setUser} />
       {error ? "error" : loading && <Loading />}
       {children}
     </div>

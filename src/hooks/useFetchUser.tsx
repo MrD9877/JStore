@@ -1,7 +1,12 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { UserType } from "./useEditProfile";
 
-export default function FetchUser({ setLoading, setError, setUser }) {
+export default function useFetchUser() {
+  const [user, setUser] = useState<null | UserType>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
   const fetchData = async () => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user`, { credentials: "include", mode: "cors" });
@@ -25,5 +30,5 @@ export default function FetchUser({ setLoading, setError, setUser }) {
   useEffect(() => {
     fetchData();
   }, []);
-  return <></>;
+  return { user, error, loading };
 }

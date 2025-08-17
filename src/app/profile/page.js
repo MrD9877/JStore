@@ -3,7 +3,7 @@ import Loading from "@/components/Loading";
 import Popup from "@/components/Popup";
 import UserProfileCard from "@/components/UserProfileCard";
 import { useState } from "react";
-import FetchUser from "@/components/FetchUser";
+import FetchUser from "@/components/useFetchUser";
 
 export default function ProfilePage() {
   const [loading, setLoading] = useState(true);

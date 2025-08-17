@@ -1,25 +1,30 @@
 "use client";
-import { createContext, ReactNode, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 import "./checkout.css";
 import SelectPaymentMethod from "./SelectPaymentMethod";
 import ShippingAddress, { CheckoutNav } from "./ShippingAddress";
 import TotalPayment from "./TotalPayment";
 import Promocode from "./PromoCode";
 import Cart from "./Cart";
+import { DeliveryAddress, UserType } from "@/hooks/useEditProfile";
+import useFetchUser from "@/hooks/useFetchUser";
 
 type ContextType = {
   paymentMethod: "card" | "upi" | undefined;
   setPaymentMethod: React.Dispatch<React.SetStateAction<"card" | "upi" | undefined>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  user: UserType | null;
+  address: DeliveryAddress | undefined;
+  setAddress: Dispatch<SetStateAction<DeliveryAddress | undefined>>;
 };
 
 type DivProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const Context = createContext<ContextType | null>(null);
 
-export function Para({ children }: { children: ReactNode }) {
-  return <p className="text-textLightGray font-[600] text-[11px] sm:text-[15px]">{children}</p>;
+export function Para({ className = "", children }: { className?: string; children: ReactNode }) {
+  return <p className={`text-textLightGray font-[600] text-[11px] sm:text-[15px] ${className}`}>{children}</p>;
 }
 
 export function Header({ children }: { children: ReactNode }) {
@@ -46,11 +51,19 @@ const Div: React.FC<DivProps> = ({ className = "", children, ...rest }) => {
 
 export default function CheckOutCard() {
   const [paymentMethod, setPaymentMethod] = useState<"card" | "upi">();
+  const { user } = useFetchUser();
   const [loading, setLoading] = useState(false);
+  const [address, setAddress] = useState<DeliveryAddress | undefined>();
+
+  useEffect(() => {
+    if (user) {
+      setAddress(user.deliveryaddress[0]);
+    }
+  }, [user]);
 
   return (
     <>
-      <Context.Provider value={{ paymentMethod, setPaymentMethod, loading, setLoading }}>
+      <Context.Provider value={{ paymentMethod, setPaymentMethod, loading, setLoading, user, address, setAddress }}>
         <div className="bg-[#121212]/82 h-full min-h-screen w-full text-white">
           <div className="hidden md:block pt-4">
             <ContainerCard>
