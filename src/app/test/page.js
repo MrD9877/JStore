@@ -6,4 +6,5 @@ export default function page() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/getOrderId?method=${"upi"}`, { credentials: "include" });
   };
   return <button onClick={test}>Hrlls</button>;
+  s;
 }

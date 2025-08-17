@@ -20,7 +20,7 @@ export default function ProfilePage() {
         ) : user ? (
           <section className="bg-white w-screen py-8 antialiased dark:bg-gray-900 md:py-8">
             <div className="mx-auto max-w-screen-lg px-2 sm:px-4 2xl:px-0">
-              <UserProfileCard user={user} />
+              <UserProfileCard user={user} setUser={setUser} />
             </div>
           </section>
         ) : (

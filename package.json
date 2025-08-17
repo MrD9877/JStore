@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack -p 3001",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "email": "email dev --dir src/app/_email"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@material-tailwind/react": "^2.1.10",
     "@next/env": "^15.0.4",
     "@react-email/components": "^0.5.0",

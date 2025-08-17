@@ -4,9 +4,13 @@ import DisplayOrdersCard from "./DisplayOrdersCard";
 import { useRouter } from "next/navigation";
 import { handleLogout } from "@/utility/LogoutFn";
 import useAvatar from "@/hooks/useAvatar";
+import { LoaderCircle, MapPinPlusInside } from "lucide-react";
+import useEditProfile from "@/hooks/useEditProfile";
+import SelectState from "./SelectState";
 
-export default function UserProfileCard({ user }) {
+export default function UserProfileCard({ user, setUser }) {
   const [avatarSrc, setAvatarSrc] = useState(null);
+  const { handleSubmit, editLoading, editProfile, setEditProfile } = useEditProfile(setUser);
   const router = useRouter();
   useAvatar({ user, setAvatarSrc });
   const handleAdminSignIn = async () => {
@@ -66,17 +70,17 @@ export default function UserProfileCard({ user }) {
 
         <div className="my-4  flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
           <div className="w-full flex flex-col ">
-            <div className="flex-1 bg-white rounded-lg shadow-xl p-3 sm:p-8">
+            <form className="flex-1 bg-white rounded-lg shadow-xl p-3 sm:p-8" action={handleSubmit}>
               <h4 className="text-xl text-gray-900 font-bold">Personal Info</h4>
               <ul className="w-full mt-2 text-gray-700">
-                <li className="flex border-y py-2">
+                <label className="flex border-y py-2" htmlFor="name">
                   <span className="font-bold w-24 ">Full name:</span>
-                  <span className="text-gray-700 ml-2 sm:ml-0 overflow-scroll">{user.name}</span>
-                </li>
-                <li className="flex border-b py-2">
+                  {editProfile ? <input type="text" name="name" defaultValue={user.name || ""} className="max-w-36 px-4 outline-none border border-black" /> : <span className="text-gray-700 ml-2 sm:ml-0 overflow-scroll">{user.name}</span>}
+                </label>
+                <label className="flex border-b py-2" htmlFor="phonenumber">
                   <span className="font-bold w-24">Mobile:</span>
-                  <span className="text-gray-700">{user.phonenumber}</span>
-                </li>
+                  {editProfile ? <input type="text" name="phonenumber" pattern="[0-9]{10}" defaultValue={Number(user.phonenumber || "")} maxLength={10} minLength={10} className="max-w-36 px-4 outline-none border border-black" /> : <span className="text-gray-700">{user.phonenumber}</span>}
+                </label>
                 <li className="flex border-b py-2">
                   <span className="font-bold w-24">Email:</span>
                   <span className="text-gray-700 ml-2 sm:ml-0 overflow-scroll">{user.email ? user.email : "Not provided"}</span>
@@ -85,35 +89,55 @@ export default function UserProfileCard({ user }) {
                   <span className="font-bold w-24">Country:</span>
                   <span className="text-gray-700"> INDIA</span>
                 </li>
-                <li className="flex border-b py-2">
+                <label className="flex border-b py-2" htmlFor="state">
                   <span className="font-bold w-24">State:</span>
-                  <span className="text-gray-700"> {user.deliveryaddress && user.deliveryaddress.state}</span>
-                </li>
-                <li className="flex border-b py-2">
-                  <span className="font-bold w-24 ">Location:</span>
-                  <span className="text-gray-700 ml-2 sm:ml-0 overflow-scroll">
-                    {" "}
-                    {user.deliveryaddress && user.deliveryaddress.housenumber},{user.deliveryaddress && user.deliveryaddress.streetname},{user.deliveryaddress && user.deliveryaddress.city}
-                  </span>
-                </li>
-                <li className="flex border-b py-2">
-                  <span className="font-bold w-24">PIN:</span>
-                  <span className="text-gray-700"> {user.deliveryaddress && user.deliveryaddress.pin}</span>
-                </li>
+                  {editProfile ? (
+                    <>
+                      <SelectState />
+                    </>
+                  ) : (
+                    <span className="text-gray-700"> {user.state || "-"}</span>
+                  )}
+                </label>
                 <li className="flex border-b py-2">
                   <span className="font-bold w-24">Languages:</span>
                   <span className="text-gray-700">English</span>
                 </li>
-                <Link href={"/profile/delivery"}>
-                  <button className="flex items-center mt-3 bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                    <svg className="-ms-0.5 me-1.5 h-6 w-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"></path>
-                    </svg>
-                    <span>EditProfile</span>
-                  </button>
-                </Link>
+                <div className="flex gap-4">
+                  {editProfile ? (
+                    <>
+                      <button disabled={editLoading} style={{ opacity: editLoading ? 0.8 : 1 }} onClick={() => setEditProfile(false)} className="flex items-center mt-3 bg-red-600 hover:bg-red-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                        <span>Cancel</span>
+                      </button>
+                      <button disabled={editLoading} type="submit" className="flex items-center mt-3 bg-green-600 hover:bg-green-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                        {editLoading ? (
+                          <span>
+                            <LoaderCircle className="animate-spin" />
+                          </span>
+                        ) : (
+                          <span>Save</span>
+                        )}
+                      </button>
+                    </>
+                  ) : (
+                    <button onClick={() => setEditProfile(true)} className="flex items-center mt-3 bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                      <svg className="-ms-0.5 me-1.5 h-6 w-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"></path>
+                      </svg>
+                      <span>Edit Profile</span>
+                    </button>
+                  )}
+                  {!editProfile && (
+                    <Link href={"/addNewAddress"}>
+                      <button className="flex items-center mt-3 bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                        <MapPinPlusInside className="-ms-0.5 me-1.5 h-6 w-6" width={24} />
+                        <span>New Dilvery Address</span>
+                      </button>
+                    </Link>
+                  )}
+                </div>
               </ul>
-            </div>
+            </form>
           </div>
         </div>
       </div>
