@@ -8,6 +8,7 @@ export default function useCart() {
   const dispatch = useDispatch();
 
   const updateCart = async (products) => {
+    if (!products) return;
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/cart`, {
         method: "POST",

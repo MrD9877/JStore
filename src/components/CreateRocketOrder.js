@@ -1,22 +1,7 @@
 "use client";
 export async function createRocketOrder({ order, customer, packageDetails, handleRocket }) {
-  const getToken = async () => {
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user}`, { credentials: "include" });
-      if (res.status === 200) {
-        const data = await res.json();
-        return data.shiprocket.token;
-      }
-    } catch {
-      //todo pop
-      return false;
-    }
-  };
-
   const dispatchDelivery = async () => {
-    console.log(customer);
-    console.log(pickupLocation);
-    const token = await getToken();
+    const token = "";
     if (!token) return;
     const date = new Date(order.orderDate).toLocaleString(undefined, { timeZone: "Asia/Kolkata" });
     const products = order.products.map((product) => {

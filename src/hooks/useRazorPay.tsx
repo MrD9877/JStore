@@ -1,8 +1,10 @@
 "use client";
 
 import { Orders } from "razorpay/dist/types/orders";
-import { useRef, useState } from "react";
+import { use, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Context } from "@/components/checkout/CheckOutCard";
+import useToast from "./useToast";
 
 declare global {
   interface Window {
@@ -14,29 +16,34 @@ export type Notes = {
   userId: string;
   cartId: string;
 };
-export default function useRazorPay({ method }: { method?: "upi" | "card" }) {
+
+export type OrderSuccess = { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string };
+
+export default function useRazorPay() {
   const order = useRef<Orders.RazorpayOrder>(null);
-  const [success, setSuccess] = useState<boolean>(false);
-  const router = useRouter();
+  const [success, setSuccess] = useState<OrderSuccess>();
+  const context = use(Context);
+  const toast = useToast();
 
   const openRazorpay = async () => {
+    if (!context) throw Error("Impossible");
     if (!order.current) {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/getOrderId`, { body: JSON.stringify({ method }), credentials: "include" });
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/getOrderId`, { method: "POST", body: JSON.stringify({ method: context.paymentMethod, type: context.paymentType, address: context.address, promocode: context.promocode }), credentials: "include" });
         if (!res.ok) {
-          // toast(res.statusText);
+          toast(res.statusText);
           return;
         }
 
         order.current = await res.json();
       } catch {
-        // toast("Connection Error try again");
+        toast("Connection Error try again");
       }
     }
     if (!order.current) throw Error("NO OrderID");
     const orderId = order.current?.id;
     if (!orderId) {
-      // toast("NO OrderID");
+      toast("NO OrderID");
       return;
     }
     console.log(orderId);
@@ -49,19 +56,18 @@ export default function useRazorPay({ method }: { method?: "upi" | "card" }) {
       modal: {
         animation: true,
       },
-      handler: async function (response: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) {
+      handler: function (response: OrderSuccess) {
         try {
-          // await updateOrder(response.razorpay_order_id);
-          setSuccess(true);
+          setSuccess(response);
         } catch (err) {
           console.log(err);
-          // toast("Somthing went wrong");
+          toast("Somthing went wrong");
         }
       },
       prefill: {
-        // name: user?.displayName,
-        // email: user?.email,
-        // contact: user?.phoneNumber,
+        name: context.user?.name,
+        email: context.user?.email,
+        contact: context.user?.phonenumber,
       },
       theme: {
         color: "#3399cc",
@@ -71,5 +77,6 @@ export default function useRazorPay({ method }: { method?: "upi" | "card" }) {
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
-  return { pay: openRazorpay, success, order } as const;
+
+  return { pay: openRazorpay, success, order, setSuccess } as const;
 }

@@ -1,23 +1,31 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, editCart } from "@/lib/storeSlice";
-import ACTIONS from "@/lib/action";
+import ACTIONS, { ActionType } from "@/lib/action";
 import Link from "next/link";
 import Popup from "@/components/Popup";
-import { useEffect } from "react";
+import { StoreState } from "@/@types/reduxStore";
+import { CartItemsType } from "@/@types/product";
+import { useEffect, useState } from "react";
 
 export default function CartPage() {
-  const total = useSelector((state) => state.total);
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state: StoreState) => state.products);
+  const [total, setTotal] = useState<number>();
   const dispatch = useDispatch();
 
-  const removeItem = (product) => {
-    dispatch(removeFromCart({ product: product }));
+  const removeItem = (product: CartItemsType) => {
+    dispatch(removeFromCart({ cartItem: product }));
   };
 
-  const handleChangeCount = (action, item) => {
-    dispatch(editCart({ type: action, product: { ...item } }));
+  const handleChangeCount = (action: ActionType, item: CartItemsType) => {
+    dispatch(editCart({ type: action, cartItem: item }));
   };
+
+  useEffect(() => {
+    if (!products) return;
+    const total = products.reduce((acc, item) => acc + item.price * item.variant.quantity, 0);
+    setTotal(total);
+  }, [products]);
 
   return (
     <>
@@ -38,7 +46,7 @@ export default function CartPage() {
                           <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                             <Link href={`/products/${item.productId}`} className="shrink-0 md:order-1">
                               {/* image  */}
-                              <img className="h-20 w-20" src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/${item.images[0]}`} alt="imac image" />
+                              <img className="h-20 w-20" src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/${item.image}`} alt="imac image" />
                             </Link>
 
                             <label htmlFor="counter-input" className="sr-only">
@@ -47,19 +55,19 @@ export default function CartPage() {
                             <div className="flex items-center justify-between md:order-3 md:justify-end">
                               <div className="flex items-center">
                                 {/* decrese btn  */}
-                                <button type="button" onClick={() => handleChangeCount(ACTIONS.SUBTRACT, item)} id="decrement-button" data-input-counter-decrement="counter-input" className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border  focus:outline-none focus:ring-2 border-gray-600 bg-gray-700 hover:bg-gray-600 focus:ring-gray-700">
+                                <button type="button" onClick={() => handleChangeCount(ACTIONS.SUBTRACT as ActionType, item)} id="decrement-button" data-input-counter-decrement="counter-input" className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border  focus:outline-none focus:ring-2 border-gray-600 bg-gray-700 hover:bg-gray-600 focus:ring-gray-700">
                                   <svg className="h-2.5 w-2.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h16" />
                                   </svg>
                                 </button>
 
                                 {/* number of items  */}
-                                <span type="text" id="counter-input" className="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium focus:outline-none focus:ring-0 text-white">
-                                  {item.count ? item.count : 0}
+                                <span id="counter-input" className="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium focus:outline-none focus:ring-0 text-white">
+                                  {item.variant.quantity || 0}
                                 </span>
 
                                 {/* increse btn  */}
-                                <button type="button" onClick={() => handleChangeCount(ACTIONS.ADD, item)} id="increment-button" data-input-counter-increment="counter-input" className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border focus:outline-none focus:ring-2  border-gray-600 bg-gray-700 hover:bg-gray-600 focus:ring-gray-700">
+                                <button type="button" onClick={() => handleChangeCount(ACTIONS.ADD as ActionType, item)} id="increment-button" data-input-counter-increment="counter-input" className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border focus:outline-none focus:ring-2  border-gray-600 bg-gray-700 hover:bg-gray-600 focus:ring-gray-700">
                                   <svg className="h-2.5 w-2.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 1v16M1 9h16" />
                                   </svg>
@@ -74,7 +82,7 @@ export default function CartPage() {
                             <div className="flex items-center justify-between md:w-64 md:max-w-md  md:order-2">
                               <div className="w-full min-w-0 flex-1 space-y-4 ">
                                 {/* title  */}
-                                <span className="text-base font-medium  text-white">{item.title.split(" ") > 4 ? `${item.title.split(" ").slice(0, 4)}...` : item.title}</span>
+                                <span className="text-base font-medium  text-white">{item.title.split(" ").length > 4 ? `${item.title.split(" ").slice(0, 4)}...` : item.title}</span>
                                 <div className="flex items-center gap-4">
                                   {/* remove btn  */}
                                   <button type="button" onClick={() => removeItem(item)} className="inline-flex items-center text-sm font-medium hover:underline text-red-500">
@@ -91,14 +99,14 @@ export default function CartPage() {
                                 <div className="flex justify-end md:justify-start">
                                   <span className="text-base font-medium  text-white">
                                     <span className="text-white font-bold">Size:</span>
-                                    <span className="text-blue-500 capitalize">{item.selectedSize}</span>
+                                    <span className="text-blue-500 capitalize">{item.variant.size}</span>
                                   </span>
                                 </div>
                                 <div className="flex items-center justify-end md:justify-start">
                                   {/* color btn  */}
                                   <span className="text-white font-bold mr-2">Color:</span>
                                   <svg width="14" height="14" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="20" cy="20" r="20" fill={`${item.selectedColor}`} />
+                                    <circle cx="20" cy="20" r="20" fill={`${item.variant.color}`} />
                                   </svg>
                                 </div>
                               </div>
@@ -122,9 +130,9 @@ export default function CartPage() {
                             return (
                               <dl key={item.productId + index} className="flex items-center justify-between gap-4">
                                 <dt className="text-base font-normal text-gray-400">
-                                  <span className="text-red-600">{item.count}</span>
+                                  <span className="text-red-600">{item.variant.quantity}</span>
                                   <span>
-                                    * {item.title}({item.selectedColor})({item.selectedSize})
+                                    * {item.title}({item.variant.color})({item.variant.size})
                                   </span>
                                 </dt>
                                 <dd className="text-base font-medium text-white">₹{item.price}</dd>

@@ -1,57 +1,45 @@
 import { useRouter } from "next/navigation";
-import { use, useEffect, useState } from "react";
+import { use, useEffect } from "react";
 import { ContainerCard, Context, Header } from "./CheckOutCard";
-import useRazorPay from "@/hooks/useRazorPay";
-import useToast from "@/hooks/useToast";
+import useRazorPay, { OrderSuccess } from "@/hooks/useRazorPay";
 import { useDispatch } from "react-redux";
 import { clearCart } from "@/lib/storeSlice";
 import useRazorPayOrder from "@/hooks/useRazorPayOrder";
+import useTotal from "@/hooks/useTotal";
 
 export default function TotalPayment() {
-  const [total, setToatal] = useState({ subTotal: 0, shipping: 0, tax: 0, total: 0 });
   const context = use(Context);
-  const toast = useToast();
+  const total = useTotal(context);
   const router = useRouter();
-  const { pay, success, order } = useRazorPay({ method: context?.paymentMethod });
+  const { pay, success, order, setSuccess } = useRazorPay();
   const dispatch = useDispatch();
   const { cancelOrder } = useRazorPayOrder();
 
-  // useEffect(() => {
-  //   async function getTotal() {
-  //     context?.setLoading(true);
-  //     try {
-  //       const data = await getCartTotal();
-  //       console.log({ data });
-  //       if ("error" in data) console.log(data.error);
-  //       else setToatal(data.success);
-  //     } catch (err) {
-  //       console.log(err);
-  //       context?.setLoading(false);
-  //     }
-  //   }
-  //   getTotal();
-  // }, [context]);
-
   useEffect(() => {
-    async function handleSuccess() {
-      if (success) {
-        try {
-          context?.setLoading(true);
-          dispatch(clearCart());
-          if (order.current) {
-            router.push(`/success?orderId=${order.current.id}`);
-          } else {
-            router.push("orders");
-          }
-        } catch {}
+    async function handleSuccess(orderSuccess: OrderSuccess) {
+      if (!context) return;
+      try {
+        context.setLoading(true);
+        dispatch(clearCart());
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/updateRazorPayOrder`, { method: "PATCH", body: JSON.stringify({ orderSuccess }) });
+
+        if (order.current) {
+          router.push(`/success?orderId=${order.current.id}`);
+        } else {
+          router.push("/orders");
+        }
+      } catch {
+      } finally {
+        setSuccess(undefined);
+        context.setLoading(false);
       }
     }
-    handleSuccess();
+    if (success) handleSuccess(success);
   }, [success, router, context, order]);
 
   useEffect(() => {
     async function updatePaymentMethod() {
-      if (!order.current || !context?.paymentMethod) return;
+      if (!order.current || !context?.paymentMethod || !context.paymentType) return;
       try {
         const res = await cancelOrder(order.current.id);
         order.current = null;
@@ -60,11 +48,7 @@ export default function TotalPayment() {
       }
     }
     updatePaymentMethod();
-  }, [context?.paymentMethod, order, context]);
-
-  function handlePay() {
-    if (total.total) pay();
-  }
+  }, [context?.paymentMethod, order, context?.paymentType, context?.promocode]);
 
   return (
     <ContainerCard>
@@ -77,11 +61,12 @@ export default function TotalPayment() {
           </div>
           <div className="grid grid-cols-[10fr_1fr] text-[13px] ">
             <span>Shipping:</span>
-            <span className="text-textLightGray text-start">₹ {total.shipping}</span>
+            <span className="text-textLightGray text-start">{total.shipping === 0 ? <span className="text-green-600/90">Free</span> : "₹ " + total.shipping}</span>
           </div>
+
           <div className="grid grid-cols-[10fr_1fr] text-[12px] text-white">
-            <span>Tax:</span>
-            <span className="text-textLightGray text-start">₹ {total.tax}</span>
+            <span>Discount:</span>
+            <span className="text-green-600/90 text-start">- ₹ {total.discount}</span>
           </div>
         </div>
       </div>
@@ -90,7 +75,7 @@ export default function TotalPayment() {
           <label htmlFor="pay" className="text-white text-[22px] font-[900]">
             ₹ {total.total}
           </label>
-          <button name="pay" onClick={handlePay} className=" flex justify-center items-center w-[150px] h-[36px] bg-blue-700 hover:bg-blue-800 rounded-md text-white text-sm font-[600]">
+          <button disabled={context?.loading} name="pay" onClick={() => pay()} className=" flex justify-center items-center w-[150px] h-[36px] bg-blue-700 hover:bg-blue-800 rounded-md text-white text-sm font-[600]">
             Checkout
           </button>
         </div>

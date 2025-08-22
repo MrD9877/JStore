@@ -1,3 +1,4 @@
+import { UserType } from "@/@types/user";
 import React, { useState } from "react";
 
 export enum AdressType {
@@ -5,25 +6,6 @@ export enum AdressType {
   Office = "office",
   Other = "other",
 }
-export type DeliveryAddress = {
-  nickname: string;
-  state: string;
-  pincode: number;
-  name: string;
-  addressLine1: string;
-  addressLine2: string;
-  city: string;
-  country: string;
-  type: AdressType;
-  phonenumber: number;
-};
-
-export type UserType = {
-  name: string;
-  phonenumber: string;
-  state: string;
-  deliveryaddress: DeliveryAddress[];
-};
 
 export const IndianStates = [
   "Andaman and Nicobar Islands",
@@ -64,7 +46,7 @@ export const IndianStates = [
   "West Bengal",
 ];
 
-export default function useEditProfile(setUser: React.Dispatch<React.SetStateAction<UserType>>) {
+export default function useEditProfile(setUser: React.Dispatch<React.SetStateAction<UserType | undefined>>) {
   const [editLoading, setEditLoading] = useState(false);
   const [editProfile, setEditProfile] = useState(false);
 
@@ -72,11 +54,14 @@ export default function useEditProfile(setUser: React.Dispatch<React.SetStateAct
     setEditLoading(true);
     try {
       const name = e.get("name") as string;
-      const phonenumber = e.get("phonenumber") as string;
+      const phonenumber = Number(e.get("phonenumber"));
       const state = e.get("state") as string;
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user`, { method: "PATCH", body: JSON.stringify({ name, phonenumber, state }), credentials: "include" });
       if (!res.status) throw Error(res.statusText);
-      setUser((pre) => ({ ...pre, name, phonenumber, state }));
+      setUser((pre) => {
+        if (pre) return { ...pre, name, phonenumber, state };
+        return pre;
+      });
       setEditProfile(false);
     } catch (err) {
       console.log(err);

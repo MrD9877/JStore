@@ -13,7 +13,7 @@ export default function HomePage() {
               <p className="text-lg mb-3">Winter sale on all Products</p>
               <p className=" text-2xl font-ArchDaughter mb-3">Design for Beauty</p>
               <p className="text-base mb-2 leading-tight">You can have Anything you want in Life you Dress for it.</p>
-              <Link className="border-2 border-black px-3" href={"/products"}>
+              <Link className="border-2 border-black px-3" href={"/categories"}>
                 All Collection
               </Link>
             </span>
@@ -27,7 +27,7 @@ export default function HomePage() {
         <MainCard background="#EEEEEE">
           <img className="w-full object-cover sm:w-auto sm:object-none" src="/images/homeWomen.png" alt="men cloths example" />
         </MainCard>
-        <MainCard background="#EEEEEE">
+        <MainCard background="#EEEEEE" classname="hidden sm:block">
           <img className="w-full object-cover sm:w-auto sm:object-none" src="/images/homeKids.png" alt="men cloths example" />
         </MainCard>
       </div>

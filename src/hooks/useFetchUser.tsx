@@ -1,9 +1,9 @@
 "use client";
+import { UserType } from "@/@types/user";
 import { useEffect, useState } from "react";
-import { UserType } from "./useEditProfile";
 
 export default function useFetchUser() {
-  const [user, setUser] = useState<null | UserType>(null);
+  const [user, setUser] = useState<UserType>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -18,10 +18,10 @@ export default function useFetchUser() {
       }
       if (res.status === 401) {
         setLoading(false);
-        return setUser(null);
+        return setUser(undefined);
       }
       setLoading(false);
-      return setUser(null);
+      return setUser(undefined);
     } catch (err) {
       setError(true);
     }
@@ -30,5 +30,5 @@ export default function useFetchUser() {
   useEffect(() => {
     fetchData();
   }, []);
-  return { user, error, loading };
+  return { user, error, loading, setUser };
 }

@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function MainCard({ children, background }) {
+export default function MainCard({ classname = "", children, background }) {
   return (
-    <div style={{ background: background }} className="mx-3 mt-6  rounded-xl ">
+    <div style={{ background: background }} className={`mx-3 mt-6  rounded-xl ${classname} `}>
       {children}
     </div>
   );
