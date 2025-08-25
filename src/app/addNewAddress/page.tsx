@@ -43,7 +43,14 @@ export default function Example() {
                 Save As
               </label>
               <div className="mt-2">
-                <input id="nickname" name="nickname" type="nickname" autoComplete="nickname" className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" placeholder="e.g., Home or “Shubham`s House” — any nickname to help you remember" />
+                <input
+                  id="nickname"
+                  name="nickname"
+                  type="nickname"
+                  autoComplete="nickname"
+                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                  placeholder="e.g., Home or “Shubham`s House” — any nickname to help you remember"
+                />
               </div>
             </div>
 
@@ -52,7 +59,13 @@ export default function Example() {
                 First name
               </label>
               <div className="mt-2">
-                <input id="first-name" name="first-name" type="text" autoComplete="given-name" className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+                <input
+                  id="first-name"
+                  name="first-name"
+                  type="text"
+                  autoComplete="given-name"
+                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                />
               </div>
             </div>
 
@@ -61,7 +74,13 @@ export default function Example() {
                 Last name
               </label>
               <div className="mt-2">
-                <input id="last-name" name="last-name" type="text" autoComplete="family-name" className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+                <input
+                  id="last-name"
+                  name="last-name"
+                  type="text"
+                  autoComplete="family-name"
+                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                />
               </div>
             </div>
 
@@ -70,7 +89,16 @@ export default function Example() {
                 Phonenumber
               </label>
               <div className="mt-2">
-                <input maxLength={10} minLength={10} pattern="[0-9]{10}" id="phonenumber" name="phonenumber" type="phonenumber" autoComplete="phonenumber" className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+                <input
+                  maxLength={10}
+                  minLength={10}
+                  pattern="[0-9]{10}"
+                  id="phonenumber"
+                  name="phonenumber"
+                  type="phonenumber"
+                  autoComplete="phonenumber"
+                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                />
               </div>
             </div>
 
@@ -79,7 +107,12 @@ export default function Example() {
                 State
               </label>
               <div className="mt-2 grid grid-cols-1">
-                <select id="state" name="state" autoComplete="state-name" className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white/5 py-1.5 pl-3 pr-8 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 *:bg-gray-800 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6">
+                <select
+                  id="state"
+                  name="state"
+                  autoComplete="state-name"
+                  className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white/5 py-1.5 pl-3 pr-8 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 *:bg-gray-800 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                >
                   {IndianStates.map((state) => {
                     return (
                       <option key={state} value={state}>
@@ -88,7 +121,10 @@ export default function Example() {
                     );
                   })}
                 </select>
-                <ChevronDownIcon aria-hidden="true" className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-400 sm:size-4" />
+                <ChevronDownIcon
+                  aria-hidden="true"
+                  className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-400 sm:size-4"
+                />
               </div>
             </div>
 
@@ -97,7 +133,13 @@ export default function Example() {
                 City
               </label>
               <div className="mt-2">
-                <input id="city" name="city" type="text" autoComplete="city" className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+                <input
+                  id="city"
+                  name="city"
+                  type="text"
+                  autoComplete="city"
+                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                />
               </div>
             </div>
 
@@ -106,7 +148,13 @@ export default function Example() {
                 Address Line1
               </label>
               <div className="mt-2">
-                <input id="addressLine1" name="addressLine1" type="text" autoComplete="address-level2" className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+                <input
+                  id="addressLine1"
+                  name="addressLine1"
+                  type="text"
+                  autoComplete="address-level2"
+                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                />
               </div>
             </div>
 
@@ -115,7 +163,13 @@ export default function Example() {
                 Address Line2
               </label>
               <div className="mt-2">
-                <input id="addressLine2" name="addressLine2" type="text" autoComplete="address-level1" className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+                <input
+                  id="addressLine2"
+                  name="addressLine2"
+                  type="text"
+                  autoComplete="address-level1"
+                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                />
               </div>
             </div>
 
@@ -124,7 +178,15 @@ export default function Example() {
                 Postal code
               </label>
               <div className="mt-2">
-                <input id="pincode" name="pincode" maxLength={6} minLength={6} type="text" autoComplete="pincode" className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+                <input
+                  id="pincode"
+                  name="pincode"
+                  maxLength={6}
+                  minLength={6}
+                  type="text"
+                  autoComplete="pincode"
+                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                />
               </div>
             </div>
             <fieldset>
@@ -142,9 +204,25 @@ export default function Example() {
                         aria-describedby={AdressType.Home}
                         className="col-start-1 row-start-1 appearance-none rounded border border-white/10 bg-white/5 checked:border-indigo-500 checked:bg-indigo-500 indeterminate:border-indigo-500 indeterminate:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 disabled:border-white/5 disabled:bg-white/10 disabled:checked:bg-white/10 forced-colors:appearance-auto"
                       />
-                      <svg fill="none" viewBox="0 0 14 14" className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-white/25">
-                        <path d="M3 8L6 11L11 3.5" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="opacity-0 group-has-[:checked]:opacity-100" />
-                        <path d="M3 7H11" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="opacity-0 group-has-[:indeterminate]:opacity-100" />
+                      <svg
+                        fill="none"
+                        viewBox="0 0 14 14"
+                        className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-white/25"
+                      >
+                        <path
+                          d="M3 8L6 11L11 3.5"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="opacity-0 group-has-[:checked]:opacity-100"
+                        />
+                        <path
+                          d="M3 7H11"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="opacity-0 group-has-[:indeterminate]:opacity-100"
+                        />
                       </svg>
                     </div>
                   </div>
@@ -165,9 +243,25 @@ export default function Example() {
                         aria-describedby={AdressType.Office}
                         className="col-start-1 row-start-1 appearance-none rounded border border-white/10 bg-white/5 checked:border-indigo-500 checked:bg-indigo-500 indeterminate:border-indigo-500 indeterminate:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 disabled:border-white/5 disabled:bg-white/10 disabled:checked:bg-white/10 forced-colors:appearance-auto"
                       />
-                      <svg fill="none" viewBox="0 0 14 14" className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-white/25">
-                        <path d="M3 8L6 11L11 3.5" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="opacity-0 group-has-[:checked]:opacity-100" />
-                        <path d="M3 7H11" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="opacity-0 group-has-[:indeterminate]:opacity-100" />
+                      <svg
+                        fill="none"
+                        viewBox="0 0 14 14"
+                        className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-white/25"
+                      >
+                        <path
+                          d="M3 8L6 11L11 3.5"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="opacity-0 group-has-[:checked]:opacity-100"
+                        />
+                        <path
+                          d="M3 7H11"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="opacity-0 group-has-[:indeterminate]:opacity-100"
+                        />
                       </svg>
                     </div>
                   </div>
@@ -188,9 +282,25 @@ export default function Example() {
                         aria-describedby={AdressType.Other}
                         className="col-start-1 row-start-1 appearance-none rounded border border-white/10 bg-white/5 checked:border-indigo-500 checked:bg-indigo-500 indeterminate:border-indigo-500 indeterminate:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 disabled:border-white/5 disabled:bg-white/10 disabled:checked:bg-white/10 forced-colors:appearance-auto"
                       />
-                      <svg fill="none" viewBox="0 0 14 14" className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-white/25">
-                        <path d="M3 8L6 11L11 3.5" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="opacity-0 group-has-[:checked]:opacity-100" />
-                        <path d="M3 7H11" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="opacity-0 group-has-[:indeterminate]:opacity-100" />
+                      <svg
+                        fill="none"
+                        viewBox="0 0 14 14"
+                        className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-white/25"
+                      >
+                        <path
+                          d="M3 8L6 11L11 3.5"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="opacity-0 group-has-[:checked]:opacity-100"
+                        />
+                        <path
+                          d="M3 7H11"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="opacity-0 group-has-[:indeterminate]:opacity-100"
+                        />
                       </svg>
                     </div>
                   </div>
@@ -207,10 +317,13 @@ export default function Example() {
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <button type="button" onClick={() => router.back()} className="text-sm/6 font-semibold text-white">
+        <button type="button" onClick={() => router.push("/")} className="text-sm/6 font-semibold text-white">
           Cancel
         </button>
-        <button type="submit" className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+        <button
+          type="submit"
+          className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+        >
           Save
         </button>
       </div>

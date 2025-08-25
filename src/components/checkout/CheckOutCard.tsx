@@ -9,6 +9,8 @@ import Cart from "./Cart";
 import useFetchUser from "@/hooks/useFetchUser";
 import SelectPaymentType from "./SelectPaymentType";
 import { DeliveryAddress, UserType } from "@/@types/user";
+import { useRouter } from "next/navigation";
+import useToast from "@/hooks/useToast";
 
 export type ContextType = {
   paymentMethod: "card" | "upi" | undefined;
@@ -62,16 +64,36 @@ export default function CheckOutCard() {
   const [loading, setLoading] = useState(false);
   const [address, setAddress] = useState<DeliveryAddress | undefined>();
   const [promocode, setPromocode] = useState<string>();
+  const router = useRouter();
+  const toast = useToast();
 
   useEffect(() => {
     if (user) {
+      if (!user.deliveryaddress || user.deliveryaddress.length === 0) {
+        toast("Please add a deliver address to continue");
+        return router.push("/addNewAddress");
+      }
       setAddress(user.deliveryaddress[0]);
     }
   }, [user]);
 
   return (
     <>
-      <Context.Provider value={{ paymentMethod, setPaymentMethod, loading, setLoading, user, address, setAddress, paymentType, setPaymentType, promocode, setPromocode }}>
+      <Context.Provider
+        value={{
+          paymentMethod,
+          setPaymentMethod,
+          loading,
+          setLoading,
+          user,
+          address,
+          setAddress,
+          paymentType,
+          setPaymentType,
+          promocode,
+          setPromocode,
+        }}
+      >
         <div className="bg-[#121212]/82 h-full min-h-screen w-full text-white">
           <div className="hidden md:block pt-4">
             <ContainerCard>

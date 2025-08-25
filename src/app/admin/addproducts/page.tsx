@@ -1,5 +1,5 @@
 import AdminNavBottom from "@/navbars/AdminNavBottom";
-import AddProduct from "@/components/AddProduct";
+import AddProduct from "@/app/admin/addproducts/AddProduct";
 import React from "react";
 
 export default function page() {

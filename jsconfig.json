@@ -5,6 +5,6 @@
       "@/*": ["src/*"] // maps @/ to ./src
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/app/admin/addproducts/FetchOpenAI.jsx"],
   "exclude": ["node_modules"]
 }

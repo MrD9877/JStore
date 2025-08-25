@@ -1,15 +1,4 @@
-export type CartItemsType = Omit<ProductFromZod, "variants" | "description" | "priorityScore" | "images"> & {
-  variant: {
-    quantity: number;
-    color: string;
-    size: string;
-    sku: string;
-    stock: number;
-  };
-  image: string;
-};
-
-import { z } from "zod";
+import z from "zod";
 
 export const VariantSchema = z
   .object({
@@ -18,7 +7,7 @@ export const VariantSchema = z
     stock: z.number().int(),
     sku: z.string().min(1, "sku is required"),
   })
-  .strict();
+  .strip();
 
 export const ProductSchema = z
   .object({
@@ -29,7 +18,7 @@ export const ProductSchema = z
     price: z.number().positive("price must be > 0"),
     images: z.array(z.string().min(1)).min(1, "at least one image"),
     category: z.string().min(1, "category is required"),
-    date: z.coerce.date(), // accepts Date or date-like string
+    date: z.number(), // accepts Date or date-like string
     priorityScore: z.number().min(0).max(100).optional(),
     discount: z.number().min(0).max(100).optional(),
     dimentions: z
@@ -39,9 +28,37 @@ export const ProductSchema = z
         height: z.number().positive("height must be > 0"),
         breadth: z.number().positive("breadth must be > 0"),
       })
-      .strict(),
+      .strip(),
   })
-  .strict();
+  .strip();
+
+export const ProductsSchema = z.array(ProductSchema);
+
+export const AddProductSchema = ProductSchema.extend({
+  variants: z.array(VariantSchema.partial({ sku: true })),
+}).partial({
+  productId: true,
+  date: true,
+  images: true,
+});
+
+export const ProductSchemaUpdate = ProductSchema.partial();
 
 // If you want Zod to infer the exact TS type:
-export type ProductFromZod = z.infer<typeof ProductSchema>;
+export type ProductType = z.infer<typeof ProductSchema>;
+
+export const CartItemSchema = ProductSchema.omit({
+  variants: true,
+  description: true,
+  priorityScore: true,
+  images: true,
+})
+  .extend({
+    variant: VariantSchema.extend({
+      quantity: z.number().int().min(1, "quantity must be > 0"),
+    }),
+    image: z.string(),
+  })
+  .strip();
+
+export type CartItemsType = z.infer<typeof CartItemSchema>;

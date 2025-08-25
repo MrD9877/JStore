@@ -1,12 +1,12 @@
-import { ProductFromZod, ProductSchema } from "@/@types/product";
+import { ProductSchema, ProductsSchema, ProductType } from "@/@types/product";
 import React, { useEffect, useState } from "react";
 
 export default function useProducts(productId: string | undefined | null) {
-  const [product, setProduct] = useState<ProductFromZod>();
+  const [product, setProduct] = useState<ProductType>();
   const [colors, setColors] = useState<string[]>();
   const [sizes, setSizes] = useState<string[]>();
   useEffect(() => {
-    const setSizeAndColor = (variants: ProductFromZod["variants"]) => {
+    const setSizeAndColor = (variants: ProductType["variants"]) => {
       let colors: string[] = [];
       let sizes: string[] = [];
       variants.forEach((element) => {
@@ -26,11 +26,13 @@ export default function useProducts(productId: string | undefined | null) {
         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/product?productId=${productId}`);
         if (res.status === 200) {
           const data = await res.json();
+          console.log(data);
           const parsedData = await ProductSchema.parseAsync(data);
           setProduct(parsedData);
           setSizeAndColor(parsedData.variants);
         }
-      } catch {
+      } catch (err) {
+        console.log(err);
         console.log("reload");
       }
     };

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, editCart } from "@/lib/storeSlice";
 import ACTIONS, { ActionType } from "@/lib/action";
@@ -25,7 +25,7 @@ export default function ProductInfo({ productId }: { productId: string | undefin
     }
   };
 
-  if (!product || !colors || !sizes) return <></>;
+  if (!product || !colors || !sizes) return <div className="text-black">Loading</div>;
 
   return (
     <>
@@ -39,7 +39,9 @@ export default function ProductInfo({ productId }: { productId: string | undefin
               <h2 className="mb-2 font-manrope font-bold text-3xl leading-10 text-gray-900"> {product && product.title}</h2>
               <div className="flex flex-col sm:flex-row sm:items-center mb-6">
                 {/* price  */}
-                <h6 className=" font-manrope font-semibold text-2xl leading-9 text-gray-900 pr-5 sm:border-r border-gray-200 mr-5">₹{product && product.price}</h6>
+                <h6 className=" font-manrope font-semibold text-2xl leading-9 text-gray-900 pr-5 sm:border-r border-gray-200 mr-5">
+                  ₹{product && product.price}
+                </h6>
               </div>
               {/* description  */}
               <p style={{ maxWidth: "100%" }} className="text-gray-500 text-base font-normal mb-8 ">
@@ -53,7 +55,13 @@ export default function ProductInfo({ productId }: { productId: string | undefin
                     {product &&
                       colors.map((_color) => {
                         return (
-                          <button key={_color} data-ui="checked active" onClick={() => handleSelect(ACTIONS.COLOR as ActionType, _color)} style={_color === color ? { border: "2px solid blue" } : { border: "2px solid black" }} className="p-2.5 border border-black bg-gray-200 rounded-full transition-all duration-300 hover:border-emerald-500 :border-emerald-500">
+                          <button
+                            key={_color}
+                            data-ui="checked active"
+                            onClick={() => handleSelect(ACTIONS.COLOR as ActionType, _color)}
+                            style={_color === color ? { border: "2px solid blue" } : { border: "2px solid black" }}
+                            className="p-2.5 border border-black bg-gray-200 rounded-full transition-all duration-300 hover:border-emerald-500 :border-emerald-500"
+                          >
                             <svg width="20" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <circle cx="20" cy="20" r="20" fill={`${_color}`} />
                             </svg>
@@ -68,7 +76,12 @@ export default function ProductInfo({ productId }: { productId: string | undefin
                       {product &&
                         sizes.map((_size) => {
                           return (
-                            <button key={_size} onClick={() => handleSelect(ACTIONS.SIZE as ActionType, _size)} style={_size === size ? { border: "2px solid blue" } : { border: "2px solid gray" }} className="border  text-gray-900 text-lg py-2 rounded-full px-1.5 sm:px-6 w-full font-semibold whitespace-nowrap shadow-sm shadow-transparent transition-all duration-300 hover:shadow-gray-300 hover:bg-gray-50 hover:border-gray-300">
+                            <button
+                              key={_size}
+                              onClick={() => handleSelect(ACTIONS.SIZE as ActionType, _size)}
+                              style={_size === size ? { border: "2px solid blue" } : { border: "2px solid gray" }}
+                              className="border  text-gray-900 text-lg py-2 rounded-full px-1.5 sm:px-6 w-full font-semibold whitespace-nowrap shadow-sm shadow-transparent transition-all duration-300 hover:shadow-gray-300 hover:bg-gray-50 hover:border-gray-300"
+                            >
                               {_size}
                             </button>
                           );
@@ -78,16 +91,40 @@ export default function ProductInfo({ productId }: { productId: string | undefin
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-8">
                     {/* count  */}
                     <div className="flex items-center justify-center w-full">
-                      <button onClick={() => handleChangeCount(ACTIONS.SUBTRACT as ActionType)} className="group py-4 px-6 border border-gray-400 rounded-l-full shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-300 hover:bg-gray-50">
-                        <svg className="stroke-gray-700 transition-all duration-500 group-hover:stroke-black" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <button
+                        onClick={() => handleChangeCount(ACTIONS.SUBTRACT as ActionType)}
+                        className="group py-4 px-6 border border-gray-400 rounded-l-full shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-300 hover:bg-gray-50"
+                      >
+                        <svg
+                          className="stroke-gray-700 transition-all duration-500 group-hover:stroke-black"
+                          width="22"
+                          height="22"
+                          viewBox="0 0 22 22"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
                           <path d="M16.5 11H5.5" stroke="" strokeWidth="1.6" strokeLinecap="round" />
                           <path d="M16.5 11H5.5" stroke="" strokeOpacity="0.2" strokeWidth="1.6" strokeLinecap="round" />
                           <path d="M16.5 11H5.5" stroke="" strokeOpacity="0.2" strokeWidth="1.6" strokeLinecap="round" />
                         </svg>
                       </button>
-                      <input type="text" className="font-semibold text-gray-900 text-lg py-[13px] px-6 w-full sm:max-w-[118px] border-y border-gray-400 bg-transparent placeholder:text-gray-900 text-center hover:bg-gray-50 focus-within:bg-gray-50 outline-0" placeholder={`${count}`} />
-                      <button onClick={() => handleChangeCount(ACTIONS.ADD as ActionType)} className="group py-4 px-6 border border-gray-400 rounded-r-full shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-300 hover:bg-gray-50">
-                        <svg className="stroke-gray-700 transition-all duration-500 group-hover:stroke-black" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <input
+                        type="text"
+                        className="font-semibold text-gray-900 text-lg py-[13px] px-6 w-full sm:max-w-[118px] border-y border-gray-400 bg-transparent placeholder:text-gray-900 text-center hover:bg-gray-50 focus-within:bg-gray-50 outline-0"
+                        placeholder={`${count}`}
+                      />
+                      <button
+                        onClick={() => handleChangeCount(ACTIONS.ADD as ActionType)}
+                        className="group py-4 px-6 border border-gray-400 rounded-r-full shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-300 hover:bg-gray-50"
+                      >
+                        <svg
+                          className="stroke-gray-700 transition-all duration-500 group-hover:stroke-black"
+                          width="22"
+                          height="22"
+                          viewBox="0 0 22 22"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
                           <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" strokeWidth="1.6" strokeLinecap="round" />
                           <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" strokeOpacity="0.2" strokeWidth="1.6" strokeLinecap="round" />
                           <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" strokeOpacity="0.2" strokeWidth="1.6" strokeLinecap="round" />

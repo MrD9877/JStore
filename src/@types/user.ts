@@ -1,15 +1,21 @@
-export type DeliveryAddress = {
-  nickname: string;
-  state: string;
-  pincode: number;
-  name: string;
-  addressLine1: string;
-  addressLine2: string;
-  city: string;
-  country: string;
-  type: "home" | "office" | "other";
-  phonenumber: number;
-};
+import z from "zod";
+
+export type DeliveryAddress = z.infer<typeof DeliveryAddressSchema>;
+
+export const DeliveryAddressSchema = z
+  .object({
+    nickname: z.string(),
+    state: z.string(),
+    pincode: z.number(),
+    name: z.string(),
+    addressLine1: z.string(),
+    addressLine2: z.string(),
+    city: z.string(),
+    country: z.string(),
+    type: z.enum(["home", "office", "other"]),
+    phonenumber: z.number(),
+  })
+  .strip();
 
 export type UserType = {
   username: string;

@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,9 +15,7 @@
     "jsx": "preserve", // 👈 important
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ] // 👈 this is the important part
+      "@/*": ["src/*"] // 👈 this is the important part
     },
     "incremental": true,
     "plugins": [
@@ -30,13 +24,6 @@
       }
     ]
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "next-env.d.ts",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts", "src/app/admin/addproducts/FetchOpenAI.jsx"],
+  "exclude": ["node_modules"]
 }
