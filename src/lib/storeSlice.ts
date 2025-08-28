@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import ACTIONS, { ActionType } from "./action";
 import { StoreState } from "@/@types/reduxStore";
-import { CartItemsType, ProductFromZod } from "@/@types/product";
+import { CartItemsType, ProductType } from "@/@types/product";
 
 const initialState: StoreState = {
   products: undefined,
@@ -19,7 +19,7 @@ export const cartSlice = createSlice({
     setCart: (state, action) => {
       state.products = action.payload.products;
     },
-    addToCart: (state, action: { payload: { product: ProductFromZod; sku: string } }) => {
+    addToCart: (state, action: { payload: { product: ProductType; sku: string } }) => {
       const variant = action.payload.product.variants.find((variant) => variant.sku === action.payload.sku);
       if (!variant || variant.stock === 0) {
         return;
@@ -37,7 +37,7 @@ export const cartSlice = createSlice({
         state.products = [cartItem];
       }
     },
-    removeFromCart: (state, action: { payload: { product: ProductFromZod; sku: string } | { cartItem: CartItemsType } }) => {
+    removeFromCart: (state, action: { payload: { product: ProductType; sku: string } | { cartItem: CartItemsType } }) => {
       let variant: Omit<CartItemsType["variant"], "quantity"> | undefined;
       if ("product" in action.payload && "sku" in action.payload) {
         const sku = action.payload.sku;
@@ -52,7 +52,7 @@ export const cartSlice = createSlice({
         state.products = state.products.filter((item) => item.variant.sku !== variant.sku);
       }
     },
-    editCart: (state, action: { payload: { product: ProductFromZod; sku: string; type: ActionType } | { cartItem: CartItemsType; type: ActionType } }) => {
+    editCart: (state, action: { payload: { product: ProductType; sku: string; type: ActionType } | { cartItem: CartItemsType; type: ActionType } }) => {
       let variant: Omit<CartItemsType["variant"], "quantity"> | undefined;
       if ("product" in action.payload && "sku" in action.payload) {
         const sku = action.payload.sku;

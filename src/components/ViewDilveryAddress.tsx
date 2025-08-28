@@ -1,4 +1,4 @@
-import { DeliveryAddress } from "@/hooks/useEditProfile";
+import { DeliveryAddress } from "@/@types/user";
 import React from "react";
 
 export default function ViewDilveryAddress({ dilveryAddress }: { dilveryAddress: DeliveryAddress[] }) {

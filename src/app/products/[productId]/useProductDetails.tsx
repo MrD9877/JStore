@@ -1,8 +1,8 @@
-import { CartItemsType, ProductFromZod } from "@/@types/product";
+import { CartItemsType, ProductType } from "@/@types/product";
 import ACTIONS, { ActionType } from "@/lib/action";
 import React, { useEffect, useState } from "react";
 
-export default function useProductDetails({ products, product }: { products: CartItemsType[] | undefined; product: ProductFromZod | undefined }) {
+export default function useProductDetails({ products, product }: { products: CartItemsType[] | undefined; product: ProductType | undefined }) {
   const [inCart, setInCart] = useState(false);
   const [count, setCount] = useState(0);
   const [color, setColor] = useState<string>();

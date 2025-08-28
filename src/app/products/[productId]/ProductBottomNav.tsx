@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/lib/storeSlice";
-import { ProductFromZod } from "@/@types/product";
+import { ProductType } from "@/@types/product";
 
-type ProductBottomNavProps = { product: ProductFromZod; inCart: boolean; selectedColor: string | undefined; selectedSize: string | undefined; outOfStock: boolean };
+type ProductBottomNavProps = { product: ProductType; inCart: boolean; selectedColor: string | undefined; selectedSize: string | undefined; outOfStock: boolean };
 
 export default function ProductBottomNav({ product, inCart, selectedColor, selectedSize, outOfStock }: ProductBottomNavProps) {
   const dispatch = useDispatch();
