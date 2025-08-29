@@ -8,13 +8,59 @@ export default function FilterBar({ setFilter }: { setFilter: Dispatch<SetStateA
     <div className="pt-6 pr-6 flex justify-end">
       <Menu>
         <MenuHandler>
-          <Button className="bg-gray-400">Filter Results</Button>
+          <Button
+            type="button"
+            className="bg-gray-400"
+            placeholder=""
+            onResize={() => {}}
+            onResizeCapture={() => {}}
+            onPointerEnterCapture={() => {}}
+            onPointerLeaveCapture={() => {}}
+          >
+            Filter Results
+          </Button>
         </MenuHandler>
-        <MenuList>
-          <MenuItem onClick={() => setFilter("new")}>New orders</MenuItem>
-          <MenuItem onClick={() => setFilter("packed")}>Accepted</MenuItem>
-          <MenuItem onClick={() => setFilter("shipped")}>Declines</MenuItem>
-          <MenuItem onClick={() => setFilter("delivered")}>Delivered</MenuItem>
+        <MenuList placeholder="" onResize={() => {}} onResizeCapture={() => {}} onPointerEnterCapture={() => {}} onPointerLeaveCapture={() => {}}>
+          <MenuItem
+            onClick={() => setFilter("new")}
+            placeholder=""
+            onResize={() => {}}
+            onResizeCapture={() => {}}
+            onPointerEnterCapture={() => {}}
+            onPointerLeaveCapture={() => {}}
+          >
+            New orders
+          </MenuItem>
+          <MenuItem
+            onClick={() => setFilter("packed")}
+            placeholder=""
+            onResize={() => {}}
+            onResizeCapture={() => {}}
+            onPointerEnterCapture={() => {}}
+            onPointerLeaveCapture={() => {}}
+          >
+            Accepted
+          </MenuItem>
+          <MenuItem
+            onClick={() => setFilter("shipped")}
+            placeholder=""
+            onResize={() => {}}
+            onResizeCapture={() => {}}
+            onPointerEnterCapture={() => {}}
+            onPointerLeaveCapture={() => {}}
+          >
+            Declines
+          </MenuItem>
+          <MenuItem
+            onClick={() => setFilter("delivered")}
+            placeholder=""
+            onResize={() => {}}
+            onResizeCapture={() => {}}
+            onPointerEnterCapture={() => {}}
+            onPointerLeaveCapture={() => {}}
+          >
+            Delivered
+          </MenuItem>
         </MenuList>
       </Menu>
     </div>
