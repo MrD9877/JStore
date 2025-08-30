@@ -94,7 +94,7 @@ export default function AddProduct() {
                 </div>
                 <div className="my-4">
                   <h2 className="text-xl font-mono mb-2">Dimentions:</h2>
-                  <div className="flex items-center w-[50%]">
+                  <div className="flex flex-col sm:flex-row items-center w-[50%] gap-4 ">
                     <FormInput name="weight" type="number" placeholder="In grams" required />
                     <FormInput name="height" type="number" placeholder="In cm" required />
                     <FormInput name="length" type="number" placeholder="In cm" required />

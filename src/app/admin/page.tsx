@@ -20,7 +20,7 @@ export default function AdminSigninPage() {
     });
     if (res.ok) {
       toast("welcome Shubham");
-      router.push("/admin/orders");
+      router.push("/admin/addproducts");
     } else {
       toast("Wrong Password", false);
     }

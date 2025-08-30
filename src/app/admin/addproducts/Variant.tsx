@@ -35,7 +35,6 @@ function VarityForm({
         toast(`This variable size:${size} color:${color} already saved`);
         return pre;
       }
-      setTimeout(() => setIsOpen(false), 0);
       return [...pre, { stock, color, size }];
     });
   }
@@ -58,9 +57,9 @@ function VarityForm({
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="bg-red-600 whitespace-nowrap ml-2 h-fit text-white text-sm font-medium py-2 px-4 rounded-lg shadow-sm hover:bg-red-700 "
+              className="bg-blue-600 whitespace-nowrap ml-2 h-fit text-white text-sm font-medium py-2 px-4 rounded-lg shadow-sm hover:bg-blue-700 "
             >
-              <span>Cancel</span>
+              <span>Done</span>
             </button>
             <button
               type="button"
@@ -86,17 +85,17 @@ export default function AddVarity({ variants, setVariants }: { variants: Variant
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="flex w-full gap-4 sm:items-end flex-col sm:flex-row">
-      <div>
+      <div className="max-w-[80%] px-4">
         <label htmlFor={"variants"} className="block text-sm font-medium text-gray-700">
           Variants :
         </label>
-        <div className="flex pr-2.5 rounded-lg">
+        <div className="flex pr-2.5 rounded-lg max-w-full overflow-x-scroll">
           <span
             id="variants"
-            className="bg-gray-50 border h-8 w-40 sm:w-60 lg:w-72 xl:w-96 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-1.5 "
+            className="bg-gray-50 border h-8 w-fit  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-1.5 "
           >
             {variants && variants.length === 0 ? (
-              <span className="text-gray-400">Please Add Atleast one variant</span>
+              <span className="text-gray-400 text-xs overflow-hidden w-full h-fit">Please Add Atleast one variant</span>
             ) : (
               <div className="flex gap-3 w-full text-nowrap overflow-x-scroll">
                 {variants.map((item, index) => {

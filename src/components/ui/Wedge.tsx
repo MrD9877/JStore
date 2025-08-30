@@ -38,7 +38,7 @@ type WedgeType = {
 export default function Wedge({ item, setVariants }: WedgeType) {
   const handleRemove = () => {
     setVariants((pre) => {
-      const removed = pre.filter((i) => i.color !== item.color && i.size !== item.size);
+      const removed = pre.filter((i) => !(i.color === item.color && i.size === item.size));
       return removed;
     });
   };
