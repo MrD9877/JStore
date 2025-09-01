@@ -8,7 +8,7 @@ export default function AdminNavBottom() {
     <div>
       <div className="fixed bottom-0 left-0 z-50 w-screen h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
         <div className="flex font-medium justify-between items-center py-2 px-1.5 sm:px-4">
-          {/* <Link
+          <Link
             style={pathname === "/admin/orders" ? { background: "#1f2937" } : {}}
             href="/admin/orders"
             className="inline-flex flex-col items-center justify-center  hover:bg-gray-50 dark:hover:bg-gray-800 group "
@@ -32,7 +32,7 @@ export default function AdminNavBottom() {
               <rect x="7" y="16" width="1.4" height="1.4" rx="0.6" fill="#2563eb" />
             </svg>
             <span className="text-sm text-gray-400 roup-hover:text-blue-500">Orders</span>
-          </Link> */}
+          </Link>
           <Link
             style={pathname === "/admin/addproducts" ? { background: "#1f2937" } : {}}
             href="/admin/addproducts"
@@ -53,7 +53,7 @@ export default function AdminNavBottom() {
             </svg>
             <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">AddNew</span>
           </Link>
-          {/* <Link
+          <Link
             style={pathname === "/admin/editproducts" ? { background: "#1f2937" } : {}}
             href="/admin/editproducts"
             className="inline-flex flex-col items-center justify-center  hover:bg-gray-50 dark:hover:bg-gray-800 group"
@@ -74,7 +74,7 @@ export default function AdminNavBottom() {
               />
             </svg>
             <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Products</span>
-          </Link> */}
+          </Link>
           <Link
             style={pathname === "/admin" ? { background: "#1f2937" } : {}}
             href="/admin"

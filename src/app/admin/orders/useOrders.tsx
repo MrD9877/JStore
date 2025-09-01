@@ -11,9 +11,7 @@ export default function useOrders(filter: OrderType["status"]) {
       let res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/orders?status=${filter}`, { credentials: "include" });
       if (res.status === 200) {
         const data = await res.json();
-        console.log(data);
         data.length === 0 && toast(`No results for ${filter}`, false);
-        // console.log(data);
         // const parseData = await OrdersSchema.parseAsync(data);
         setOrders(data);
       } else if (res.status === 401) {

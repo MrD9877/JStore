@@ -26,7 +26,6 @@ export default function useProducts(productId: string | undefined | null) {
         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/product?productId=${productId}`);
         if (res.status === 200) {
           const data = await res.json();
-          console.log(data);
           const parsedData = await ProductSchema.parseAsync(data);
           setProduct(parsedData);
           setSizeAndColor(parsedData.variants);

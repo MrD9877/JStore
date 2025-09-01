@@ -1,21 +1,21 @@
+import { OrderType } from "@/@types/orders";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import Modal from "./Modal";
 
-export default function OrderDetailCard({ order }) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!order) return;
-    const c = order.products.reduce((a, b) => {
-      return a + b.count;
-    }, 0);
-    setCount(c);
-  }, [order]);
+export default function OrderDetailCard({ order }: { order: OrderType }) {
+  const [image, setImage] = useState<string>();
   return (
-    <div className="p-4 mb-10 w-screen">
+    <div className="p-4 mb-10 w-full">
+      {image && (
+        <div className="fixed w-full h-full top-0 left-0 bg-black/50">
+          <Modal image={image} setImage={setImage} />
+        </div>
+      )}
       <div className="w-full max-w-md p-4 mx-auto  bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
         <div className="flex items-center justify-between mb-4">
           <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Order:</h5>
-          <h5 className="text-sm font-bold leading-none text-gray-900 dark:text-white overflow-scroll">{order && order.orderId}</h5>
+          <h5 className="text-sm font-bold leading-none text-gray-900 dark:text-white overflow-scroll">{order.orderId}</h5>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -34,16 +34,18 @@ export default function OrderDetailCard({ order }) {
             </thead>
             <tbody>
               {order &&
-                order.products.map((product, index) => {
+                order.items.map((product, index) => {
                   return (
                     <tr key={index} className="bg-white dark:bg-gray-800">
-                      <th onClick={(e) => (e.target.style.color = "blue")} scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <Link href={`/orders/${order.orderId}/${product.images[0]}`} scroll={false}>
-                          {product.title}
-                        </Link>
+                      <th
+                        onClick={(e) => (e.currentTarget.style.color = "blue")}
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      >
+                        <button onClick={() => setImage(product.image)}>{product.title}</button>
                       </th>
-                      <td className="px-6 py-4">{product.count}</td>
-                      <td onClick={(e) => (e.target.style.color = "blue")} className="px-6 py-4">
+                      <td className="px-6 py-4">{product.variant.quantity}</td>
+                      <td onClick={(e) => (e.currentTarget.style.color = "blue")} className="px-6 py-4">
                         <Link href={`/products/${product.productId}`}>₹ {product.price}</Link>
                       </td>
                     </tr>
@@ -55,8 +57,8 @@ export default function OrderDetailCard({ order }) {
                 <th scope="row" className="px-6 py-3 text-base">
                   Total
                 </th>
-                <td className="px-6 py-3">{count}</td>
-                <td className="px-6 py-3">₹ {order && order.amount}</td>
+                <td className="px-6 py-3">{order.items.length}</td>
+                <td className="px-6 py-3">₹ {order.amount}</td>
               </tr>
             </tfoot>
           </table>

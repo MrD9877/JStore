@@ -36,7 +36,6 @@ export async function createRocketOrder({ order, customer, packageDetails, handl
       height: packageDetails.height,
       weight: packageDetails.weight,
     };
-    console.log(data);
 
     try {
       const headers = {
@@ -48,7 +47,11 @@ export async function createRocketOrder({ order, customer, packageDetails, handl
       try {
         if (res.ok) {
           const shiprocketOrderData = await res.json();
-          const fetch = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/order?orderId=${order.orderId}`, { method: "PATCH", credentials: "include", body: JSON.stringify(shiprocketOrderData) });
+          const fetch = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/order?orderId=${order.orderId}`, {
+            method: "PATCH",
+            credentials: "include",
+            body: JSON.stringify(shiprocketOrderData),
+          });
           fetch.ok ? console.log("ok") : console.log(fetch.status);
         }
       } catch {}

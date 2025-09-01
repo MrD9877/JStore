@@ -33,7 +33,7 @@ export const cartSlice = createSlice({
         const findDublicate = state.products.find((item) => item.variant.sku === variant.sku);
         if (findDublicate) return;
         state.products = [...state.products, cartItem];
-      } else if (state.products === undefined) {
+      } else if (!state.products) {
         state.products = [cartItem];
       }
     },
@@ -46,13 +46,16 @@ export const cartSlice = createSlice({
       if ("cartItem" in action.payload) {
         variant = action.payload.cartItem.variant;
       }
-      if (!variant || state.products === undefined) {
+      if (!variant || !state.products) {
         return;
       } else {
         state.products = state.products.filter((item) => item.variant.sku !== variant.sku);
       }
     },
-    editCart: (state, action: { payload: { product: ProductType; sku: string; type: ActionType } | { cartItem: CartItemsType; type: ActionType } }) => {
+    editCart: (
+      state,
+      action: { payload: { product: ProductType; sku: string; type: ActionType } | { cartItem: CartItemsType; type: ActionType } }
+    ) => {
       let variant: Omit<CartItemsType["variant"], "quantity"> | undefined;
       if ("product" in action.payload && "sku" in action.payload) {
         const sku = action.payload.sku;
@@ -84,7 +87,7 @@ export const cartSlice = createSlice({
       }
     },
     clearCart: (state) => {
-      state.products = undefined;
+      state.products = null;
     },
   },
 });

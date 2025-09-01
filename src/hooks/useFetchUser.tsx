@@ -13,7 +13,6 @@ export default function useFetchUser() {
       if (res.status === 200) {
         const data = await res.json();
         setLoading(false);
-        console.log(data);
         return setUser(data);
       }
       if (res.status === 401) {

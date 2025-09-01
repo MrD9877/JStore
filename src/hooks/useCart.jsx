@@ -24,13 +24,14 @@ export default function useCart() {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/cart`, { credentials: "include" });
       const data = await res.json();
+      console.log(data);
       if (data) {
-        console.log(data);
         dispatch(setCart({ products: data }));
       } else {
-        throw Error("no Data found in cart");
+        dispatch(setCart({ products: null }));
       }
     } catch (err) {
+      dispatch(setCart({ products: null }));
       console.log(err);
     }
   };

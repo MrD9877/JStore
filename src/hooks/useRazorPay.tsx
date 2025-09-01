@@ -29,7 +29,11 @@ export default function useRazorPay() {
     if (!context) throw Error("Impossible");
     if (!order.current) {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/getOrderId`, { method: "POST", body: JSON.stringify({ method: context.paymentMethod, type: context.paymentType, address: context.address, promocode: context.promocode }), credentials: "include" });
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/getOrderId`, {
+          method: "POST",
+          body: JSON.stringify({ method: context.paymentMethod, type: context.paymentType, address: context.address, promocode: context.promocode }),
+          credentials: "include",
+        });
         if (!res.ok) {
           toast(res.statusText);
           return;
@@ -46,7 +50,6 @@ export default function useRazorPay() {
       toast("NO OrderID");
       return;
     }
-    console.log(orderId);
     const options = {
       key: process.env.NEXT_PUBLIC_RAZORPAY_Id!,
       amount: Number(order.current.amount) * 100,

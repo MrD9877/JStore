@@ -11,9 +11,7 @@ export default function OrdersCard({ array }: { array: OrderType[] }) {
   const handleRocket = (orderId: string) => {
     router.push(`/admin/orders/${orderId}`);
   };
-  useEffect(() => {
-    console.log({ array });
-  }, [array]);
+
   return (
     <>
       <div className="flex flex-wrap">
@@ -25,7 +23,7 @@ export default function OrdersCard({ array }: { array: OrderType[] }) {
                 className="shadow-grayesh relative flex sm:mx-3 mx-auto h-full w-60 sm:max-h-80 overflow-scroll my-3 bg-white  border border-slate-200 rounded-lg sm:flex-col"
               >
                 <div className="px-6 py-2">
-                  <Link href={`/orders/${item.orderId}`}>
+                  <Link href={`/admin/orders/${item.orderId}`}>
                     <div className="w-full max-w-md py-4 px-2 bg-white ">
                       <div className="flex items-center justify-between mb-2"></div>
                       <div className="flow-root">

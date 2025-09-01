@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export default function useOutsideAlert() {
-  const [isInside, setisInside] = useState(false);
+export default function useOutsideAlert(intial?: boolean) {
+  const [isInside, setisInside] = useState(intial || false);
   const inside = useRef<HTMLDivElement>(null);
 
   const handler = (e: PointerEvent) => {
