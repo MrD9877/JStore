@@ -61,21 +61,7 @@ export default function MainNavBar() {
               </svg>
             </button>
             <Link href={"/cart"}>
-              <CartButton count={3} className="w-4 h-4" />
-              {/* <button className="mr-4 flex items-center h-7 sm:h-10">
-                <svg aria-hidden="true" className="w-6 h-7 lg:w-10 lg:h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"
-                  />
-                </svg>
-                <span className="absolute w-8 h-7 flex justify-end align-baseline text-xs">
-                  <span className="bg-red-500 w-4 h-4 rounded-full">{count}</span>
-                </span>
-              </button> */}
+              <CartButton count={count} className="w-4 h-4" />
             </Link>
             <span>
               {menuVisible && <OutSideAlart inside={menuRef} setInside={setMenuVisible} />}
@@ -86,8 +72,8 @@ export default function MainNavBar() {
               </button>
               <span
                 ref={menuRef}
-                style={{ display: menuVisible ? "flex" : "none" }}
-                className="flex flex-col right-4 border-2 py-1 px-3 max-w-24 max-h-28 overflow-scroll border-black rounded-sm absolute justify-start items-baseline"
+                style={{ display: menuVisible ? "flex" : "none", right: "8px" }}
+                className="flex flex-col border-2 py-1 px-3 max-w-24 max-h-28 overflow-scroll border-black rounded-sm absolute justify-start items-baseline"
               >
                 <Link className="flex justify-center items-center" href={"/"}>
                   Home
