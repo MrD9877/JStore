@@ -51,7 +51,7 @@ export default function useRazorPay() {
     }
     const options = {
       key: process.env.NEXT_PUBLIC_RAZORPAY_Id!,
-      amount: Number(order.current.amount) * 100,
+      amount: Number(order.current.amount),
       currency: "INR",
       name: "Jagraon Garments",
       order_id: orderId,
