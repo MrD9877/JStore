@@ -21,13 +21,7 @@ export default function TotalPayment() {
       try {
         context.setLoading(true);
         dispatch(clearCart());
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/updateRazorPayOrder`, { method: "PATCH", body: JSON.stringify({ orderSuccess }) });
-
-        if (order.current) {
-          router.push(`/success?orderId=${order.current.id}`);
-        } else {
-          router.push("/orders");
-        }
+        router.push(`/success`);
       } catch {
       } finally {
         setSuccess(undefined);
@@ -61,7 +55,9 @@ export default function TotalPayment() {
           </div>
           <div className="grid grid-cols-[10fr_1fr] text-[13px] ">
             <span>Shipping:</span>
-            <span className="text-textLightGray text-start">{total.shipping === 0 ? <span className="text-green-600/90">Free</span> : "₹ " + total.shipping}</span>
+            <span className="text-textLightGray text-start">
+              {total.shipping === 0 ? <span className="text-green-600/90">Free</span> : "₹ " + total.shipping}
+            </span>
           </div>
 
           <div className="grid grid-cols-[10fr_1fr] text-[12px] text-white">
@@ -75,7 +71,12 @@ export default function TotalPayment() {
           <label htmlFor="pay" className="text-white text-[22px] font-[900]">
             ₹ {total.total}
           </label>
-          <button disabled={context?.loading} name="pay" onClick={() => pay()} className=" flex justify-center items-center w-[150px] h-[36px] bg-blue-700 hover:bg-blue-800 rounded-md text-white text-sm font-[600]">
+          <button
+            disabled={context?.loading}
+            name="pay"
+            onClick={() => pay()}
+            className=" flex justify-center items-center w-[150px] h-[36px] bg-blue-700 hover:bg-blue-800 rounded-md text-white text-sm font-[600]"
+          >
             Checkout
           </button>
         </div>

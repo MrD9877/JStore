@@ -41,7 +41,7 @@ export default function useCart() {
   }, []);
 
   useEffect(() => {
-    if (products) {
+    if (products !== undefined) {
       updateCart(products);
     }
   }, [products]);
