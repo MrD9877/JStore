@@ -2,7 +2,6 @@
 
 import { Orders } from "razorpay/dist/types/orders";
 import { use, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import { Context } from "@/components/checkout/CheckOutCard";
 import useToast from "./useToast";
 
@@ -54,7 +53,7 @@ export default function useRazorPay() {
       key: process.env.NEXT_PUBLIC_RAZORPAY_Id!,
       amount: Number(order.current.amount) * 100,
       currency: "INR",
-      name: "Test Store",
+      name: "Jagraon Garments",
       order_id: orderId,
       modal: {
         animation: true,

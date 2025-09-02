@@ -24,9 +24,9 @@ export default function AddProduct() {
     setLoading(true);
     const form = e.currentTarget;
     const formData = new FormData(form);
-    Array.from(files).forEach((file) => {
-      formData.append("image", file);
-    });
+    // Array.from(files).forEach((file) => {
+    //   formData.append("image", file);
+    // });
     formData.append("variants", JSON.stringify(variants));
     formData.append(
       "dimentions",
@@ -40,9 +40,10 @@ export default function AddProduct() {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/product`, { method: "POST", credentials: "include", body: formData });
       if (res.status === 200) toast("Done", true);
+    } catch (err) {
+      toast((err as Error).message, false);
+    } finally {
       setLoading(false);
-    } catch {
-      toast("oppps somthing went wrong try again..", false);
     }
   };
 
