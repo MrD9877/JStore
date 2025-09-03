@@ -27,6 +27,7 @@ export default function useFiles(files: FileList | undefined) {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/signedUrl`, {
       method: "POST",
       body: JSON.stringify(data),
+      credentials: "include",
     });
     const resData = (await res.json()) as { presignedUrl: string; imageId: string }[];
     const parsedData = await PreSignedSchema.parseAsync(resData);
