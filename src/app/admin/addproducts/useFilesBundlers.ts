@@ -58,10 +58,11 @@ export default function useFiles(files: FileList | undefined) {
           },
           mode: "cors",
         });
-        if (res.ok) {
-          toast("Images Saved ✓");
+        if (!res.ok) {
+          toast(res.statusText, false);
         }
       }
+      toast("Image uploaded", true);
     } catch (error) {
       toast("Failed to upload files");
     } finally {

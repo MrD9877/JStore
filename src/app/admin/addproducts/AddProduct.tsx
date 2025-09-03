@@ -107,7 +107,7 @@ export default function AddProduct() {
                 </div>
                 {/* imagecount  */}
                 <div className="w-fit mx-auto mb-5 bg-purple-600 text-white font-medium py-2 px-4 rounded-lg shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
-                  Images: {(files && files.length) || 0}
+                  Images: {(images && images.length) || 0}
                 </div>
                 {/* <!-- Upload Images --> */}
                 <UploadImage setFile={setFile} />

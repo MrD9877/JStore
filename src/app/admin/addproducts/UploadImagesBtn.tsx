@@ -4,12 +4,12 @@ type UploadImagesBtnType = {
   setFile: Dispatch<SetStateAction<FileList | undefined>>;
   uploadFiles: () => Promise<void>;
 };
-export default function UploadImagesBtn({ setFile, uploadFiles }: UploadImagesBtnType) {
+export default function UploadImagesBtn({ setFile, uploadFiles, files }: UploadImagesBtnType) {
   return (
     <div className="flex justify-center items-center fixed z-10 top-0 left-0 mx-auto h-full w-full  ">
       <div className="flex h-fit w-fit bg-black/85 px-10 py-10 rounded-xl">
         <div className="flex flex-col gap-4 justify-center">
-          <h1 className="text-white text-center text-xl py-4">Upload Images:</h1>
+          <h1 className="text-white text-center text-xl py-4">Upload Images:{files.length}</h1>
           <div className="w-full grid grid-cols-2">
             <button
               type="button"
