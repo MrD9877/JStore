@@ -1,17 +1,17 @@
 "use client";
 import { ShoppingCart } from "lucide-react";
+import useFiles from "../admin/addproducts/useFilesBundlers";
+import UploadImage from "../admin/addproducts/UploadImage";
+import { useState } from "react";
 
 export default function page() {
+  const [files, setFiles] = useState<FileList>();
+  const { images, uploadFiles } = useFiles(files);
   return (
     <>
-      <aside className={`cart w-fit h-fit`}>
-        <div className="btn-cart-wrapper ">
-          <button className="btn-cart">
-            <ShoppingCart />
-          </button>
-          <div className="count">3</div>
-        </div>
-      </aside>
+      {JSON.stringify(images)}
+      <UploadImage setFile={setFiles} />
+      <button onClick={uploadFiles}>upload</button>
     </>
   );
 }

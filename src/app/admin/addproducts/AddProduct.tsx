@@ -7,6 +7,8 @@ import UploadImage from "./UploadImage";
 import { FormEvent, useState } from "react";
 import AddVarity, { VariantState } from "./Variant";
 import { FormInput } from "./UI";
+import useFiles from "./useFilesBundlers";
+import UploadImagesBtn from "./UploadImagesBtn";
 
 export default function AddProduct() {
   const [files, setFile] = useState<FileList>();
@@ -15,18 +17,17 @@ export default function AddProduct() {
   const [title, setTitle] = useState<string>();
   const [price, setPrice] = useState<number>();
   const [category, setCategory] = useState<string>();
+  const { images, uploadFiles } = useFiles(files);
   const toast = useToast();
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!files || files.length < 2) return toast("Atleast 2 images...");
+    if (!images) return toast("Atleast 2 images...");
     if (!title || !price || !category) return toast("Please fill all the fields...", false);
     setLoading(true);
     const form = e.currentTarget;
     const formData = new FormData(form);
-    // Array.from(files).forEach((file) => {
-    //   formData.append("image", file);
-    // });
+    formData.append("images", JSON.stringify(images));
     formData.append("variants", JSON.stringify(variants));
     formData.append(
       "dimentions",
@@ -40,6 +41,7 @@ export default function AddProduct() {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/product`, { method: "POST", credentials: "include", body: formData });
       if (res.status === 200) toast("Done", true);
+      else throw Error(res.statusText);
     } catch (err) {
       toast((err as Error).message, false);
     } finally {
@@ -57,6 +59,7 @@ export default function AddProduct() {
     <>
       <div className="bg-gray-100 w-full flex flex-col">
         <AddnewOptions />
+        {files && <UploadImagesBtn files={files} setFile={setFile} uploadFiles={uploadFiles} />}
         <div className="bg-gray-100">
           <div className="min-h-screen flex items-center justify-center p-4">
             <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg p-6 md:p-8">
