@@ -15,6 +15,7 @@ export const OrderSchema = z
     orderDate: z.number(),
     razorpay: {
       id: z.string(),
+      refundId: z.string().optional(),
     },
     shiprocket: z
       .object({
