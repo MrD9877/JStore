@@ -1,10 +1,10 @@
 import React from "react";
 
 export default function useRazorPayOrder() {
-  async function cancelOrder(orderId: string) {
+  async function cancelOrder(id: string) {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/cancelOrder`, {
       method: "POST",
-      body: JSON.stringify({ orderId }),
+      body: JSON.stringify({ id }),
       credentials: "include",
     });
     if (!res.ok) throw Error(res.statusText);

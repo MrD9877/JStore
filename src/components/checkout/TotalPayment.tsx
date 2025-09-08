@@ -51,25 +51,25 @@ export default function TotalPayment() {
         <div className="grid gap-[5px] font-[600]">
           <div className="grid grid-cols-[10fr_1fr] text-[12px] text-white">
             <span>Subtotal:</span>
-            <span className="text-textLightGray text-start">₹ {total.subTotal}</span>
+            <span className="text-textLightGray text-start">₹ {total.subTotal / 100}</span>
           </div>
           <div className="grid grid-cols-[10fr_1fr] text-[13px] ">
             <span>Shipping:</span>
             <span className="text-textLightGray text-start">
-              {total.shipping === 0 ? <span className="text-green-600/90">Free</span> : "₹ " + total.shipping}
+              {total.shipping === 0 ? <span className="text-green-600/90">Free</span> : "₹ " + total.shipping / 100}
             </span>
           </div>
 
           <div className="grid grid-cols-[10fr_1fr] text-[12px] text-white">
             <span>Discount:</span>
-            <span className="text-green-600/90 text-start">- ₹ {total.discount}</span>
+            <span className="text-green-600/90 text-start">- ₹ {total.discount / 100}</span>
           </div>
         </div>
       </div>
       <div className="mt-4 ">
         <div className="flex justify-between rounded-xl items-center bg-darkGray p-[10px] px-[20px]">
           <label htmlFor="pay" className="text-white text-[22px] font-[900]">
-            ₹ {total.total}
+            ₹ {total.total / 100}
           </label>
           <button
             disabled={context?.loading}
