@@ -18,9 +18,8 @@ export const DeliveryAddressSchema = z
   .strip();
 
 export type UserType = {
-  username: string;
-  email?: string;
-  password: string;
+  email: string;
+  password?: string;
   deliveryaddress: DeliveryAddress[];
   name?: string;
   state?: string;

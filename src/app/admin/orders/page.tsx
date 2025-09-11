@@ -12,7 +12,7 @@ export default function OrdersPage() {
   // const { orders } = useOrders(filter);
   const orders: OrderType[] = [
     {
-      username: "john_doe",
+      email: "john_doe",
       orderId: "ORD123456",
       items: [
         {
@@ -50,7 +50,7 @@ export default function OrdersPage() {
       paymentType: "prepaid",
     },
     {
-      username: "jane_smith",
+      email: "jane_smith",
       orderId: "ORD654321",
       items: [
         {

@@ -8,7 +8,7 @@ import LoadingBtn from "@/utility/LoadingBtn";
 export default function RecoverPage() {
   const navigate = useRouter();
   const [loading, setLoading] = useState(false);
-  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
 
   const popTost = (msg, success) => {
     let emote = "❌";
@@ -23,8 +23,8 @@ export default function RecoverPage() {
     });
   };
   const handleSendEmail = async () => {
-    if (!userName) {
-      popTost("Please enter your username", false);
+    if (!email) {
+      popTost("Please enter your email", false);
       return;
     }
     try {
@@ -35,50 +35,67 @@ export default function RecoverPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username: userName.trim().toLowerCase() }),
+        body: JSON.stringify({ email: email.trim().toLowerCase() }),
       });
-      setLoading(false);
+      if (checkUser.status === 200) {
+        const data = await checkUser.json();
+        const email = data.email;
+        popTost("OTP is send to your register email", true);
+        navigate.push(`/recoverpassword/otp?email=${email.trim().toLowerCase()}`);
+      }
       if (checkUser.status === 400) {
         const data = await checkUser.json();
         const email = data.email;
         popTost(data.msg, false);
         if (data.msg.includes("OTP already sent")) {
-          navigate.push(`/recoverpassword/otp?username=${userName.trim().toLowerCase()}&email=${email}`);
+          navigate.push(`/recoverpassword/otp?email=${email.trim().toLowerCase()}`);
         }
         return;
-      }
-      if (checkUser.status === 200) {
-        const data = await checkUser.json();
-        const email = data.email;
-        popTost("OTP is send to your register email", true);
-        navigate.push(`/recoverpassword/otp?username=${userName.trim().toLowerCase()}`);
       }
       if (checkUser.status === 500) {
         popTost("Internal server error try again", false);
         return;
       }
     } catch (err) {
-      setLoading(false);
       popTost("Sorry server is down", false);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-      <div style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_HOSTED_URL}/images/bgImage.jpg)` }} className="flex align-middle justify-center items-center h-screen">
-        <div style={{ background: "rgba(0, 10,20,0.9)", maxWidth: "400px" }} className="shadow-neon  px-12 pb-1 h-fit  lg:mb-32 xl:mb-16 mx-auto mb-52 p-6 w-5/6 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+      <div
+        style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_HOSTED_URL}/images/bgImage.jpg)` }}
+        className="flex align-middle justify-center items-center h-screen"
+      >
+        <div
+          style={{ background: "rgba(0, 10,20,0.9)", maxWidth: "400px" }}
+          className="shadow-neon  px-12 pb-1 h-fit  lg:mb-32 xl:mb-16 mx-auto mb-52 p-6 w-5/6 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700"
+        >
           <div className="w-full">
             <div className="mb-4">
-              <p className="mb-5 font-normal  text-white dark:text-gray-400">PLease input Your username:</p>
-              <label htmlFor="username" className="block mb-2 text-sm font-medium text-white dark:text-white">
-                User Name
+              <p className="mb-5 font-normal  text-white dark:text-gray-400">PLease input Your Email:</p>
+              <label htmlFor="email" className="block mb-2 text-sm font-medium text-white dark:text-white">
+                Email
               </label>
-              <input value={userName} onChange={(e) => setUserName(e.target.value)} type="username" id="username" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light mb-3" placeholder="Jonny23" />
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                id="email"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light mb-3"
+                placeholder="Jonny23"
+              />
               {loading ? (
                 <LoadingBtn />
               ) : (
-                <button onClick={handleSendEmail} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">
+                <button
+                  onClick={handleSendEmail}
+                  type="button"
+                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 "
+                >
                   Send Otp
                 </button>
               )}

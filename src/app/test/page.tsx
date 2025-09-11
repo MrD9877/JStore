@@ -5,13 +5,14 @@ import UploadImage from "../admin/addproducts/UploadImage";
 import { useState } from "react";
 
 export default function page() {
-  const [files, setFiles] = useState<FileList>();
-  const { images, uploadFiles } = useFiles(files);
+  async function test() {
+    await fetch("http://localhost:3000/checkLogin", { credentials: "include" });
+  }
   return (
     <>
-      {JSON.stringify(images)}
-      <UploadImage setFile={setFiles} />
-      <button onClick={uploadFiles}>upload</button>
+      {/* {JSON.stringify(images)}
+      <UploadImage setFile={setFiles} /> */}
+      <button onClick={test}>upload</button>
     </>
   );
 }

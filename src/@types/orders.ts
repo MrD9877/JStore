@@ -9,7 +9,7 @@ export type OrderType = z.infer<typeof OrderSchema>;
 
 export const OrderSchema = z
   .object({
-    username: z.string(),
+    email: z.email(),
     orderId: z.string(),
     items: z.array(CartItemSchema),
     orderDate: z.number(),
@@ -106,7 +106,7 @@ export type Amount = {
 };
 
 export type RazorpayNotes = {
-  username: string;
+  email: string;
   promocode?: string;
   type: "prepaid" | "cod";
   orderId: string;

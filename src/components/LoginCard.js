@@ -18,7 +18,7 @@ export default function LoginPage({ welcome = true, link = "/" }) {
   };
 
   const onSubmit = async (data) => {
-    const username = data.username.trim().toLowerCase();
+    const email = data.email.trim().toLowerCase();
     setLoading(true);
     try {
       const checkUser = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/login`, {
@@ -27,11 +27,11 @@ export default function LoginPage({ welcome = true, link = "/" }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password: data.password }),
+        body: JSON.stringify({ email, password: data.password }),
       });
       if (checkUser.status === 401) {
         setLoading(false);
-        toast("Envalid Username or password", false);
+        toast("Envalid email or password", false);
         setStyle(redInputStyle);
         return;
       }
@@ -46,7 +46,10 @@ export default function LoginPage({ welcome = true, link = "/" }) {
   };
   return (
     <>
-      <div style={{ background: "rgba(0, 10,20,0.9)", maxWidth: "400px" }} className="shadow-neon  px-12 pb-1  lg:mb-32 xl:mb-16 m-auto mb-52 p-6 w-5/6 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+      <div
+        style={{ background: "rgba(0, 10,20,0.9)", maxWidth: "400px" }}
+        className="shadow-neon  px-12 pb-1  lg:mb-32 xl:mb-16 m-auto mb-52 p-6 w-5/6 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700"
+      >
         <Link style={welcome ? { display: "" } : { display: "none" }} href="/">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Welcome to J-shop</h5>
         </Link>
