@@ -6,10 +6,12 @@ import Link from "next/link";
 import useToast from "@/hooks/useToast";
 import { useRouter } from "next/navigation";
 import PasswordInput from "@/components/ui/PasswordInput";
+import MainNavBar from "@/navbars/MainNavBar";
 
 export default function AdminSigninPage() {
   const toast = useToast();
   const router = useRouter();
+
   const onSubmit = async (data: FormData) => {
     const password = data.get("password");
     if (!password) return toast("No password", false);

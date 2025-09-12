@@ -9,19 +9,21 @@ import { StoreState } from "@/@types/reduxStore";
 import useProducts from "./useProducts";
 import ProductBottomNav from "./ProductBottomNav";
 import useProductDetails from "./useProductDetails";
+import useToast from "@/hooks/useToast";
 
 export default function ProductInfo({ productId }: { productId: string | undefined | null }) {
   const products = useSelector((state: StoreState) => state.products);
   const { product, colors, sizes } = useProducts(productId);
   const { color, size, outOfStock, count, inCart, sku, handleSelect } = useProductDetails({ product, products });
   const dispatch = useDispatch();
+  const toast = useToast();
 
   const handleChangeCount = (action: ActionType) => {
     if (!sku || !product) return;
     if (count === 0 && action === ACTIONS.ADD) {
       dispatch(addToCart({ product, sku }));
     } else {
-      dispatch(editCart({ type: action, product, sku }));
+      dispatch(editCart({ type: action, product, sku, toast }));
     }
   };
 
@@ -29,8 +31,8 @@ export default function ProductInfo({ productId }: { productId: string | undefin
 
   return (
     <>
-      <section style={{ maxWidth: "100vw" }} className="py-10 sm:py-24 relative bg-white overflow-hidden">
-        <div className="mx-auto max-w-7xl px-4  sm:px-8">
+      <section style={{ maxWidth: "100vw" }} className="py-10 sm:py-24  bg-white overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 relative sm:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-16">
             <div className="pro-detail w-full flex flex-col justify-center order-last sm:order-none max-sm:max-w-[608px] max-sm:mx-auto">
               {/* catogory  */}

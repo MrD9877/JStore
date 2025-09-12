@@ -6,6 +6,7 @@ export default function useAdmin(setLoading: React.Dispatch<React.SetStateAction
   const toast = useToast();
   const [admin, setAdmin] = useState<null | undefined | UpdateAdmin>();
   const keyref = useRef<string>(null);
+
   const getAdmin = async (form: FormData) => {
     const key = form.get("key") as string;
     console.log(key);

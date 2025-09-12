@@ -40,7 +40,7 @@ export default function MainNavBar() {
   };
   return (
     <div className="mb-20 sm:mb-24">
-      <div className="fixed top-0 w-screen bg-white">
+      <div className="fixed top-0 w-screen bg-white z-50">
         <nav className="flex justify-between px-3 mt-2 sm:px-5 sm:py-4">
           <span className="font-amarante pt-1 text-lg sm:text-2xl">
             <Link href={"/"}>
@@ -73,7 +73,7 @@ export default function MainNavBar() {
               <span
                 ref={menuRef}
                 style={{ display: menuVisible ? "flex" : "none", right: "8px" }}
-                className="flex flex-col border-2 py-1 px-3 max-w-24 max-h-28 overflow-scroll border-black rounded-sm absolute justify-start items-baseline"
+                className="flex flex-col border-2 py-1 px-3 max-w-24 max-h-28 overflow-scroll border-black rounded-sm absolute justify-start items-baseline bg-white z-30"
               >
                 <Link className="flex justify-center items-center" href={"/"}>
                   Home

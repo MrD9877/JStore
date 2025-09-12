@@ -22,7 +22,13 @@ function CompleteSvg() {
 function TransitSvg() {
   return (
     <svg className="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h6l2 4m-8-4v8m0-8V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v9h2m8 0H9m4 0h2m4 0h2v-4m0 0h-5m3.5 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm-10 0a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"></path>
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M13 7h6l2 4m-8-4v8m0-8V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v9h2m8 0H9m4 0h2m4 0h2v-4m0 0h-5m3.5 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm-10 0a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"
+      ></path>
     </svg>
   );
 }
@@ -52,6 +58,11 @@ export default function DisplayOrdersCard() {
   useEffect(() => {
     fetchOrders();
   }, []);
+
+  if (orders && orders.length === 0) {
+    return <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">No orders yet</h3>;
+  }
+
   return (
     <>
       {orders && orders.length > 0 && (
@@ -66,7 +77,10 @@ export default function DisplayOrdersCard() {
               const date = new Date(order.orderDate).toLocaleString(undefined, { timeZone: "Asia/Kolkata" });
 
               return (
-                <div key={order._id} className={`flex flex-wrap items-center gap-y-4  border-gray-200 py-4 dark:border-gray-700 md:pb-5 ${index !== order.length - 1 && "border-b"}`}>
+                <div
+                  key={order._id}
+                  className={`flex flex-wrap items-center gap-y-4  border-gray-200 py-4 dark:border-gray-700 md:pb-5 ${index !== order.length - 1 && "border-b"}`}
+                >
                   {/* order id  */}
                   <dl className="w-1/2 sm:w-48">
                     <dt className="text-base font-medium text-gray-500 dark:text-gray-400">Order ID:</dt>

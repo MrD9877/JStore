@@ -9,6 +9,13 @@ const initialState: StoreState = {
   progress: 0,
 };
 
+type BasePayload = {
+  type: ActionType;
+  toast?: (msg: string, success?: boolean) => void;
+};
+
+type EditCartPayload = (BasePayload & { product: ProductType; sku: string }) | (BasePayload & { cartItem: CartItemsType });
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -52,10 +59,7 @@ export const cartSlice = createSlice({
         state.products = state.products.filter((item) => item.variant.sku !== variant.sku);
       }
     },
-    editCart: (
-      state,
-      action: { payload: { product: ProductType; sku: string; type: ActionType } | { cartItem: CartItemsType; type: ActionType } }
-    ) => {
+    editCart: (state, action: { payload: EditCartPayload }) => {
       let variant: Omit<CartItemsType["variant"], "quantity"> | undefined;
       if ("product" in action.payload && "sku" in action.payload) {
         const sku = action.payload.sku;
@@ -70,6 +74,8 @@ export const cartSlice = createSlice({
           if (items.variant.sku === variant.sku) {
             if (items.variant.quantity < variant.stock) {
               items.variant.quantity += 1;
+            } else if ("toast" in action.payload) {
+              action.payload.toast?.(`Only ${variant.stock} in Stock!!`);
             }
           }
           return items;
