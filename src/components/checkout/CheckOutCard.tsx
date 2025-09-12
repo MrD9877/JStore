@@ -11,6 +11,7 @@ import SelectPaymentType from "./SelectPaymentType";
 import { DeliveryAddress, UserType } from "@/@types/user";
 import { useRouter } from "next/navigation";
 import useToast from "@/hooks/useToast";
+import useCartRefresh from "./useCartRefresh";
 
 export type ContextType = {
   paymentMethod: "card" | "upi" | undefined;
@@ -66,6 +67,7 @@ export default function CheckOutCard() {
   const [promocode, setPromocode] = useState<string>();
   const router = useRouter();
   const toast = useToast();
+  useCartRefresh();
 
   useEffect(() => {
     if (user) {

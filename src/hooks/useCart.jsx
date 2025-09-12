@@ -1,4 +1,5 @@
 "use client";
+import { CartSchema } from "@/@types/product";
 import { setCart } from "@/lib/storeSlice";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,7 +27,8 @@ export default function useCart() {
       const data = await res.json();
       console.log(data);
       if (data) {
-        dispatch(setCart({ products: data }));
+        const cartData = await CartSchema.parseAsync(data);
+        dispatch(setCart({ products: cartData }));
       } else {
         dispatch(setCart({ products: null }));
       }

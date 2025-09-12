@@ -61,4 +61,6 @@ export const CartItemSchema = ProductSchema.omit({
   })
   .strip();
 
+export const CartSchema = z.array(CartItemSchema);
+
 export type CartItemsType = z.infer<typeof CartItemSchema>;

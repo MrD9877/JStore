@@ -20,7 +20,7 @@ export default function TotalPayment() {
       if (!context) return;
       try {
         context.setLoading(true);
-        dispatch(clearCart());
+        await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/cart`, { method: "DELETE", credentials: "include" });
         router.push(`/success`);
       } catch {
       } finally {
